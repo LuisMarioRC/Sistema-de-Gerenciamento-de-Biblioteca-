@@ -6,6 +6,9 @@ public class Usuario extends Operador{
     private Integer telefone;
     private Boolean status;
 
+    public Usuario(){
+
+    }
 
     public String getEndereco() {
         return endereco;
@@ -30,6 +33,7 @@ public class Usuario extends Operador{
     public void setStatus(Boolean status) {
         this.status = status;
     }
+
 
 
 }

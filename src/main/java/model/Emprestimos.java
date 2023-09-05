@@ -1,28 +1,38 @@
 package model;
+import DAO.LivroDAO;
+
 import java.util.Date;
 
 
 public class Emprestimos {
-    private String livro;
-    private String usuario;
+    private Livro livro;
+    private Usuario usuario;
     private Date dataEmprestimos;
     private Date dataDevolucao;
     private Integer multa;
     private Boolean status;
 
-    public String getLivro() {
+
+    private LivroDAO livrodao;
+
+    public Emprestimos(){
+        livrodao= new LivroDAO();
+    }
+
+
+    public Livro getLivro() {
         return livro;
     }
 
-    public void setLivro(String livro) {
+    public void setLivro(Livro livro) {
         this.livro = livro;
     }
 
-    public String getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(String usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
@@ -57,4 +67,6 @@ public class Emprestimos {
     public void setStatus(Boolean status) {
         this.status = status;
     }
+
+
 }
