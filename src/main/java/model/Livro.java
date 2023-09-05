@@ -84,9 +84,21 @@ public class Livro {
     }
 
 
+
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+    @Override
+    public String toString(){
+        return "\nTítulo: " + titulo +
+                "\nAutor: " + autor +
+                "\nEditora: " + editora +
+                "\nISBN: " + isbn +
+                "\nAno de Publicação: " +anoDePublicacao+
+                "\nCategoria: " + categoria+
+                "\nDisponibilidade: " +disponibilidade+
+                "\nID: "+id;
     }
 }
 

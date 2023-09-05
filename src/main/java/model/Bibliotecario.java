@@ -2,16 +2,15 @@ package model;
 
 import DAO.LivroDAO;
 
+import java.util.ArrayList;
+
 public class Bibliotecario extends Operador {
 
-    private LivroDAO livrodao;
     public Bibliotecario(){
-        livrodao = new LivroDAO();
+
     }
 
-
-
-    public void registraLivro(String titulo, String autor,String editora,Integer isbn,Integer anoDePublicacao,String categoria){
+    public Livro registraLivro(String titulo, String autor,String editora,Integer isbn,Integer anoDePublicacao,String categoria){
         Livro livro= new Livro();
         livro.setTitulo(titulo);
         livro.setAutor(autor);
@@ -20,7 +19,7 @@ public class Bibliotecario extends Operador {
         livro.setAnoDePublicacao(anoDePublicacao);
         livro.setCategoria(categoria);
         livro.setDisponibilidade(true);
-        livrodao.addLivro(livro);
+        return livro;
     }
 
 }
