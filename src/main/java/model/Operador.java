@@ -6,6 +6,10 @@ public class Operador {
     private Integer senha;
     private Integer numeroDeIdentificacao;
 
+    public Operador(){
+
+    }
+
     public String getNome() {
         return nome;
     }
@@ -37,6 +41,8 @@ public class Operador {
     public void setNumeroDeIdentificacao(Integer numeroDeIdentificacao) {
         this.numeroDeIdentificacao = numeroDeIdentificacao;
     }
+
+
 
 
 }
