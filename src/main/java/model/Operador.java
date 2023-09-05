@@ -5,11 +5,19 @@ public class Operador {
     private String cargo;
     private Integer senha;
     private Integer numeroDeIdentificacao;
+    private Boolean status;
 
     public Operador(){
 
     }
 
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
     public String getNome() {
         return nome;
     }
@@ -41,8 +49,5 @@ public class Operador {
     public void setNumeroDeIdentificacao(Integer numeroDeIdentificacao) {
         this.numeroDeIdentificacao = numeroDeIdentificacao;
     }
-
-
-
 
 }

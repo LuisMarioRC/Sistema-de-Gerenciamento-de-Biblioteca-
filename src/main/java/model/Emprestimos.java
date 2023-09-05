@@ -13,12 +13,10 @@ public class Emprestimos {
     private Boolean status;
 
 
-    private LivroDAO livrodao;
-
     public Emprestimos(){
-        livrodao= new LivroDAO();
+        livro = new Livro();
+        usuario = new Usuario();
     }
-
 
     public Livro getLivro() {
         return livro;
@@ -66,6 +64,15 @@ public class Emprestimos {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public void registrarEmprestimos(Livro livro, Usuario usuario){
+        Emprestimos em = new Emprestimos();
+        Date dataDeEmprestimo= new Date();
+        em.setLivro(livro);
+        em.setUsuario(usuario);                         //Código imcompleto, precisa fazer o incremento de 7 dias para a devolução
+        em.setDataEmprestimos(dataDeEmprestimo);        // também precisa verificar se o usuario está bloqueado;
+
     }
 
 

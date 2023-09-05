@@ -4,26 +4,29 @@ import DAO.LivroDAO;
 
 import java.util.ArrayList;
 import java.util.Date;
-
+                                        //main para alguns testes
 public class Main {
     public static void main(String[] args) {
         Bibliotecario b = new Bibliotecario();
-        b.registraLivro("Os miseráveis","Luis Mario","Mario abc",55774,1987,"Romance");
-        b.registraLivro("Os crueis","Roberto","Mario abc",55774,1987,"Romance");
-        b.registraLivro("Os rapazes","Luis Mario","Mario abc",55774,1987,"Romance");
-        b.registraLivro("Os womans","Luis Mario","Mario abc",55774,1987,"Romance");
+        Livro l1= b.registraLivro("Os crueis","Luis Mario","Mario abc",55774,1987,"Romance");
+        Livro l2= b.registraLivro("Os crueis","Roberto","Mario abc",55774,1987,"Romance");
+        Livro l3= b.registraLivro("Os loucos","Luis Mario","Mario abc",55774,1987,"Romance");
+        Livro l4= b.registraLivro("Os crueis","Luis Mario","Mario abc",55774,1987,"Romance");
 
 
         LivroDAO livrodao = new LivroDAO();
-        ArrayList<Livro> livrosEcontrados = livrodao.pesquisaPorTitulo("Os crueis");
 
-        for (Livro livro: livrosEcontrados){
-            System.out.println(livro.getTitulo());
-            System.out.println(livro.getAutor());
+        livrodao.addLivro(l1);
+        livrodao.addLivro(l2);
+        livrodao.addLivro(l3);
+        livrodao.addLivro(l4);
+        ArrayList<Livro> ab = livrodao.pesquisaPorTitulo("Os crueis");
+
+        for (Livro livro: ab){
+            System.out.println(ab);
         }
 
-        Date datahoje= new Date();
-        System.out.println(datahoje);
+
 
     }
 }
