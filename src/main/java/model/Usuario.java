@@ -4,6 +4,7 @@ public class Usuario extends Operador{
 
     private String endereco;
     private Integer telefone;
+    private Integer multa;
 
 
     public Usuario(){
@@ -27,6 +28,11 @@ public class Usuario extends Operador{
     }
 
 
+    public Integer getMulta() {
+        return multa;
+    }
 
-
+    public void setMulta(Integer multa) {
+        this.multa = multa;
+    }
 }

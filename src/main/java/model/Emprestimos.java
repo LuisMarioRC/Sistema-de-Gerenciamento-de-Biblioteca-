@@ -1,16 +1,14 @@
 package model;
-import DAO.LivroDAO;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 
 public class Emprestimos {
     private Livro livro;
     private Usuario usuario;
-    private Date dataEmprestimos;
-    private Date dataDevolucao;
-    private Integer multa;
-    private Boolean status;
+    private LocalDate dataEmprestimos;
+    private LocalDate dataDevolucao;
+
 
 
     public Emprestimos(){
@@ -34,46 +32,22 @@ public class Emprestimos {
         this.usuario = usuario;
     }
 
-    public Date getDataEmprestimos() {
+    public LocalDate getDataEmprestimos() {
         return dataEmprestimos;
     }
 
-    public void setDataEmprestimos(Date dataEmprestimos) {
+    public void setDataEmprestimos(LocalDate dataEmprestimos) {
         this.dataEmprestimos = dataEmprestimos;
     }
 
-    public Date getDataDevolucao() {
+    public LocalDate getDataDevolucao() {
         return dataDevolucao;
     }
 
-    public void setDataDevolucao(Date dataDevolucao) {
+    public void setDataDevolucao(LocalDate dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
 
-    public Integer getMulta() {
-        return multa;
-    }
-
-    public void setMulta(Integer multa) {
-        this.multa = multa;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-
-    public void registrarEmprestimos(Livro livro, Usuario usuario){
-        Emprestimos em = new Emprestimos();
-        Date dataDeEmprestimo= new Date();
-        em.setLivro(livro);
-        em.setUsuario(usuario);                         //Código imcompleto, precisa fazer o incremento de 7 dias para a devolução
-        em.setDataEmprestimos(dataDeEmprestimo);        // também precisa verificar se o usuario está bloqueado;
-
-    }
 
 
 }
