@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 
 public class Emprestimos {
@@ -8,8 +9,7 @@ public class Emprestimos {
     private Usuario usuario;
     private LocalDate dataEmprestimos;
     private LocalDate dataDevolucao;
-
-
+    private int id;
 
     public Emprestimos(){
         livro = new Livro();
@@ -48,6 +48,17 @@ public class Emprestimos {
         this.dataDevolucao = dataDevolucao;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

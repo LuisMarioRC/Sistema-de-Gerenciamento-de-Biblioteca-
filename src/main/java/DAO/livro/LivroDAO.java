@@ -59,6 +59,7 @@ public class LivroDAO implements LivroDAOinterface{
         }
         return listaPorCategoria;
     }
+
     public ArrayList<Livro> pesquisaPorAutor(String autor){
         ArrayList<Livro> listaPorAutor= new ArrayList<>();
         for (Livro livro: listLivros){
@@ -68,7 +69,6 @@ public class LivroDAO implements LivroDAOinterface{
         }
         return listaPorAutor;
     }
-
 
 
     @Override

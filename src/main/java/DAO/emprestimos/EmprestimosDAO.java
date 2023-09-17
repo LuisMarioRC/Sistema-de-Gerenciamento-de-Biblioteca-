@@ -6,71 +6,109 @@ import model.Livro;
 import model.Usuario;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class EmprestimosDAO implements EmprestimosDAOinterface {
     private ArrayList<Emprestimos> listDeEmprestimos;
-
+    private int proximoID;
+    private int getProximoID() {
+        return this.proximoID++;
+    }
 
     public EmprestimosDAO(){
         this.listDeEmprestimos= new ArrayList<>();
+        this.proximoID = 1;
     }
 
-    public void addEmprestimos(Emprestimos emprestimos){
-        this.listDeEmprestimos.add(emprestimos);
-    }
+
     public ArrayList<Emprestimos> getListDeEmprestimos() {
         return listDeEmprestimos;
     }
 
     public void registrarEmprestimos(Livro livro, Usuario usuario){
         //Tem q verificar se o livro ta disponivel
-        Emprestimos em = new Emprestimos();
+        Emprestimos emprestimo = new Emprestimos();
         LocalDate dataDeEmprestimo= LocalDate.now();
         LocalDate dataDeDevolucao = dataDeEmprestimo.plusDays(7);
         livro.setDisponibilidade(false);
-        em.setLivro(livro);
-        em.setUsuario(usuario);
-        em.setDataEmprestimos(dataDeEmprestimo);
-        em.setDataDevolucao(dataDeDevolucao);
-        this.addEmprestimos(em);
+        emprestimo.setLivro(livro);
+        emprestimo.setUsuario(usuario);
+        emprestimo.setDataEmprestimos(dataDeEmprestimo);
+        emprestimo.setDataDevolucao(dataDeDevolucao);
+        this.criar(emprestimo);
     }
+
+
+    private void multa (Livro livro, Usuario usuario){
+        LocalDate datahoje = LocalDate.now();
+        int idLivro = livro.getId();
+        Emprestimos emprestimo = encontraPorIdDoLivro(idLivro);
+        Boolean verificacao = datahoje.isAfter(emprestimo.getDataDevolucao());
+        Long diferencaEntreDias = ChronoUnit.DAYS.between(datahoje, emprestimo.getDataDevolucao());
+        Integer diasDeMulta = Math.toIntExact(diferencaEntreDias * 2);
+        usuario.setMulta(diasDeMulta);
+        usuario.setStatus(false);
+    }
+
 
     public void registraDevolucao(Livro livro, Usuario usuario){
-        LocalDate dataAtual = LocalDate.now();
-
+        this.multa(livro,usuario);
+        int idLivro = livro.getId();
+        Emprestimos emprestimo = encontraPorIdDoLivro(idLivro);
+        this.excluir(emprestimo);
+        livro.setDisponibilidade(true);
 
     }
-
 
     @Override
     public Emprestimos criar(Emprestimos obj) {
-        return null;
+        obj.setId(this.getProximoID());
+        this.listDeEmprestimos.add(obj);
+        return obj;
     }
 
     @Override
     public void excluir(Emprestimos obj) {
-
+        this.listDeEmprestimos.remove(obj);
     }
 
     @Override
     public void excluirTodos() {
-
+        this.listDeEmprestimos = new ArrayList<>();
+        this.proximoID=0;
     }
 
     @Override
     public Emprestimos atualizar(Emprestimos obj) {
-        return null;
+        int index = this.listDeEmprestimos.indexOf(obj);
+        this.listDeEmprestimos.set(index, obj);
+        return obj;
     }
 
     @Override
     public ArrayList<Emprestimos> encontrarTodos() {
-        return null;
+        return this.listDeEmprestimos;
     }
 
     @Override
     public Emprestimos encontrarPorID(int id) {
+        for (Emprestimos emprestimo : listDeEmprestimos ){
+            if (Objects.equals(emprestimo.getId(), id)){
+                return emprestimo;
+            }
+        }
         return null;
     }
+
+    public Emprestimos encontraPorIdDoLivro(int id) {
+        for (Emprestimos emprestimo : listDeEmprestimos ){
+            if (Objects.equals(emprestimo.getLivro().getId(), id)){
+                return emprestimo;
+            }
+        }
+        return null;
+    }
+
 }
