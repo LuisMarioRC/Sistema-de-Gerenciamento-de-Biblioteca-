@@ -1,11 +1,14 @@
 package model;
 
+import java.util.Objects;
+
 public class Operador {
     private String nome;
     private String cargo;
     private Integer senha;
     private Integer numeroDeIdentificacao;
     private Boolean status;
+
 
     public Operador(){
 
@@ -50,4 +53,9 @@ public class Operador {
         this.numeroDeIdentificacao = numeroDeIdentificacao;
     }
 
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numeroDeIdentificacao);
+    }
 }

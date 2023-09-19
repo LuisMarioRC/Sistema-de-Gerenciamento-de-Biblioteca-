@@ -19,13 +19,21 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
 
     public EmprestimosDAO(){
         this.listDeEmprestimos= new ArrayList<>();
-        this.proximoID = 1;
+        this.proximoID = 0;
+    }
+
+    public Boolean verificaAtraso(Usuario usuario){
+        LocalDate dataHoje= LocalDate.now();
+        return listDeEmprestimos.stream()
+                .filter(emprestimo -> Objects.equals(emprestimo.getUsuario(), usuario))
+                .anyMatch(emprestimo -> dataHoje.isAfter(emprestimo.getDataDevolucao()));
     }
 
 
     public ArrayList<Emprestimos> getListDeEmprestimos() {
         return listDeEmprestimos;
     }
+
 
     public void registrarEmprestimos(Livro livro, Usuario usuario){
         //Tem q verificar se o livro ta disponivel
@@ -45,8 +53,7 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
         LocalDate datahoje = LocalDate.now();
         int idLivro = livro.getId();
         Emprestimos emprestimo = encontraPorIdDoLivro(idLivro);
-        Boolean verificacao = datahoje.isAfter(emprestimo.getDataDevolucao());
-        Long diferencaEntreDias = ChronoUnit.DAYS.between(datahoje, emprestimo.getDataDevolucao());
+        long diferencaEntreDias = ChronoUnit.DAYS.between(datahoje, emprestimo.getDataDevolucao());
         Integer diasDeMulta = Math.toIntExact(diferencaEntreDias * 2);
         usuario.setMulta(diasDeMulta);
         usuario.setStatus(false);
@@ -57,6 +64,7 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
         this.multa(livro,usuario);
         int idLivro = livro.getId();
         Emprestimos emprestimo = encontraPorIdDoLivro(idLivro);
+        livro.setDisponibilidade(true);
         this.excluir(emprestimo);
         livro.setDisponibilidade(true);
 
