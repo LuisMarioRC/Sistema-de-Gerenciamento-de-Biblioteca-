@@ -1,5 +1,7 @@
 package DAO.livro;
 
+
+import DAO.excecoes.LivroException;
 import model.Livro;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -10,7 +12,7 @@ public class LivroDAO implements LivroDAOinterface{
     private int proximoID;
     public LivroDAO(){
         this.listLivros = new ArrayList<>();
-        this.proximoID=1;
+        this.proximoID=0;
     }
 
     private int getProximoID() {
@@ -31,41 +33,55 @@ public class LivroDAO implements LivroDAOinterface{
     }
 
 
-    public ArrayList<Livro> pesquisaPorTitulo(String titulo){
+    public ArrayList<Livro> pesquisaPorTitulo(String titulo) throws LivroException{
         ArrayList<Livro> listaPorTitulos= new ArrayList<>();
         for (Livro livro: listLivros){
             if (Objects.equals(livro.getTitulo(), titulo)){
                 listaPorTitulos.add(livro);
             }
         }
+        if (listLivros.isEmpty()){
+            throw new LivroException(LivroException.BUSCAR);
+        }
         return listaPorTitulos;
     }
-    public ArrayList<Livro> pesquisaPorisbn(Integer isbn){
+
+
+    public ArrayList<Livro> pesquisaPorisbn(Integer isbn) throws LivroException{
         ArrayList<Livro> listaPorIsbn= new ArrayList<>();
         for (Livro livro: listLivros){
             if (Objects.equals(livro.getIsbn(), isbn)){
                 listaPorIsbn.add(livro);
             }
         }
+        if (listLivros.isEmpty()){
+            throw new LivroException(LivroException.BUSCAR);
+        }
         return listaPorIsbn;
     }
 
-    public ArrayList<Livro> pesquisaPorCategoria(String categoria){
+    public ArrayList<Livro> pesquisaPorCategoria(String categoria) throws LivroException{
         ArrayList<Livro> listaPorCategoria= new ArrayList<>();
         for (Livro livro: listLivros){
             if (Objects.equals(livro.getCategoria(), categoria)){
                 listaPorCategoria.add(livro);
             }
         }
+        if (listLivros.isEmpty()){
+            throw new LivroException(LivroException.BUSCAR);
+        }
         return listaPorCategoria;
     }
 
-    public ArrayList<Livro> pesquisaPorAutor(String autor){
+    public ArrayList<Livro> pesquisaPorAutor(String autor) throws LivroException{
         ArrayList<Livro> listaPorAutor= new ArrayList<>();
         for (Livro livro: listLivros){
             if (Objects.equals(livro.getAutor(), autor)){
                 listaPorAutor.add(livro);
             }
+        }
+        if (listLivros.isEmpty()){
+            throw new LivroException(LivroException.BUSCAR);
         }
         return listaPorAutor;
     }
@@ -103,12 +119,12 @@ public class LivroDAO implements LivroDAOinterface{
     }
 
     @Override
-    public Livro encontrarPorID(int id) {
+    public Livro encontrarPorID(int id) throws LivroException {
         for (Livro livro: listLivros){
             if (Objects.equals(livro.getId(), id)){
                 return livro;
             }
         }
-        return null;
+        throw new LivroException(LivroException.BUSCAR);
     }
 }

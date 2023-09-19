@@ -1,51 +1,28 @@
 package DAO;
 
+
+
 import java.util.ArrayList;
 
 
-public interface CRUD <T> {
+public interface CRUD <T, E extends Exception> {
 
-    /**
-     * Cria novo objeto
-     *
-     * @param obj
-     * @return
-     */
+    // Cria um novo objeto
     public T criar(T obj);
 
-    /**
-     * Deleta um objeto
-     *
-     * @param obj
-     * @return
-     */
+    // Excluir um objeto
     public void excluir(T obj);
 
-    /**
-     * Detela todos os dados
-     */
+    // Excluir todos os objetos
     public void excluirTodos();
 
-    /**
-     * Atualiza um objeto
-     *
-     * @param obj
-     * @return
-     */
+    // Atualizar um objeto
     public T atualizar(T obj);
 
-    /**
-     * Ler toda a lista de dados
-     *
-     * @return
-     */
+    // Econtrar todos os objetos
     public ArrayList<T> encontrarTodos();
 
-    /**
-     * Encontra um objeto específico pelo id
-     *
-     * @param id
-     * @return
-     */
-    public T encontrarPorID(int id);
+
+    // Econtrar o objeto por id
+    public T encontrarPorID(int id) throws E;
 }
