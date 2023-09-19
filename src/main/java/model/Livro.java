@@ -89,6 +89,7 @@ public class Livro {
     public int hashCode() {
         return Objects.hash(id);
     }
+
     @Override
     public String toString(){
         return "\nTítulo: " + titulo +

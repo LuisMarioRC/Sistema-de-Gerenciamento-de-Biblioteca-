@@ -1,10 +1,10 @@
-package DAO;
+package DAO.livro;
 
 import model.Livro;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class LivroDAO {
+public class LivroDAO implements LivroDAOinterface{
     private  ArrayList<Livro> listLivros;
 
     private int proximoID;
@@ -17,12 +17,17 @@ public class LivroDAO {
         return this.proximoID++;
     }
 
-    public ArrayList<Livro> getListLivros(){
-        return this.listLivros;
-    }
-    public void addLivro(Livro livro) {
-        livro.setId(this.getProximoID());
-        this.listLivros.add(livro);
+
+    public void registraLivro(String titulo, String autor,String editora,Integer isbn,Integer anoDePublicacao,String categoria){
+        Livro livro= new Livro();
+        livro.setTitulo(titulo);
+        livro.setAutor(autor);
+        livro.setEditora(editora);
+        livro.setIsbn(isbn);
+        livro.setAnoDePublicacao(anoDePublicacao);
+        livro.setCategoria(categoria);
+        livro.setDisponibilidade(true);
+        this.criar(livro);
     }
 
 
@@ -54,6 +59,7 @@ public class LivroDAO {
         }
         return listaPorCategoria;
     }
+
     public ArrayList<Livro> pesquisaPorAutor(String autor){
         ArrayList<Livro> listaPorAutor= new ArrayList<>();
         for (Livro livro: listLivros){
@@ -64,7 +70,40 @@ public class LivroDAO {
         return listaPorAutor;
     }
 
-    public Livro pesquisaID(int id){
+
+    @Override
+    public Livro criar(Livro obj) {
+        obj.setId(this.getProximoID());
+        this.listLivros.add(obj);
+        return obj;
+    }
+
+    @Override
+    public void excluir(Livro obj) {
+        this.listLivros.remove(obj);
+    }
+
+    @Override
+    public void excluirTodos() {
+        this.listLivros = new ArrayList<>();
+        this.proximoID=0;
+
+    }
+
+    @Override
+    public Livro atualizar(Livro obj) {
+        int index = this.listLivros.indexOf(obj);
+        this.listLivros.set(index, obj);
+        return obj;
+    }
+
+    @Override
+    public ArrayList<Livro> encontrarTodos() {
+        return this.listLivros;
+    }
+
+    @Override
+    public Livro encontrarPorID(int id) {
         for (Livro livro: listLivros){
             if (Objects.equals(livro.getId(), id)){
                 return livro;
@@ -72,7 +111,4 @@ public class LivroDAO {
         }
         return null;
     }
-
-
 }
-
