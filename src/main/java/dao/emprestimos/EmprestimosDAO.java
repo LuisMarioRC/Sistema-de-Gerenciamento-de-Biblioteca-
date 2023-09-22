@@ -1,6 +1,7 @@
 package dao.emprestimos;
 
 
+import dao.excecoes.DAOException;
 import model.Emprestimos;
 import model.Livro;
 import model.Usuario;
@@ -33,42 +34,6 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
     }
 
 
-
-    /**public void registrarEmprestimos(Livro livro, Usuario usuario){
-        //Tem q verificar se o livro ta disponivel
-        Emprestimos emprestimo = new Emprestimos();
-        LocalDate dataDeEmprestimo= LocalDate.now();
-        LocalDate dataDeDevolucao = dataDeEmprestimo.plusDays(7);
-        livro.setDisponibilidade(false);
-        emprestimo.setLivro(livro);
-        emprestimo.setUsuario(usuario);
-        emprestimo.setDataEmprestimos(dataDeEmprestimo);
-        emprestimo.setDataDevolucao(dataDeDevolucao);
-        this.criar(emprestimo);
-    }*/
-
-
-    private void multa (Livro livro, Usuario usuario){
-        LocalDate datahoje = LocalDate.now();
-        int idLivro = livro.getId();
-        Emprestimos emprestimo = encontraPorIdDoLivro(idLivro);
-        long diferencaEntreDias = ChronoUnit.DAYS.between(datahoje, emprestimo.getDataDevolucao());
-        Integer diasDeMulta = Math.toIntExact(diferencaEntreDias * 2);
-        usuario.setMulta(diasDeMulta);
-        usuario.setStatus(false);
-    }
-
-
-    public void registraDevolucao(Livro livro, Usuario usuario){
-        this.multa(livro,usuario);
-        int idLivro = livro.getId();
-        Emprestimos emprestimo = encontraPorIdDoLivro(idLivro);
-        livro.setDisponibilidade(true);
-        this.excluir(emprestimo);
-        livro.setDisponibilidade(true);
-
-    }
-
     @Override
     public Emprestimos criar(Emprestimos obj) {
         obj.setId(this.getProximoID());
@@ -77,8 +42,11 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
     }
 
     @Override
-    public void excluir(Emprestimos obj) {
-        this.listDeEmprestimos.remove(obj);
+    public void excluir(Emprestimos obj) throws DAOException{
+        boolean remocao = this.listDeEmprestimos.remove(obj);
+        if (!remocao){
+            throw new DAOException(DAOException.EXCLUIR);
+        }
     }
 
     @Override
@@ -88,8 +56,11 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
     }
 
     @Override
-    public Emprestimos atualizar(Emprestimos obj) {
+    public Emprestimos atualizar(Emprestimos obj) throws DAOException{
         int index = this.listDeEmprestimos.indexOf(obj);
+        if (index == -1){
+            throw new DAOException(DAOException.ATUALIZAR);
+        }
         this.listDeEmprestimos.set(index, obj);
         return obj;
     }
@@ -100,13 +71,13 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
     }
 
     @Override
-    public Emprestimos encontrarPorID(int id) {
+    public Emprestimos encontrarPorID(int id) throws DAOException{
         for (Emprestimos emprestimo : listDeEmprestimos ){
             if (Objects.equals(emprestimo.getId(), id)){
                 return emprestimo;
             }
         }
-        return null;
+        throw new DAOException(DAOException.BUSCAR);
     }
 
     public Emprestimos encontraPorIdDoLivro(int id) {

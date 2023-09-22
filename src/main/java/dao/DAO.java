@@ -24,7 +24,7 @@ public class DAO {
         return livroDao;
     }
 
-    public static EmprestimosDAO getEmprestimosAO() {
+    public static EmprestimosDAO getEmprestimosDAO() {
         if (emprestimosDao == null) {
             emprestimosDao = new EmprestimosDAO();
         }

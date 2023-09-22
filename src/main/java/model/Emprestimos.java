@@ -1,8 +1,11 @@
 package model;
 
-import java.time.LocalDate;
-import java.util.Objects;
+import dao.DAO;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Objects;
+import static dao.DAO.*;
 
 public class Emprestimos {
     private Livro livro;
@@ -14,14 +17,36 @@ public class Emprestimos {
 
     public Emprestimos(Livro livro, Usuario usuario){
         //Tem q verificar se o livro ta disponivel
-        LocalDate dataDeEmprestimo= LocalDate.now();
-        LocalDate dataDeDevolucao = dataDeEmprestimo.plusDays(7);
-        livro.setDisponibilidade(false);
-        this.livro=livro;
-        this.usuario=usuario;
-        this.dataEmprestimos=dataDeEmprestimo;
-        this.dataDevolucao=dataDeDevolucao;
+        if (!DAO.getEmprestimosDAO().verificaAtraso(usuario)) {
+            LocalDate dataDeEmprestimo = LocalDate.now();
+            LocalDate dataDeDevolucao = dataDeEmprestimo.plusDays(7);
+            livro.setDisponibilidade(false);
+            this.livro = livro;
+            this.usuario = usuario;
+            this.dataEmprestimos = dataDeEmprestimo;
+            this.dataDevolucao = dataDeDevolucao;
+        }
     }
+
+    public void multa (Livro livro, Usuario usuario){
+        LocalDate datahoje = LocalDate.now();
+        int idLivro = livro.getId();
+        Emprestimos emprestimo = DAO.getEmprestimosDAO().encontraPorIdDoLivro(idLivro);
+        long diferencaEntreDias = ChronoUnit.DAYS.between(datahoje, emprestimo.getDataDevolucao());
+        Integer diasDeMulta = Math.toIntExact(diferencaEntreDias * 2);
+        usuario.setMulta(diasDeMulta);
+        usuario.setStatus(false);
+    }
+
+
+    public void registraDevolucao(Livro livro, Usuario usuario){
+        this.multa(livro,usuario);
+        int idLivro = livro.getId();
+        Emprestimos emprestimo = DAO.getEmprestimosDAO().encontraPorIdDoLivro(idLivro);
+        livro.setDisponibilidade(true);
+    }
+
+
     public Livro getLivro() {
         return livro;
     }
