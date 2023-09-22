@@ -11,11 +11,17 @@ public class Emprestimos {
     private LocalDate dataDevolucao;
     private int id;
 
-    public Emprestimos(){
-        livro = new Livro();
-        usuario = new Usuario();
-    }
 
+    public Emprestimos(Livro livro, Usuario usuario){
+        //Tem q verificar se o livro ta disponivel
+        LocalDate dataDeEmprestimo= LocalDate.now();
+        LocalDate dataDeDevolucao = dataDeEmprestimo.plusDays(7);
+        livro.setDisponibilidade(false);
+        this.livro=livro;
+        this.usuario=usuario;
+        this.dataEmprestimos=dataDeEmprestimo;
+        this.dataDevolucao=dataDeDevolucao;
+    }
     public Livro getLivro() {
         return livro;
     }
@@ -48,17 +54,27 @@ public class Emprestimos {
         this.dataDevolucao = dataDevolucao;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
-
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "Emprestimos{" +
+                "livro=" + livro +
+                ", usuario=" + usuario +
+                ", dataEmprestimos=" + dataEmprestimos +
+                ", dataDevolucao=" + dataDevolucao +
+                ", id=" + id +
+                '}';
     }
 }

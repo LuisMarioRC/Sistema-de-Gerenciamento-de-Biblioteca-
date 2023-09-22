@@ -13,12 +13,19 @@ public class Livro {
     private Boolean disponibilidade;
     private int id;
 
-    //Construtor vazio
-    public Livro() {
 
+
+    public Livro(String titulo, String autor,String editora,Integer isbn,Integer anoDePublicacao,String categoria) {
+        this.titulo=titulo;
+        this.autor=autor;
+        this.editora=editora;
+        this.isbn=isbn;
+        this.anoDePublicacao=anoDePublicacao;
+        this.categoria=categoria;
+        this.disponibilidade=true; //Se tiver disponivel a disponibilidade é true
     }
 
-    //Getters e setters
+    /**Getters e setters*/
 
     public int getId() {
         return id;
@@ -91,17 +98,16 @@ public class Livro {
     }
 
     @Override
-    public String toString(){
-        return "\nTítulo: " + titulo +
-                "\nAutor: " + autor +
-                "\nEditora: " + editora +
-                "\nISBN: " + isbn +
-                "\nAno de Publicação: " +anoDePublicacao+
-                "\nCategoria: " + categoria+
-                "\nDisponibilidade: " +disponibilidade+
-                "\nID: "+id;
+    public String toString() {
+        return "Livro{" +
+                "titulo='" + titulo + '\'' +
+                ", autor='" + autor + '\'' +
+                ", editora='" + editora + '\'' +
+                ", isbn=" + isbn +
+                ", anoDePublicacao=" + anoDePublicacao +
+                ", categoria='" + categoria + '\'' +
+                ", disponibilidade=" + disponibilidade +
+                ", id=" + id +
+                '}';
     }
 }
-
-
-

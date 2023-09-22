@@ -1,6 +1,6 @@
-package DAO.livro;
+package dao.livro;
 
-import DAO.CRUD;
+import dao.CRUD;
 import model.Livro;
 
 public interface LivroDAOinterface extends CRUD<Livro, Exception> {

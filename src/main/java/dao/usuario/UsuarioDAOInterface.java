@@ -1,6 +1,6 @@
-package DAO.usuario;
+package dao.usuario;
 
-import DAO.CRUD;
+import dao.CRUD;
 import model.Usuario;
 
 public interface UsuarioDAOInterface extends CRUD<Usuario, Exception> {

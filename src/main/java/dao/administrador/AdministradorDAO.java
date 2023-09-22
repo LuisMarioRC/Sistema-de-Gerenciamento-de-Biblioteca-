@@ -1,7 +1,6 @@
-package DAO.administrador;
+package dao.administrador;
 
 import model.Administrador;
-import model.Livro;
 
 import java.util.ArrayList;
 import java.util.Objects;

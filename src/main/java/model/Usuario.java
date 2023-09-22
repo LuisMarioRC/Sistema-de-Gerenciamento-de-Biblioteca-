@@ -7,8 +7,13 @@ public class Usuario extends Operador{
     private Integer multa;
 
 
-    public Usuario(){
 
+
+    public Usuario(String nome,String endereco,Integer telefone){
+        super(nome);
+        this.endereco=endereco;
+        this.telefone=telefone;
+        this.multa=0;
     }
 
     public String getEndereco() {
@@ -35,4 +40,17 @@ public class Usuario extends Operador{
     public void setMulta(Integer multa) {
         this.multa = multa;
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "nome=" + super.getNome() + '\''+
+                ",endereco=" + endereco + '\'' +
+                ", telefone=" + telefone +
+                ", multa=" + multa + '\''+
+                ", numeroDeIdentificacao=" + super.getNumeroDeIdentificacao()+ '\''+
+                ",status=" +super.getStatus()+
+                '}';
+    }
+
 }

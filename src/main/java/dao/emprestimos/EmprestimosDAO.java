@@ -1,4 +1,4 @@
-package DAO.emprestimos;
+package dao.emprestimos;
 
 
 import model.Emprestimos;
@@ -21,6 +21,9 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
         this.listDeEmprestimos= new ArrayList<>();
         this.proximoID = 0;
     }
+    public ArrayList<Emprestimos> getListDeEmprestimos() {
+        return listDeEmprestimos;
+    }
 
     public Boolean verificaAtraso(Usuario usuario){
         LocalDate dataHoje= LocalDate.now();
@@ -30,12 +33,8 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
     }
 
 
-    public ArrayList<Emprestimos> getListDeEmprestimos() {
-        return listDeEmprestimos;
-    }
 
-
-    public void registrarEmprestimos(Livro livro, Usuario usuario){
+    /**public void registrarEmprestimos(Livro livro, Usuario usuario){
         //Tem q verificar se o livro ta disponivel
         Emprestimos emprestimo = new Emprestimos();
         LocalDate dataDeEmprestimo= LocalDate.now();
@@ -46,7 +45,7 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
         emprestimo.setDataEmprestimos(dataDeEmprestimo);
         emprestimo.setDataDevolucao(dataDeDevolucao);
         this.criar(emprestimo);
-    }
+    }*/
 
 
     private void multa (Livro livro, Usuario usuario){

@@ -2,14 +2,14 @@ package model;
 
 public class Administrador extends Bibliotecario{
 
-    public Administrador(){
+    public Administrador(String nome, String cargo,Integer senha){
+        super(nome,cargo,senha);
 
     }
 
-    public void bloquearConta(Operador conta){
-        conta.setStatus(false);   // Muda o status da conta que deseja bloquear para false;
+
+    @Override
+    public String toString() {
+        return "Administrador{}";
     }
-
-
-
 }
