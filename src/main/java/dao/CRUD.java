@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 
 
@@ -11,13 +11,13 @@ public interface CRUD <T, E extends Exception> {
     public T criar(T obj);
 
     // Excluir um objeto
-    public void excluir(T obj);
+    public void excluir(T obj) throws E;
 
     // Excluir todos os objetos
     public void excluirTodos();
 
     // Atualizar um objeto
-    public T atualizar(T obj);
+    public T atualizar(T obj) throws E;
 
     // Econtrar todos os objetos
     public ArrayList<T> encontrarTodos();

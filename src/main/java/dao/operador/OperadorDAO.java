@@ -1,4 +1,4 @@
-package DAO.operador;
+package dao.operador;
 
 import model.Operador;
 
@@ -19,14 +19,19 @@ public class OperadorDAO implements OperadorDAOInterface {
     }
 
 
-    public Operador cadastrarOperadores(String nome, String cargo, Integer senha){
+    /**public Operador cadastrarOperadores(String nome, String cargo, Integer senha){
         Operador operador= new Operador();
         operador.setNome(nome);
         operador.setCargo(cargo);
         operador.setSenha(senha);
         operador.setStatus(true);
         return operador;
+    }*/
+
+    public void bloquearConta(Operador conta){
+        conta.setStatus(false);   // Muda o status da conta que deseja bloquear para false;
     }
+
 
     @Override
     public Operador criar(Operador obj) {

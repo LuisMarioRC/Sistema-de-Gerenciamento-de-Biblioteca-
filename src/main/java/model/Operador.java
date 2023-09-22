@@ -9,9 +9,16 @@ public class Operador {
     private Integer numeroDeIdentificacao;
     private Boolean status;
 
+    public Operador(String nome){
+        this.nome= nome;
+        this.status=true;
+    }
 
-    public Operador(){
-
+    public Operador(String nome, String cargo,Integer senha){
+        this.nome=nome;
+        this.cargo=cargo;
+        this.senha=senha;
+        this.status=true; // True siginifica que o operador não esta bloqueado
     }
 
     public Boolean getStatus() {
@@ -57,5 +64,16 @@ public class Operador {
     @Override
     public int hashCode() {
         return Objects.hash(numeroDeIdentificacao);
+    }
+
+    @Override
+    public String toString() {
+        return "Operador{" +
+                "nome='" + nome + '\'' +
+                ", cargo='" + cargo + '\'' +
+                ", senha=" + senha +
+                ", numeroDeIdentificacao=" + numeroDeIdentificacao +
+                ", status=" + status +
+                '}';
     }
 }

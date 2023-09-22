@@ -1,4 +1,4 @@
-package DAO.usuario;
+package dao.usuario;
 
 import model.Usuario;
 
@@ -19,14 +19,14 @@ public class UsuarioDAO implements UsuarioDAOInterface{
         this.proximoID=0;
     }
 
-    public Usuario cadastrarUsuario(String nome, String endereco, Integer telefone){
+    /**public Usuario cadastrarUsuario(String nome, String endereco, Integer telefone){
         Usuario usuario = new Usuario();
         usuario.setNome(nome);
         usuario.setEndereco(endereco);
         usuario.setTelefone(telefone);
         usuario.setStatus(true);
         return usuario;
-    }
+    }*/
     @Override
     public Usuario criar(Usuario obj) {
         obj.setNumeroDeIdentificacao(this.getProximoID());
@@ -66,4 +66,6 @@ public class UsuarioDAO implements UsuarioDAOInterface{
         }
         return null;
     }
+
+
 }

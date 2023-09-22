@@ -1,6 +1,6 @@
-package DAO.bibliotecario;
+package dao.bibliotecario;
 
-import DAO.CRUD;
+import dao.CRUD;
 import model.Bibliotecario;
 
 public interface BibliotecarioDAOInterface extends CRUD <Bibliotecario, Exception> {

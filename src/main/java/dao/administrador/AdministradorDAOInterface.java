@@ -1,6 +1,6 @@
-package DAO.administrador;
+package dao.administrador;
 
-import DAO.CRUD;
+import dao.CRUD;
 import model.Administrador;
 
 public interface AdministradorDAOInterface extends CRUD <Administrador, Exception> {

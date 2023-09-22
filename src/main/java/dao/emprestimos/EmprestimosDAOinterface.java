@@ -1,6 +1,6 @@
-package DAO.emprestimos;
+package dao.emprestimos;
 
-import DAO.CRUD;
+import dao.CRUD;
 import model.Emprestimos;
 
 public interface EmprestimosDAOinterface extends CRUD<Emprestimos, Exception> {

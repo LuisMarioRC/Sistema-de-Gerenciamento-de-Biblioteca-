@@ -1,4 +1,4 @@
-package DAO.bibliotecario;
+package dao.bibliotecario;
 
 import model.Bibliotecario;
 

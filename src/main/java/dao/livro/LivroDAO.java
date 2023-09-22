@@ -1,7 +1,7 @@
-package DAO.livro;
+package dao.livro;
 
 
-import DAO.excecoes.LivroException;
+import dao.excecoes.LivroException;
 import model.Livro;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -19,18 +19,6 @@ public class LivroDAO implements LivroDAOinterface{
         return this.proximoID++;
     }
 
-
-    public void registraLivro(String titulo, String autor,String editora,Integer isbn,Integer anoDePublicacao,String categoria){
-        Livro livro= new Livro();
-        livro.setTitulo(titulo);
-        livro.setAutor(autor);
-        livro.setEditora(editora);
-        livro.setIsbn(isbn);
-        livro.setAnoDePublicacao(anoDePublicacao);
-        livro.setCategoria(categoria);
-        livro.setDisponibilidade(true);
-        this.criar(livro);
-    }
 
 
     public ArrayList<Livro> pesquisaPorTitulo(String titulo) throws LivroException{
@@ -95,8 +83,11 @@ public class LivroDAO implements LivroDAOinterface{
     }
 
     @Override
-    public void excluir(Livro obj) {
-        this.listLivros.remove(obj);
+    public void excluir(Livro obj) throws LivroException{
+        boolean remocao = this.listLivros.remove(obj);
+        if (!remocao){
+            throw new LivroException(LivroException.EXCLUIR,obj);
+        }
     }
 
     @Override
@@ -107,8 +98,11 @@ public class LivroDAO implements LivroDAOinterface{
     }
 
     @Override
-    public Livro atualizar(Livro obj) {
+    public Livro atualizar(Livro obj) throws LivroException{
         int index = this.listLivros.indexOf(obj);
+        if (index == -1){
+            throw new LivroException(LivroException.ATUALIZAR,obj);
+        }
         this.listLivros.set(index, obj);
         return obj;
     }
