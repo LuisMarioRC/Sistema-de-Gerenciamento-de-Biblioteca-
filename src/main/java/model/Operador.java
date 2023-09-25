@@ -1,5 +1,6 @@
 package model;
 
+
 import java.util.Objects;
 
 public class Operador {
@@ -8,6 +9,7 @@ public class Operador {
     private Integer senha;
     private Integer numeroDeIdentificacao;
     private Boolean status;
+
 
     public Operador(String nome){
         this.nome= nome;
@@ -19,6 +21,10 @@ public class Operador {
         this.cargo=cargo;
         this.senha=senha;
         this.status=true; // True siginifica que o operador não esta bloqueado
+    }
+
+    public void bloquearConta(Operador conta){
+        conta.setStatus(false);   // Muda o status da conta que deseja bloquear para false;
     }
 
     public Boolean getStatus() {

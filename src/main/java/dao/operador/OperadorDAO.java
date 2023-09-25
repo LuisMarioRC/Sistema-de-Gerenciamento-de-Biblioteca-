@@ -19,8 +19,15 @@ public class OperadorDAO implements OperadorDAOInterface {
         this.proximoID=0;
     }
 
-    public void bloquearConta(Operador conta){
-        conta.setStatus(false);   // Muda o status da conta que deseja bloquear para false;
+
+    public ArrayList<Operador> encontraOperador(String cargo){
+        ArrayList<Operador> listOperadorEspecifico= new ArrayList<>();
+        for(Operador operador: listDeOperador){
+            if (Objects.equals(operador.getCargo(),cargo)){
+                listOperadorEspecifico.add(operador);
+            }
+        }
+        return listOperadorEspecifico;
     }
 
 
