@@ -1,11 +1,13 @@
 package dao.emprestimos;
 
+import dao.DAO;
 import dao.excecoes.EmprestimosException;
 import model.Emprestimos;
 import model.Livro;
 import model.Usuario;
 import java.time.LocalDate;
 import java.util.*;
+import static dao.DAO.*;
 
 public class EmprestimosDAO implements EmprestimosDAOinterface {
     private ArrayList<Emprestimos> listDeEmprestimos;
@@ -20,6 +22,14 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
         this.proximoID = 0;
     }
 
+    public void renovar(Livro livro, Usuario usuario) throws EmprestimosException {
+        if (!verificaAtraso(usuario) && !DAO.getReservaDAO().verificaReserva(livro.getId())) {
+            Emprestimos emprestimo = encontraPorIdDoLivro(livro.getId());
+            LocalDate dataDeDevolucao = emprestimo.getDataDevolucao();
+            emprestimo.setDataDevolucao(dataDeDevolucao.plusDays(7));
+        }
+    }
+
     public Boolean verificaAtraso(Usuario usuario){
         LocalDate dataHoje= LocalDate.now();
         for (Emprestimos emprestimo: listDeEmprestimos){
@@ -32,9 +42,6 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
         return false;
     }
 
-    public void reservarLivro(Livro livro, Usuario usuario){
-
-    }
 
     @Override
     public Emprestimos criar(Emprestimos obj) {

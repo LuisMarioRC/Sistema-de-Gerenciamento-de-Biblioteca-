@@ -1,6 +1,5 @@
 package dao.reserva;
 
-import model.Livro;
 import model.Reserva;
 import model.Usuario;
 import java.util.ArrayList;
@@ -9,31 +8,42 @@ import java.util.Map;
 
 public class ReservaDAO implements ReservaDAOInterface{
 
-    private Map<Livro, ArrayList<Usuario>> reservas = new HashMap<>();
+    private Map<Integer, ArrayList<Usuario>> reservas = new HashMap<>();
+
 
     public ReservaDAO() {
-        this.reservas = new HashMap<Livro, ArrayList<Usuario>>();
+        this.reservas = new HashMap<Integer, ArrayList<Usuario>>();
     }
 
     // Método para obter a lista de reservas para um livro específico
-    public ArrayList<Usuario> getReservasParaLivro(Livro livro) {
-        return reservas.getOrDefault(livro, new ArrayList<>());
+    public ArrayList<Usuario> getReservasParaLivro(Integer idLivro) {
+        return reservas.getOrDefault(idLivro, new ArrayList<>());
     }
 
     //retorna toda o map;
-    public Map<Livro, ArrayList<Usuario>> getReservas(){
+    public Map<Integer, ArrayList<Usuario>> getReservas(){
         return this.reservas;
     }
 
 
-    //vericar se para reservar, será o livro ou Id do livro.
+    public boolean verificaReserva(Integer idLivro){
+        if (reservas.containsKey(idLivro)){
+            ArrayList<Usuario> lista= reservas.get(idLivro);
+            // "true" corresponde se tem reserva
+            return !lista.isEmpty();
+        }else{
+            return false; //"false" corresponde que nao tem reserva (a lista esta vazia)
+        }
+    }
+
+
     @Override
     public Reserva criar(Reserva obj) {
-        if (!reservas.containsKey(obj.getLivro())) {
+        if (!reservas.containsKey(obj.getIdLivro())) {
             // Se o livro não estiver no map, crie uma nova lista de reservas
-            reservas.put(obj.getLivro(), new ArrayList<>());
+            reservas.put(obj.getIdLivro(), new ArrayList<>());
         }
-        reservas.get(obj.getLivro()).add(obj.getUsuario());
+        reservas.get(obj.getIdLivro()).add(obj.getUsuario());
         return obj;
     }
 

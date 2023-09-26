@@ -15,6 +15,7 @@ public class Emprestimos {
     private int id;
 
 
+    //talvez precisa por a verificação no metodo criar do DAO.
 
     public Emprestimos(Livro livro, Usuario usuario) throws EmprestimosException {
         //verificando se o usuario nao tem livro atrasado e se o livro está disponivel.
@@ -30,28 +31,23 @@ public class Emprestimos {
             throw new EmprestimosException(EmprestimosException.EMPRESTAR);
         }
     }
-    // Esta chamando a execeção do DAO nessa classe, verificar se é melhor fazer um class de execeção pra cada;
+    // Esta chamando a execeção do DAO nessa classe, (verificar se é melhor fazer um class de execeção pra cada);
     public void multa (Livro livro, Usuario usuario) throws EmprestimosException {
         LocalDate datahoje = LocalDate.now();
-        int idLivro = livro.getId();
-        Emprestimos emprestimo = DAO.getEmprestimosDAO().encontraPorIdDoLivro(idLivro);
+        Emprestimos emprestimo = DAO.getEmprestimosDAO().encontraPorIdDoLivro(livro.getId());
         if (emprestimo != null) {
-            // verificar se tem emprestimos com esse livro; (dps testar com exceção)
+            // verificar se tem emprestimos com esse livro;
             long diferencaEntreDias = ChronoUnit.DAYS.between(datahoje, emprestimo.getDataDevolucao());
             if (diferencaEntreDias > 0) { // para calcular a multa, tem que ter diferença de dias
                 Integer diasDeMulta = Math.toIntExact(diferencaEntreDias * 2);
                 usuario.setMulta(diasDeMulta);
-                //usuario.setStatus(false);  status é bloqueio, nao multa
             }
         }
     }
 
 
-    //Tbm chamando a exceção do DAO
     public void registraDevolucao(Livro livro, Usuario usuario) throws EmprestimosException {
         this.multa(livro,usuario);
-        //int idLivro = livro.getId();
-        //Emprestimos emprestimo = DAO.getEmprestimosDAO().encontraPorIdDoLivro(idLivro);
         livro.setDisponibilidade(true);
     }
 

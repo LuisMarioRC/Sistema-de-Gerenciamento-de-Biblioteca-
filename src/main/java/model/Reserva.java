@@ -1,21 +1,13 @@
 package model;
 
 public class Reserva {
-    private Livro livro;
+    private Integer idLivro;
     private Usuario usuario;
 
 
-    public Reserva(Livro livro,Usuario usuario){
-        this.livro = livro;
-        this.usuario =usuario;
-    }
-
-    public Livro getLivro() {
-        return livro;
-    }
-
-    public void setLivro(Livro livro) {
-        this.livro = livro;
+    public Reserva(Integer idLivro,Usuario usuario){
+        this.idLivro = idLivro;
+        this.setUsuario(usuario);
     }
 
     public Usuario getUsuario() {
@@ -26,10 +18,19 @@ public class Reserva {
         this.usuario = usuario;
     }
 
+    public Integer getIdLivro() {
+        return idLivro;
+    }
+
+    public void setIdLivro(Integer idLivro) {
+        this.idLivro = idLivro;
+    }
+
+
     @Override
     public String toString() {
         return "Reserva{" +
-                "livro=" + livro +
+                "idLivro=" + idLivro +
                 ", usuario=" + usuario +
                 '}';
     }
