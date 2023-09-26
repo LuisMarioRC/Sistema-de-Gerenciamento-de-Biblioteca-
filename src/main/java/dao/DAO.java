@@ -5,6 +5,7 @@ import dao.bibliotecario.BibliotecarioDAO;
 import dao.emprestimos.EmprestimosDAO;
 import dao.livro.LivroDAO;
 import dao.operador.OperadorDAO;
+import dao.reserva.ReservaDAO;
 import dao.usuario.UsuarioDAO;
 
 public class DAO {
@@ -15,7 +16,15 @@ public class DAO {
     private static UsuarioDAO usuarioDao;
     private static AdministradorDAO administradorDao;
     private static BibliotecarioDAO bibliotecarioDao;
+    private static ReservaDAO reservaDao;
 
+
+    public static ReservaDAO getReservaDAO(){
+        if (reservaDao == null) {
+            reservaDao = new ReservaDAO();
+        }
+        return reservaDao;
+    }
 
     public static LivroDAO getLivroDAO() {
         if (livroDao == null) {
@@ -24,7 +33,7 @@ public class DAO {
         return livroDao;
     }
 
-    public static EmprestimosDAO getEmprestimosAO() {
+    public static EmprestimosDAO getEmprestimosDAO() {
         if (emprestimosDao == null) {
             emprestimosDao = new EmprestimosDAO();
         }

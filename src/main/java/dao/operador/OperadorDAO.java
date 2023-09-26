@@ -1,5 +1,6 @@
 package dao.operador;
 
+import dao.excecoes.DAOException;
 import model.Operador;
 
 import java.util.ArrayList;
@@ -19,17 +20,14 @@ public class OperadorDAO implements OperadorDAOInterface {
     }
 
 
-    /**public Operador cadastrarOperadores(String nome, String cargo, Integer senha){
-        Operador operador= new Operador();
-        operador.setNome(nome);
-        operador.setCargo(cargo);
-        operador.setSenha(senha);
-        operador.setStatus(true);
-        return operador;
-    }*/
-
-    public void bloquearConta(Operador conta){
-        conta.setStatus(false);   // Muda o status da conta que deseja bloquear para false;
+    public ArrayList<Operador> encontraOperador(String cargo){
+        ArrayList<Operador> listOperadorEspecifico= new ArrayList<>();
+        for(Operador operador: listDeOperador){
+            if (Objects.equals(operador.getCargo(),cargo)){
+                listOperadorEspecifico.add(operador);
+            }
+        }
+        return listOperadorEspecifico;
     }
 
 
@@ -41,8 +39,11 @@ public class OperadorDAO implements OperadorDAOInterface {
     }
 
     @Override
-    public void excluir(Operador obj) {
-        this.listDeOperador.remove(obj);
+    public void excluir(Operador obj) throws DAOException{
+        boolean remocao = this.listDeOperador.remove(obj);
+        if (!remocao){
+            throw new DAOException(DAOException.EXCLUIR);
+        }
     }
 
     @Override
@@ -52,8 +53,11 @@ public class OperadorDAO implements OperadorDAOInterface {
     }
 
     @Override
-    public Operador atualizar(Operador obj) {
+    public Operador atualizar(Operador obj) throws DAOException{
         int index = this.listDeOperador.indexOf(obj);
+        if (index == -1){
+            throw new DAOException(DAOException.ATUALIZAR);
+        }
         this.listDeOperador.set(index, obj);
         return obj;
     }
@@ -64,13 +68,13 @@ public class OperadorDAO implements OperadorDAOInterface {
     }
 
     @Override
-    public Operador encontrarPorID(int id) {
+    public Operador encontrarPorID(int id) throws DAOException {
         for (Operador operador : listDeOperador){
             if (Objects.equals(operador.getNumeroDeIdentificacao(),id)){
                 return operador;
             }
         }
-        return null;
+        throw new DAOException(DAOException.BUSCAR);
     }
 
 

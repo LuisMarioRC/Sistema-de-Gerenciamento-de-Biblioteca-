@@ -1,5 +1,7 @@
 package dao.usuario;
 
+import dao.DAO;
+import dao.excecoes.DAOException;
 import model.Usuario;
 
 import java.util.ArrayList;
@@ -19,14 +21,6 @@ public class UsuarioDAO implements UsuarioDAOInterface{
         this.proximoID=0;
     }
 
-    /**public Usuario cadastrarUsuario(String nome, String endereco, Integer telefone){
-        Usuario usuario = new Usuario();
-        usuario.setNome(nome);
-        usuario.setEndereco(endereco);
-        usuario.setTelefone(telefone);
-        usuario.setStatus(true);
-        return usuario;
-    }*/
     @Override
     public Usuario criar(Usuario obj) {
         obj.setNumeroDeIdentificacao(this.getProximoID());
@@ -35,8 +29,11 @@ public class UsuarioDAO implements UsuarioDAOInterface{
     }
 
     @Override
-    public void excluir(Usuario obj) {
-        this.listDeUsuario.remove(obj);
+    public void excluir(Usuario obj) throws DAOException {
+        boolean remocao =this.listDeUsuario.remove(obj);
+        if (!remocao){
+            throw new DAOException(DAOException.EXCLUIR);
+        }
     }
 
     @Override
@@ -46,8 +43,11 @@ public class UsuarioDAO implements UsuarioDAOInterface{
     }
 
     @Override
-    public Usuario atualizar(Usuario obj) {
+    public Usuario atualizar(Usuario obj) throws DAOException{
         int index = this.listDeUsuario.indexOf(obj);
+        if (index == -1){
+            throw new DAOException(DAOException.ATUALIZAR);
+        }
         this.listDeUsuario.set(index,obj);
         return obj;
     }
@@ -58,13 +58,13 @@ public class UsuarioDAO implements UsuarioDAOInterface{
     }
 
     @Override
-    public Usuario encontrarPorID(int id) {
+    public Usuario encontrarPorID(int id)throws DAOException {
         for (Usuario usuario : listDeUsuario){
             if (Objects.equals(usuario.getNumeroDeIdentificacao(),id)){
                 return usuario;
             }
         }
-        return null;
+        throw new DAOException(DAOException.BUSCAR);
     }
 
 
