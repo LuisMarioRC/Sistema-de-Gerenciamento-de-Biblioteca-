@@ -7,7 +7,6 @@ import model.Livro;
 import model.Usuario;
 import java.time.LocalDate;
 import java.util.*;
-import static dao.DAO.*;
 
 public class EmprestimosDAO implements EmprestimosDAOinterface {
     private ArrayList<Emprestimos> listDeEmprestimos;
@@ -23,31 +22,85 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
     }
 
     public void renovar(Livro livro, Usuario usuario) throws EmprestimosException {
-        if (!verificaAtraso(usuario) && !DAO.getReservaDAO().verificaReserva(livro.getId())) {
+        if (!verificaAtrasoDeUsuario(usuario) && !DAO.getReservaDAO().verificaReserva(livro.getId())) {
             Emprestimos emprestimo = encontraPorIdDoLivro(livro.getId());
             LocalDate dataDeDevolucao = emprestimo.getDataDevolucao();
             emprestimo.setDataDevolucao(dataDeDevolucao.plusDays(7));
+            this.atualizar(emprestimo);
         }
     }
 
-    public Boolean verificaAtraso(Usuario usuario){
+    public Integer numLivrosEmprestados(){
+        return this.listDeEmprestimos.size();
+    }
+
+
+    public Integer numLivroAtrasado(){
+        Integer numeroDeAtraso=1;
+        LocalDate dataHoje= LocalDate.now();
+        for (Emprestimos emprestimos : listDeEmprestimos){
+            if (emprestimos.getAndamento() && dataHoje.isAfter(emprestimos.getDataDevolucao())){
+                numeroDeAtraso ++;
+            }
+        }
+        return numeroDeAtraso;
+    }
+
+
+    public ArrayList<Emprestimos> historioEmprestimosUsuario(Usuario usuario){
+        ArrayList<Emprestimos> historicoEmprestimos= new ArrayList<>();
+        for (Emprestimos emprestimos : listDeEmprestimos){
+            if (Objects.equals(emprestimos.getUsuario(),usuario)){
+                historicoEmprestimos.add(emprestimos);
+            }
+        }
+        return historicoEmprestimos;
+    }
+
+    public void livroMaisPolular(){
+        ArrayList<Livro> livroMaisPopular = new ArrayList<>();
+        int maiorContagem = 0;
+        for (Emprestimos emprestimos : listDeEmprestimos) {
+            int contagem = contarElemento(listDeEmprestimos, emprestimos.getLivro());
+            if (contagem > maiorContagem) {
+                maiorContagem = contagem;
+                livroMaisPopular.clear();
+                livroMaisPopular.add(emprestimos.getLivro());
+            } else if (contagem == maiorContagem && !livroMaisPopular.contains(emprestimos.getLivro())) {
+                livroMaisPopular.add(emprestimos.getLivro());
+            }
+        }
+
+    }
+
+    private static int contarElemento(ArrayList<Emprestimos> list, Livro livro) {
+        int contagem = 0;
+        for (Emprestimos emprestimos : list) {
+            if (emprestimos.getLivro().equals(livro)) {
+                contagem++;
+            }
+        }
+        return contagem;
+    }
+
+    public Boolean verificaAtrasoDeUsuario(Usuario usuario){
         LocalDate dataHoje= LocalDate.now();
         for (Emprestimos emprestimo: listDeEmprestimos){
             if (emprestimo.getUsuario() == usuario
                     && dataHoje.isAfter(emprestimo.getDataDevolucao())
-                    && !emprestimo.getLivro().getDisponibilidade()){
+                    && emprestimo.getAndamento()){
                 return true;
             }
         }
-        return false;
+        return false; // false equivale que o usuario NÂO tem atraso
     }
 
 
     @Override
-    public Emprestimos criar(Emprestimos obj) {
-        obj.setId(this.getProximoID());
-        this.listDeEmprestimos.add(obj);
-        return obj;
+    public Emprestimos criar(Emprestimos obj)  {
+            obj.setId(this.getProximoID());
+            this.listDeEmprestimos.add(obj);
+            return obj;
     }
 
     @Override
