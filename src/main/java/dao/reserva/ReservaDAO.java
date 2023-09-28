@@ -15,6 +15,12 @@ public class ReservaDAO implements ReservaDAOInterface{
         this.reservas = new HashMap<Integer, ArrayList<Usuario>>();
     }
 
+
+    public Integer numLivrosReservados(){
+        return this.reservas.size();
+    }
+
+
     // Método para obter a lista de reservas para um livro específico
     public ArrayList<Usuario> getReservasParaLivro(Integer idLivro) {
         return reservas.getOrDefault(idLivro, new ArrayList<>());
@@ -49,12 +55,11 @@ public class ReservaDAO implements ReservaDAOInterface{
 
     @Override
     public void excluir(Reserva obj) throws Exception {
-
     }
 
     @Override
     public void excluirTodos() {
-
+        this.reservas = new HashMap<Integer, ArrayList<Usuario>>();
     }
 
     @Override
