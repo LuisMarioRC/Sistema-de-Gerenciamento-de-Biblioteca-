@@ -1,7 +1,7 @@
 package dao.usuario;
 
-import dao.DAO;
-import dao.excecoes.DAOException;
+import dao.DAO;;
+import dao.excecoes.UsuarioException;
 import model.Usuario;
 
 import java.util.ArrayList;
@@ -29,10 +29,10 @@ public class UsuarioDAO implements UsuarioDAOInterface{
     }
 
     @Override
-    public void excluir(Usuario obj) throws DAOException {
+    public void excluir(Usuario obj) throws UsuarioException {
         boolean remocao =this.listDeUsuario.remove(obj);
         if (!remocao){
-            throw new DAOException(DAOException.EXCLUIR);
+            throw new UsuarioException(UsuarioException.EXCLUIR);
         }
     }
 
@@ -43,10 +43,10 @@ public class UsuarioDAO implements UsuarioDAOInterface{
     }
 
     @Override
-    public Usuario atualizar(Usuario obj) throws DAOException{
+    public Usuario atualizar(Usuario obj) throws UsuarioException{
         int index = this.listDeUsuario.indexOf(obj);
         if (index == -1){
-            throw new DAOException(DAOException.ATUALIZAR);
+            throw new UsuarioException(UsuarioException.ATUALIZAR);
         }
         this.listDeUsuario.set(index,obj);
         return obj;
@@ -58,14 +58,13 @@ public class UsuarioDAO implements UsuarioDAOInterface{
     }
 
     @Override
-    public Usuario encontrarPorID(int id)throws DAOException {
+    public Usuario encontrarPorID(int id)throws UsuarioException {
         for (Usuario usuario : listDeUsuario){
             if (Objects.equals(usuario.getNumeroDeIdentificacao(),id)){
                 return usuario;
             }
         }
-        throw new DAOException(DAOException.BUSCAR);
+        throw new UsuarioException(UsuarioException.BUSCAR);
     }
-
 
 }
