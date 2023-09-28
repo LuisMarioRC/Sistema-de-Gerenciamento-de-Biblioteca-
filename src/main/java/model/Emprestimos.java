@@ -2,10 +2,12 @@ package model;
 
 import dao.DAO;
 import dao.excecoes.EmprestimosException;
+import dao.excecoes.LivroException;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Objects;
-import static dao.DAO.*;
 
 public class Emprestimos {
     private Livro livro;
@@ -13,25 +15,31 @@ public class Emprestimos {
     private LocalDate dataEmprestimos;
     private LocalDate dataDevolucao;
     private int id;
+    private Boolean andamento;
 
 
     //talvez precisa por a verificação no metodo criar do DAO.
 
-    public Emprestimos(Livro livro, Usuario usuario) throws EmprestimosException {
-        //verificando se o usuario nao tem livro atrasado e se o livro está disponivel.
-        if (!DAO.getEmprestimosDAO().verificaAtraso(usuario) && livro.getDisponibilidade()) {
+
+
+    public Emprestimos(Livro livro, Usuario usuario) throws EmprestimosException, LivroException {
+        //verificando se o usuario nao tem livro atrasado e se o livro está disponivel e se n tem reserva para esse livro.
+        ArrayList<Usuario > listaDeReserva =DAO.getReservaDAO().getReservasParaLivro(livro.getId());
+        if (!DAO.getEmprestimosDAO().verificaAtrasoDeUsuario(usuario) && livro.getDisponibilidade() && !listaDeReserva.isEmpty()) {
             LocalDate dataDeEmprestimo = LocalDate.now();
             LocalDate dataDeDevolucao = dataDeEmprestimo.plusDays(7);
             livro.setDisponibilidade(false);
+            DAO.getLivroDAO().atualizar(livro);
             this.livro = livro;
             this.usuario = usuario;
             this.dataEmprestimos = dataDeEmprestimo;
             this.dataDevolucao = dataDeDevolucao;
+            this.setAndamento(true); //true significa ativo;
         }else{
             throw new EmprestimosException(EmprestimosException.EMPRESTAR);
         }
     }
-    // Esta chamando a execeção do DAO nessa classe, (verificar se é melhor fazer um class de execeção pra cada);
+
     public void multa (Livro livro, Usuario usuario) throws EmprestimosException {
         LocalDate datahoje = LocalDate.now();
         Emprestimos emprestimo = DAO.getEmprestimosDAO().encontraPorIdDoLivro(livro.getId());
@@ -46,9 +54,11 @@ public class Emprestimos {
     }
 
 
-    public void registraDevolucao(Livro livro, Usuario usuario) throws EmprestimosException {
+    public Livro registraDevolucao(Livro livro, Usuario usuario) throws EmprestimosException, LivroException {
         this.multa(livro,usuario);
         livro.setDisponibilidade(true);
+        DAO.getLivroDAO().atualizar(livro);
+        return livro;
     }
 
 
@@ -106,5 +116,13 @@ public class Emprestimos {
                 ", dataDevolucao=" + dataDevolucao +
                 ", id=" + id +
                 '}';
+    }
+
+    public Boolean getAndamento() {
+        return andamento;
+    }
+
+    public void setAndamento(Boolean andamento) {
+        this.andamento = andamento;
     }
 }
