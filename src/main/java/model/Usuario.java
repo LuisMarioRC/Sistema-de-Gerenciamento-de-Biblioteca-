@@ -1,5 +1,8 @@
 package model;
 
+import dao.DAO;
+import dao.excecoes.UsuarioException;
+
 public class Usuario extends Operador{
 
     private String endereco;
@@ -14,6 +17,12 @@ public class Usuario extends Operador{
         this.endereco=endereco;
         this.telefone=telefone;
         this.multa=0;
+    }
+
+    public Usuario bloquearConta(Usuario usuario) throws UsuarioException{
+        usuario.setStatus(false);// Muda o status da conta que deseja bloquear para false;
+        DAO.getUsuarioDAO().atualizar(usuario);
+        return usuario;
     }
 
     public String getEndereco() {
