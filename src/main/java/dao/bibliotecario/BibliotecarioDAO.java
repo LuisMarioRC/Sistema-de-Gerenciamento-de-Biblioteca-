@@ -1,6 +1,6 @@
 package dao.bibliotecario;
 
-import dao.excecoes.DAOException;
+import dao.excecoes.BibliotecarioException;
 import model.Bibliotecario;
 
 import java.util.ArrayList;
@@ -30,10 +30,10 @@ public class BibliotecarioDAO implements BibliotecarioDAOInterface {
     }
 
     @Override
-    public void excluir(Bibliotecario obj) throws DAOException{
+    public void excluir(Bibliotecario obj) throws BibliotecarioException {
         boolean remocao = this.listDeBibliotecario.remove(obj);
         if (!remocao){
-            throw new DAOException(DAOException.EXCLUIR);
+            throw new BibliotecarioException(BibliotecarioException.EXCLUIR);
         }
     }
 
@@ -44,10 +44,10 @@ public class BibliotecarioDAO implements BibliotecarioDAOInterface {
     }
 
     @Override
-    public Bibliotecario atualizar(Bibliotecario obj) throws DAOException{
+    public Bibliotecario atualizar(Bibliotecario obj) throws BibliotecarioException{
         int index= this.listDeBibliotecario.indexOf(obj);
         if (index == -1){
-            throw new DAOException(DAOException.BUSCAR);
+            throw new BibliotecarioException(BibliotecarioException.BUSCAR);
         }
         this.listDeBibliotecario.set(index,obj);
         return obj;
@@ -59,13 +59,13 @@ public class BibliotecarioDAO implements BibliotecarioDAOInterface {
     }
 
     @Override
-    public Bibliotecario encontrarPorID(int id) throws DAOException {
+    public Bibliotecario encontrarPorID(int id) throws BibliotecarioException {
         for (Bibliotecario bibliotecario: listDeBibliotecario){
             if (Objects.equals(bibliotecario.getNumeroDeIdentificacao(), id)){
                 return bibliotecario;
             }
         }
-        throw new DAOException(DAOException.BUSCAR);
+        throw new BibliotecarioException(BibliotecarioException.BUSCAR);
     }
 
 
