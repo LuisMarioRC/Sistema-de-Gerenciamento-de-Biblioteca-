@@ -1,13 +1,19 @@
 package model;
 
+import dao.DAO;
+
 public class Reserva {
     private Integer idLivro;
     private Usuario usuario;
 
 
     public Reserva(Integer idLivro,Usuario usuario){
-        this.idLivro = idLivro;
-        this.setUsuario(usuario);
+        if (usuario.getStatus()
+                && usuario.getMulta() == 0
+                && !DAO.getEmprestimosDAO().verificaAtrasoDeUsuario(usuario)) {
+            this.idLivro = idLivro;
+            this.setUsuario(usuario);
+        }
     }
 
     public Usuario getUsuario() {
