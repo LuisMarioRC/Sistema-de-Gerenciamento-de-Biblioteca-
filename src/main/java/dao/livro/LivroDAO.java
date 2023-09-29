@@ -20,7 +20,7 @@ public class LivroDAO implements LivroDAOinterface{
     }
 
 
-
+    @Override
     public ArrayList<Livro> pesquisaPorTitulo(String titulo) throws LivroException{
         ArrayList<Livro> listaPorTitulos= new ArrayList<>();
         for (Livro livro: listLivros){
@@ -34,7 +34,7 @@ public class LivroDAO implements LivroDAOinterface{
         return listaPorTitulos;
     }
 
-
+    @Override
     public ArrayList<Livro> pesquisaPorisbn(Integer isbn) throws LivroException{
         ArrayList<Livro> listaPorIsbn= new ArrayList<>();
         for (Livro livro: listLivros){
@@ -48,6 +48,7 @@ public class LivroDAO implements LivroDAOinterface{
         return listaPorIsbn;
     }
 
+    @Override
     public ArrayList<Livro> pesquisaPorCategoria(String categoria) throws LivroException{
         ArrayList<Livro> listaPorCategoria= new ArrayList<>();
         for (Livro livro: listLivros){
@@ -61,6 +62,7 @@ public class LivroDAO implements LivroDAOinterface{
         return listaPorCategoria;
     }
 
+    @Override
     public ArrayList<Livro> pesquisaPorAutor(String autor) throws LivroException{
         ArrayList<Livro> listaPorAutor= new ArrayList<>();
         for (Livro livro: listLivros){
@@ -73,7 +75,6 @@ public class LivroDAO implements LivroDAOinterface{
         }
         return listaPorAutor;
     }
-
 
     @Override
     public Livro criar(Livro obj) {
