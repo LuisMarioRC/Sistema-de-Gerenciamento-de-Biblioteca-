@@ -6,13 +6,12 @@ public class Reserva {
     private Integer idLivro;
     private Usuario usuario;
 
-
-    public Reserva(Integer idLivro,Usuario usuario){
+    public Reserva(Integer idLivro,Usuario usuario, String dataHoje){
         if (usuario.getStatus()
-                && usuario.getMulta() == 0
+                && DAO.getEmprestimosDAO().validaMulta(usuario,dataHoje)
                 && !DAO.getEmprestimosDAO().verificaAtrasoDeUsuario(usuario)) {
             this.idLivro = idLivro;
-            this.setUsuario(usuario);
+            this.usuario=usuario;
         }
     }
 
