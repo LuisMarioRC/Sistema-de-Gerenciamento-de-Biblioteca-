@@ -22,7 +22,10 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
     }
 
     public void renovar(Livro livro, Usuario usuario) throws EmprestimosException {
-        if (!verificaAtrasoDeUsuario(usuario) && !DAO.getReservaDAO().verificaReserva(livro.getId())) {
+        if (!verificaAtrasoDeUsuario(usuario)
+                && !DAO.getReservaDAO().verificaReserva(livro.getId() )
+                && usuario.getMulta() == 0
+                && usuario.getStatus()) {
             Emprestimos emprestimo = encontraPorIdDoLivro(livro.getId());
             LocalDate dataDeDevolucao = emprestimo.getDataDevolucao();
             emprestimo.setDataDevolucao(dataDeDevolucao.plusDays(7));
@@ -47,7 +50,7 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
     }
 
 
-    public ArrayList<Emprestimos> historioEmprestimosUsuario(Usuario usuario){
+    public ArrayList<Emprestimos> historicoEmprestimosUsuario(Usuario usuario){
         ArrayList<Emprestimos> historicoEmprestimos= new ArrayList<>();
         for (Emprestimos emprestimos : listDeEmprestimos){
             if (Objects.equals(emprestimos.getUsuario(),usuario)){
