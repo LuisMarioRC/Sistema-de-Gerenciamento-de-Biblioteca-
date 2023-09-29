@@ -6,6 +6,7 @@ import model.Emprestimos;
 import model.Livro;
 import model.Usuario;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class EmprestimosDAO implements EmprestimosDAOinterface {
@@ -21,10 +22,11 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
         this.proximoID = 0;
     }
 
-    public void renovar(Livro livro, Usuario usuario) throws EmprestimosException {
+    @Override
+    public void renovar(Livro livro, Usuario usuario, String dataHoje) throws EmprestimosException {
         if (!verificaAtrasoDeUsuario(usuario)
                 && !DAO.getReservaDAO().verificaReserva(livro.getId() )
-                && usuario.getMulta() == 0
+                && validaMulta(usuario,dataHoje)
                 && usuario.getStatus()) {
             Emprestimos emprestimo = encontraPorIdDoLivro(livro.getId());
             LocalDate dataDeDevolucao = emprestimo.getDataDevolucao();
@@ -32,12 +34,22 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
             this.atualizar(emprestimo);
         }
     }
+    @Override
+    public boolean validaMulta(Usuario usuario,String dataHoje){
+        DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate newDate = LocalDate.parse(dataHoje, dataFormatada);
+        if (usuario.getFimDaMulta() == null){
+            return true;
+        } else return newDate.isAfter(usuario.getFimDaMulta());
+    }
 
+
+    @Override
     public Integer numLivrosEmprestados(){
         return this.listDeEmprestimos.size();
     }
 
-
+    @Override
     public Integer numLivroAtrasado(){
         Integer numeroDeAtraso=1;
         LocalDate dataHoje= LocalDate.now();
@@ -49,7 +61,7 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
         return numeroDeAtraso;
     }
 
-
+    @Override
     public ArrayList<Emprestimos> historicoEmprestimosUsuario(Usuario usuario){
         ArrayList<Emprestimos> historicoEmprestimos= new ArrayList<>();
         for (Emprestimos emprestimos : listDeEmprestimos){
@@ -60,6 +72,7 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
         return historicoEmprestimos;
     }
 
+    @Override
     public void livroMaisPolular(){
         ArrayList<Livro> livroMaisPopular = new ArrayList<>();
         int maiorContagem = 0;
@@ -86,6 +99,7 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
         return contagem;
     }
 
+    @Override
     public Boolean verificaAtrasoDeUsuario(Usuario usuario){
         LocalDate dataHoje= LocalDate.now();
         for (Emprestimos emprestimo: listDeEmprestimos){
@@ -145,7 +159,7 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
         throw new EmprestimosException(EmprestimosException.BUSCAR);
     }
 
-
+    @Override
     public ArrayList<Emprestimos> econtraPorUsuario(Usuario usuario){
         ArrayList<Emprestimos> emprestimosPorUsuario= new ArrayList<>();
         for (Emprestimos emprestimos : listDeEmprestimos){
@@ -158,7 +172,7 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
         return emprestimosPorUsuario;
     }
 
-
+    @Override
     public Emprestimos encontraPorIdDoLivro(int id) throws EmprestimosException {
         for (Emprestimos emprestimo : listDeEmprestimos ){
             if (Objects.equals(emprestimo.getLivro().getId(), id)){
