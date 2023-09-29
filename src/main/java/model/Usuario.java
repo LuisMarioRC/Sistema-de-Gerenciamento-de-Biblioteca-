@@ -8,7 +8,6 @@ public class Usuario extends Operador{
     private String endereco;
     private String telefone;
     private Integer multa;
-    private Integer numEmprestimos;
 
 
 
@@ -17,7 +16,6 @@ public class Usuario extends Operador{
         this.endereco=endereco;
         this.telefone=telefone;
         this.multa=0;
-        this.numEmprestimos=0;
     }
 
     public Usuario bloquearConta(Usuario usuario) throws UsuarioException{
@@ -61,13 +59,5 @@ public class Usuario extends Operador{
                 ", numeroDeIdentificacao=" + super.getNumeroDeIdentificacao()+ '\''+
                 ",status=" +super.getStatus()+
                 '}';
-    }
-
-    public Integer getNumEmprestimos() {
-        return numEmprestimos;
-    }
-
-    public void setNumEmprestimos(Integer numEmprestimos) {
-        this.numEmprestimos = numEmprestimos;
     }
 }
