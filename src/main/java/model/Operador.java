@@ -1,11 +1,9 @@
 package model;
 
-
 import java.util.Objects;
 
 public class Operador {
     private String nome;
-    private String cargo;
     private Integer senha;
     private Integer numeroDeIdentificacao;
     private Boolean status;
@@ -13,19 +11,14 @@ public class Operador {
 
     public Operador(String nome){
         this.nome= nome;
-        this.status=true;
+        this.status=true; //True siginifica que o operador não esta bloqueado
     }
 
-    public Operador(String nome, String cargo,Integer senha){
+    public Operador(String nome,Integer senha){
         this.nome=nome;
-        this.cargo=cargo;
         this.senha=senha;
-        this.status=true; // True siginifica que o operador não esta bloqueado
     }
 
-    public void bloquearConta(Operador conta){
-        conta.setStatus(false);   // Muda o status da conta que deseja bloquear para false;
-    }
 
     public Boolean getStatus() {
         return status;
@@ -40,14 +33,6 @@ public class Operador {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
     }
 
     public Integer getSenha() {
@@ -66,6 +51,13 @@ public class Operador {
         this.numeroDeIdentificacao = numeroDeIdentificacao;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Operador operador = (Operador) o;
+        return Objects.equals(numeroDeIdentificacao, operador.numeroDeIdentificacao);
+    }
 
     @Override
     public int hashCode() {
@@ -76,7 +68,6 @@ public class Operador {
     public String toString() {
         return "Operador{" +
                 "nome='" + nome + '\'' +
-                ", cargo='" + cargo + '\'' +
                 ", senha=" + senha +
                 ", numeroDeIdentificacao=" + numeroDeIdentificacao +
                 ", status=" + status +

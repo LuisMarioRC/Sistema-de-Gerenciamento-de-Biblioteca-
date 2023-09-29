@@ -1,19 +1,29 @@
 package model;
 
+import dao.DAO;
+import dao.excecoes.UsuarioException;
+
 public class Usuario extends Operador{
 
     private String endereco;
-    private Integer telefone;
+    private String telefone;
     private Integer multa;
+    private Integer numEmprestimos;
 
 
 
-
-    public Usuario(String nome,String endereco,Integer telefone){
+    public Usuario(String nome,String endereco,String telefone){
         super(nome);
         this.endereco=endereco;
         this.telefone=telefone;
         this.multa=0;
+        this.numEmprestimos=0;
+    }
+
+    public Usuario bloquearConta(Usuario usuario) throws UsuarioException{
+        usuario.setStatus(false);// Muda o status da conta que deseja bloquear para false;
+        DAO.getUsuarioDAO().atualizar(usuario);
+        return usuario;
     }
 
     public String getEndereco() {
@@ -24,11 +34,11 @@ public class Usuario extends Operador{
         this.endereco = endereco;
     }
 
-    public Integer getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(Integer telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
@@ -53,4 +63,11 @@ public class Usuario extends Operador{
                 '}';
     }
 
+    public Integer getNumEmprestimos() {
+        return numEmprestimos;
+    }
+
+    public void setNumEmprestimos(Integer numEmprestimos) {
+        this.numEmprestimos = numEmprestimos;
+    }
 }

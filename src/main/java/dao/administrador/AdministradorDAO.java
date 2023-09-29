@@ -1,6 +1,6 @@
 package dao.administrador;
 
-import dao.excecoes.DAOException;
+import dao.excecoes.AdministradorException;
 import model.Administrador;
 
 import java.util.ArrayList;
@@ -29,10 +29,10 @@ public class AdministradorDAO implements AdministradorDAOInterface{
     }
 
     @Override
-    public void excluir(Administrador obj) throws DAOException {
+    public void excluir(Administrador obj) throws AdministradorException {
         boolean remocao =this.listDeAdministrador.remove(obj);
         if (!remocao){
-            throw new DAOException(DAOException.EXCLUIR);
+            throw new AdministradorException(AdministradorException.EXCLUIR);
         }
     }
 
@@ -43,10 +43,10 @@ public class AdministradorDAO implements AdministradorDAOInterface{
     }
 
     @Override
-    public Administrador atualizar(Administrador obj) throws DAOException{
+    public Administrador atualizar(Administrador obj) throws AdministradorException{
         int index = this.listDeAdministrador.indexOf(obj);
         if (index == -1){
-            throw new DAOException(DAOException.ATUALIZAR);
+            throw new AdministradorException(AdministradorException.ATUALIZAR);
         }
         this.listDeAdministrador.set(index, obj);
         return obj;
@@ -58,13 +58,13 @@ public class AdministradorDAO implements AdministradorDAOInterface{
     }
 
     @Override
-    public Administrador encontrarPorID(int id) throws DAOException {
+    public Administrador encontrarPorID(int id) throws AdministradorException {
         for (Administrador administrador: listDeAdministrador){
             if (Objects.equals(administrador.getNumeroDeIdentificacao(), id)){
                 return administrador;
             }
         }
-        throw new DAOException(DAOException.BUSCAR);
+        throw new AdministradorException(AdministradorException.BUSCAR);
     }
 
 
