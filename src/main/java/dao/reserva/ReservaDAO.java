@@ -26,11 +26,8 @@ public class ReservaDAO implements ReservaDAOInterface{
         return reservas.getOrDefault(idLivro, new ArrayList<>());
     }
 
-    public boolean primeiroUsuarioNaLista(Integer idLivro,Usuario usuario) {
+    public boolean primeiroUsuarioNaLista(Integer idLivro,Usuario usuario){
         ArrayList<Usuario > listaDeReserva = getReservasParaLivro(idLivro);
-        if (listaDeReserva.isEmpty()) {
-            return true;
-        }
         return listaDeReserva.get(0).equals(usuario);
     }
 
@@ -49,6 +46,12 @@ public class ReservaDAO implements ReservaDAOInterface{
         }else{
             return false; //"false" corresponde que nao tem reserva (a lista esta vazia)
         }
+    }
+
+    public void retiraUsuarioDaLista(Integer idLivro , Usuario usuario){
+        ArrayList<Usuario> reservaUsuario = this.getReservasParaLivro(idLivro);
+        reservaUsuario.remove(0);
+        reservas.put(idLivro,reservaUsuario);
     }
 
 
