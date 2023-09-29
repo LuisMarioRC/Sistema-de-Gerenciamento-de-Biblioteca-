@@ -3,11 +3,13 @@ package model;
 import dao.DAO;
 import dao.excecoes.UsuarioException;
 
+import java.time.LocalDate;
+
 public class Usuario extends Operador{
 
     private String endereco;
     private String telefone;
-    private Integer multa;
+    private LocalDate fimDaMulta;
 
 
 
@@ -15,7 +17,7 @@ public class Usuario extends Operador{
         super(nome);
         this.endereco=endereco;
         this.telefone=telefone;
-        this.multa=0;
+        this.fimDaMulta = null;
     }
 
     public Usuario bloquearConta(Usuario usuario) throws UsuarioException{
@@ -40,24 +42,23 @@ public class Usuario extends Operador{
         this.telefone = telefone;
     }
 
-
-    public Integer getMulta() {
-        return multa;
-    }
-
-    public void setMulta(Integer multa) {
-        this.multa = multa;
-    }
-
     @Override
     public String toString() {
         return "Usuario{" +
                 "nome=" + super.getNome() + '\''+
                 ",endereco=" + endereco + '\'' +
-                ", telefone=" + telefone +
-                ", multa=" + multa + '\''+
+                ", telefone=" + telefone + '\'' +
                 ", numeroDeIdentificacao=" + super.getNumeroDeIdentificacao()+ '\''+
-                ",status=" +super.getStatus()+
+                ",status=" +super.getStatus()+ '\''+
+                ", fimDaMulta= "+ fimDaMulta+
                 '}';
+    }
+
+    public LocalDate getFimDaMulta() {
+        return fimDaMulta;
+    }
+
+    public void setFimDaMulta(LocalDate fimDaMulta) {
+        this.fimDaMulta = fimDaMulta;
     }
 }
