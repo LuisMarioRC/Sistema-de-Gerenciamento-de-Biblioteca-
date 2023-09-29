@@ -26,6 +26,15 @@ public class ReservaDAO implements ReservaDAOInterface{
         return reservas.getOrDefault(idLivro, new ArrayList<>());
     }
 
+    public boolean primeiroUsuarioNaLista(Integer idLivro,Usuario usuario) {
+        ArrayList<Usuario > listaDeReserva = getReservasParaLivro(idLivro);
+        if (listaDeReserva.isEmpty()) {
+            return true;
+        }
+        return listaDeReserva.get(0).equals(usuario);
+    }
+
+
     //retorna toda o map;
     public Map<Integer, ArrayList<Usuario>> getReservas(){
         return this.reservas;
