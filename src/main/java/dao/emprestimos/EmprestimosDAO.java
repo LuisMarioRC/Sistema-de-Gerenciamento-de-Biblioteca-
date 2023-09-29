@@ -145,11 +145,25 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
         throw new EmprestimosException(EmprestimosException.BUSCAR);
     }
 
+
+    public ArrayList<Emprestimos> econtraPorUsuario(Usuario usuario){
+        ArrayList<Emprestimos> emprestimosPorUsuario= new ArrayList<>();
+        for (Emprestimos emprestimos : listDeEmprestimos){
+            if (Objects.equals(emprestimos.getUsuario().getNumeroDeIdentificacao(), usuario.getNumeroDeIdentificacao())){
+                if (emprestimos.getAndamento()) {
+                    emprestimosPorUsuario.add(emprestimos);
+                }
+            }
+        }
+        return emprestimosPorUsuario;
+    }
+
+
     public Emprestimos encontraPorIdDoLivro(int id) throws EmprestimosException {
         for (Emprestimos emprestimo : listDeEmprestimos ){
             if (Objects.equals(emprestimo.getLivro().getId(), id)){
-                // vai retornar o emprestimos onde o livro ta indisponível(emprestado)
-                if (!emprestimo.getLivro().getDisponibilidade()) {
+                // vai retornar o emprestimos onde esta ativo
+                if (emprestimo.getAndamento()) {
                     return emprestimo;
                 }
             }
