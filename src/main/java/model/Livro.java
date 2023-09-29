@@ -90,7 +90,13 @@ public class Livro {
         this.disponibilidade = disponibilidade;
     }
 
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Livro livro = (Livro) o;
+        return id == livro.id;
+    }
 
     @Override
     public int hashCode() {

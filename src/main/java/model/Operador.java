@@ -11,13 +11,12 @@ public class Operador {
 
     public Operador(String nome){
         this.nome= nome;
-        this.status=true;
+        this.status=true; //True siginifica que o operador não esta bloqueado
     }
 
     public Operador(String nome,Integer senha){
         this.nome=nome;
         this.senha=senha;
-        this.status=true; // True siginifica que o operador não esta bloqueado
     }
 
 
@@ -52,6 +51,13 @@ public class Operador {
         this.numeroDeIdentificacao = numeroDeIdentificacao;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Operador operador = (Operador) o;
+        return Objects.equals(numeroDeIdentificacao, operador.numeroDeIdentificacao);
+    }
 
     @Override
     public int hashCode() {
