@@ -21,7 +21,7 @@ public class Emprestimos {
     private Boolean andamento; //true = o emprestimo esta ativo, false = o emprestimo foi delvolvido
 
 
-    public Emprestimos(Livro livro, Usuario usuario,String dataHoje) throws EmprestimosException, LivroException, ReservaException {
+    public Emprestimos(Livro livro, Usuario usuario,String dataHoje) throws EmprestimosException, LivroException, ReservaException, UsuarioException {
         //verificando se o usuario nao tem livro atrasado, se o livro está disponivel, se n tem reserva para esse livro,
         // se o usuario não esta bloqueado,se tem multa e o total de emprestimos.
         ArrayList<Emprestimos> emprestimosDoUsuario = DAO.getEmprestimosDAO().econtraPorUsuario(usuario);
@@ -30,10 +30,10 @@ public class Emprestimos {
                 //verificando informações referente ao usuario
                 && livro.getDisponibilidade()
                 && usuario.getStatus()
-                && usuario.getMulta() == 0
+                &&  DAO.getEmprestimosDAO().validaMulta(usuario,dataHoje)
                 && totalDeEmprestimos <3) {
             //verificando se a lista ta de reserva desse livro ta vazia ou o usuario é o primeiro da lista para emprestar
-            if (DAO.getReservaDAO().getReservasParaLivro(livro.getId()).size() ==0
+            if (DAO.getReservaDAO().getReservasParaLivro(livro.getId()).isEmpty()
                     ||  DAO.getReservaDAO().primeiroUsuarioNaLista(livro.getId(),usuario)) {
                 //Se for o primeiro da lista, chama a função para retirar da lista;
                 if (DAO.getReservaDAO().primeiroUsuarioNaLista(livro.getId(),usuario) ) {
@@ -42,6 +42,8 @@ public class Emprestimos {
                 DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 livro.setDisponibilidade(false);
                 DAO.getLivroDAO().atualizar(livro);
+                usuario.setFimDaMulta(null);
+                DAO.getUsuarioDAO().atualizar(usuario);
                 this.livro = livro;
                 this.usuario = usuario;
                 this.dataEmprestimos = LocalDate.parse(dataHoje, dataFormatada);
@@ -53,23 +55,23 @@ public class Emprestimos {
         }
     }
 
-    public void multa (Livro livro, Usuario usuario) throws EmprestimosException, UsuarioException {
+
+    private void multas (Livro livro, Usuario usuario) throws EmprestimosException, UsuarioException {
         LocalDate datahoje = LocalDate.now();
         Emprestimos emprestimo = DAO.getEmprestimosDAO().encontraPorIdDoLivro(livro.getId());
         if (emprestimo != null) {
             // verificar se tem emprestimos com esse livro;
             long diferencaEntreDias = ChronoUnit.DAYS.between(datahoje, emprestimo.getDataDevolucao());
             if (diferencaEntreDias > 0) { // para calcular a multa, tem que ter diferença de dias
-                Integer diasDeMulta = Math.toIntExact(diferencaEntreDias * 2);
-                usuario.setMulta(diasDeMulta);
+                int diasDeMulta = Math.toIntExact(diferencaEntreDias * 2);
+                usuario.setFimDaMulta(emprestimo.getDataDevolucao().plusDays(diasDeMulta));
                 DAO.getUsuarioDAO().atualizar(usuario);
             }
         }
     }
 
-
     public Livro registraDevolucao(Livro livro, Usuario usuario) throws EmprestimosException, LivroException, UsuarioException {
-        this.multa(livro,usuario);
+        this.multas(livro,usuario);
         Emprestimos emprestimoDoLivro = DAO.getEmprestimosDAO().encontraPorIdDoLivro(livro.getId());
         emprestimoDoLivro.setAndamento(false);
         DAO.getEmprestimosDAO().atualizar(emprestimoDoLivro);
