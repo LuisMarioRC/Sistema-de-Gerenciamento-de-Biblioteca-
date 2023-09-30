@@ -10,6 +10,7 @@ public class EmprestimosException extends Exception{
     public static final String EMPRESTAR= "Operação de EMPRESTIMO não realizada";
     public static final String BUSCAR= "Operação de BUSCA não realizada";
     public static final String ATUALIZAR = "Operação de ATUALIZAÇÃO não realizada.";
+    public static final String RENOVAR = "Limite de RENOVAÇÂO atingida.";
 
     public EmprestimosException(String texto){
         super (texto);

@@ -1,6 +1,5 @@
 package dao.excecoes;
 
-import model.Bibliotecario;
 import model.Usuario;
 
 public class UsuarioException extends Exception{
@@ -9,6 +8,10 @@ public class UsuarioException extends Exception{
     public static final String BUSCAR = "Operação de BUSCAR não encontrada";
     public static final String EXCLUIR = "Operação de EXCLUSÃO não realizada.";
     public static final String ATUALIZAR = "Operação de ATUALIZAÇÃO não realizada.";
+    public static final String LIMITE = "Limite de EMPRÉSTIMOS atingido";
+    public static final String MULTADO = "Usuário com MULTA pendente";
+    public static final String BLOQUEIO = "Usuário BLOQUEADO";
+    public static final String ATRASO = "Usuário com livro PENDENTE à devolução";
 
     public UsuarioException(String texto, Usuario usuario){
         super(texto);
