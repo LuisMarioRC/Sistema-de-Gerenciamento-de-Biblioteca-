@@ -1,6 +1,5 @@
 package dao.emprestimos;
 
-import dao.DAO;
 import dao.excecoes.EmprestimosException;
 import model.Emprestimos;
 import model.Livro;
@@ -22,18 +21,7 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
         this.proximoID = 0;
     }
 
-    @Override
-    public void renovar(Livro livro, Usuario usuario, String dataHoje) throws EmprestimosException {
-        if (!verificaAtrasoDeUsuario(usuario)
-                && !DAO.getReservaDAO().verificaReserva(livro.getId() )
-                && validaMulta(usuario,dataHoje)
-                && usuario.getStatus()) {
-            Emprestimos emprestimo = encontraPorIdDoLivro(livro.getId());
-            LocalDate dataDeDevolucao = emprestimo.getDataDevolucao();
-            emprestimo.setDataDevolucao(dataDeDevolucao.plusDays(7));
-            this.atualizar(emprestimo);
-        }
-    }
+
     @Override
     public boolean validaMulta(Usuario usuario,String dataHoje){
         DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -46,12 +34,18 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
 
     @Override
     public Integer numLivrosEmprestados(){
-        return this.listDeEmprestimos.size();
+        int contagemDeLivroEmprestados=0;
+        for (Emprestimos emprestimo: listDeEmprestimos){
+            if (emprestimo.getAndamento()){
+                contagemDeLivroEmprestados++;
+            }
+        }
+        return contagemDeLivroEmprestados;
     }
 
     @Override
     public Integer numLivroAtrasado(){
-        Integer numeroDeAtraso=1;
+        Integer numeroDeAtraso=0;
         LocalDate dataHoje= LocalDate.now();
         for (Emprestimos emprestimos : listDeEmprestimos){
             if (emprestimos.getAndamento() && dataHoje.isAfter(emprestimos.getDataDevolucao())){
