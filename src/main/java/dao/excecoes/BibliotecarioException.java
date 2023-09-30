@@ -1,7 +1,6 @@
 package dao.excecoes;
 
 import model.Bibliotecario;
-import model.Operador;
 
 public class BibliotecarioException extends Exception {
 

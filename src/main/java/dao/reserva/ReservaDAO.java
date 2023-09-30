@@ -1,5 +1,6 @@
 package dao.reserva;
 
+import dao.excecoes.ReservaException;
 import model.Reserva;
 import model.Usuario;
 import java.util.ArrayList;
@@ -52,8 +53,10 @@ public class ReservaDAO implements ReservaDAOInterface {
     @Override
     public void retiraUsuarioDaLista(Integer idLivro, Usuario usuario) {
         ArrayList<Reserva> reservasDoLivro = this.getReservasParaLivro(idLivro);
-        reservasDoLivro.remove(0);
-        reservas.put(idLivro, reservasDoLivro);
+        if (!reservasDoLivro.isEmpty()) {
+            reservasDoLivro.remove(0);
+            reservas.put(idLivro, reservasDoLivro);
+        }
     }
 
 
@@ -106,6 +109,6 @@ public class ReservaDAO implements ReservaDAOInterface {
                 return reserva;
             }
         }
-        return null;
+        throw new ReservaException(ReservaException.BUSCAR);
     }
 }
