@@ -1,18 +1,28 @@
 package model;
 
 import dao.DAO;
+import dao.excecoes.LivroException;
+import dao.excecoes.UsuarioException;
 
 public class Reserva {
     private Integer idLivro;
     private Usuario usuario;
 
-    public Reserva(Integer idLivro,Usuario usuario, String dataHoje){
-        if (usuario.getStatus()
-                && DAO.getEmprestimosDAO().validaMulta(usuario,dataHoje)
-                && !DAO.getEmprestimosDAO().verificaAtrasoDeUsuario(usuario)) {
-            this.idLivro = idLivro;
-            this.usuario=usuario;
+    public Reserva(Integer idLivro,Usuario usuario, String dataHoje) throws UsuarioException, LivroException {
+        if (!usuario.getStatus() ){
+            throw new UsuarioException(UsuarioException.BLOQUEIO);
         }
+        if (!DAO.getEmprestimosDAO().validaMulta(usuario,dataHoje)){
+            throw new UsuarioException(UsuarioException.MULTADO);
+        }
+        if (DAO.getEmprestimosDAO().verificaAtrasoDeUsuario(usuario)){
+            throw new UsuarioException(UsuarioException.ATRASO);
+        }
+        if (DAO.getLivroDAO().encontrarPorID(idLivro).getDisponibilidade()){
+            throw new LivroException(LivroException.DISPONIBILIDADE);
+        }
+        this.idLivro = idLivro;
+        this.usuario=usuario;
     }
 
     public Usuario getUsuario() {
