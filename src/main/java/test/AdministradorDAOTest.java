@@ -68,7 +68,7 @@ public class AdministradorDAOTest {
             DAO.getAdministradorDAO().atualizar(nulo);
             fail("Uma exceção deveria ser levantada");
         } catch (AdministradorException e) {
-            assertEquals(AdministradorException.BUSCAR,e.getMessage());
+            assertEquals(AdministradorException.ATUALIZAR,e.getMessage());
         }
     }
     @Test
