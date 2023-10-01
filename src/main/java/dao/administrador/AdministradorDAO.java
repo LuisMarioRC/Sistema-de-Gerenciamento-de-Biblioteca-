@@ -25,7 +25,7 @@ public class AdministradorDAO implements AdministradorDAOInterface{
     public Administrador criar(Administrador obj) {
         obj.setNumeroDeIdentificacao(this.getProximoID());
         this.listDeAdministrador.add(obj);
-        return null;
+        return obj;
     }
 
     @Override
