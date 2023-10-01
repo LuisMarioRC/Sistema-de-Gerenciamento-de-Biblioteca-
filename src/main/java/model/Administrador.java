@@ -3,7 +3,7 @@ package model;
 public class Administrador extends Bibliotecario{
 
     public Administrador(String nome,Integer senha){
-        super(nome,senha);
+        super(nome,senha,"Administrador");
 
     }
 
