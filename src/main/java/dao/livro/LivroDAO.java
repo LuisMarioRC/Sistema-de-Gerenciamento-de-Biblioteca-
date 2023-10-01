@@ -56,7 +56,7 @@ public class LivroDAO implements LivroDAOinterface{
                 listaPorCategoria.add(livro);
             }
         }
-        if (listaPorCategoria.isEmpty()){
+        if (listaPorCategoria.isEmpty() ){
             throw new LivroException(LivroException.BUSCAR);
         }
         return listaPorCategoria;
