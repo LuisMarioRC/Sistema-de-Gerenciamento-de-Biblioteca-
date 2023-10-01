@@ -38,7 +38,7 @@ public class Emprestimos {
         }
         if (!DAO.getReservaDAO().getReservasParaLivro(livro.getId()).isEmpty()) {
             if (DAO.getReservaDAO().primeiroUsuarioNaLista(livro.getId(),usuario) ) {
-                DAO.getReservaDAO().retiraUsuarioDaLista(livro.getId(),usuario);
+                DAO.getReservaDAO().retiraUsuarioDaLista(livro.getId());
             }else{
                 throw new ReservaException(ReservaException.RESERVADO);
             }

@@ -30,11 +30,15 @@ public class ReservaDAO implements ReservaDAOInterface {
     @Override
     public boolean primeiroUsuarioNaLista(Integer idLivro, Usuario usuario) {
         ArrayList<Reserva> listaDeReserva = getReservasParaLivro(idLivro);
-        return listaDeReserva.get(0).getUsuario().equals(usuario);
+        if (!listaDeReserva.isEmpty()) {
+            return listaDeReserva.get(0).getUsuario().equals(usuario);
+        }
+        return false;
     }
 
 
     //retorna toda o map;
+    @Override
     public Map<Integer, ArrayList<Reserva>> getReservas() {
         return this.reservas;
     }
@@ -51,7 +55,7 @@ public class ReservaDAO implements ReservaDAOInterface {
     }
 
     @Override
-    public void retiraUsuarioDaLista(Integer idLivro, Usuario usuario) {
+    public void retiraUsuarioDaLista(Integer idLivro) {
         ArrayList<Reserva> reservasDoLivro = this.getReservasParaLivro(idLivro);
         if (!reservasDoLivro.isEmpty()) {
             reservasDoLivro.remove(0);
