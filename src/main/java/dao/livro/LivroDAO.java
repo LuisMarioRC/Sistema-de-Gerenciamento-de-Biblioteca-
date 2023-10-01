@@ -42,7 +42,7 @@ public class LivroDAO implements LivroDAOinterface{
                 listaPorIsbn.add(livro);
             }
         }
-        if (listLivros.isEmpty()){
+        if (listaPorIsbn.isEmpty()){
             throw new LivroException(LivroException.BUSCAR);
         }
         return listaPorIsbn;
