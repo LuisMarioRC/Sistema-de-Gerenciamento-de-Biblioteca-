@@ -28,7 +28,7 @@ public class LivroDAO implements LivroDAOinterface{
                 listaPorTitulos.add(livro);
             }
         }
-        if (listLivros.isEmpty()){
+        if (listaPorTitulos.isEmpty()){
             throw new LivroException(LivroException.BUSCAR);
         }
         return listaPorTitulos;
@@ -56,7 +56,7 @@ public class LivroDAO implements LivroDAOinterface{
                 listaPorCategoria.add(livro);
             }
         }
-        if (listLivros.isEmpty()){
+        if (listaPorCategoria.isEmpty()){
             throw new LivroException(LivroException.BUSCAR);
         }
         return listaPorCategoria;
@@ -70,7 +70,7 @@ public class LivroDAO implements LivroDAOinterface{
                 listaPorAutor.add(livro);
             }
         }
-        if (listLivros.isEmpty()){
+        if (listaPorAutor.isEmpty()){
             throw new LivroException(LivroException.BUSCAR);
         }
         return listaPorAutor;
