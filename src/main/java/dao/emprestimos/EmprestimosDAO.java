@@ -67,7 +67,7 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
     }
 
     @Override
-    public void livroMaisPolular(){
+    public ArrayList<Livro> livroMaisPolular(){
         ArrayList<Livro> livroMaisPopular = new ArrayList<>();
         int maiorContagem = 0;
         for (Emprestimos emprestimos : listDeEmprestimos) {
@@ -80,7 +80,7 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
                 livroMaisPopular.add(emprestimos.getLivro());
             }
         }
-
+        return livroMaisPopular;
     }
 
     private static int contarElemento(ArrayList<Emprestimos> list, Livro livro) {
