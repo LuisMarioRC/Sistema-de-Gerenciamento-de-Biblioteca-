@@ -115,4 +115,15 @@ public class ReservaDAO implements ReservaDAOInterface {
         }
         throw new ReservaException(ReservaException.BUSCAR);
     }
+
+    @Override
+    public ArrayList<Reserva> reservasDeUsuario(Usuario usuario){
+        ArrayList<Reserva> reservasDeUsuario = new ArrayList<>();
+        for (Reserva reservas: this.encontrarTodos()){
+            if (reservas.getUsuario().equals(usuario)){
+                reservasDeUsuario.add(reservas);
+            }
+        }
+        return reservasDeUsuario;
+    }
 }
