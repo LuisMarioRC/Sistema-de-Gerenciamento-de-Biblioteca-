@@ -17,8 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EmprestimosTest {
@@ -113,7 +112,7 @@ public class EmprestimosTest {
     }
 
     @Test
-    void failEmprestimoConstrutorVerificaReserva() throws LivroException, UsuarioException {
+    void failEmprestimoConstrutorVerificaReserva() throws LivroException, UsuarioException ,ReservaException{
         livro1.setDisponibilidade(false);
         DAO.getLivroDAO().atualizar(livro1);
         DAO.getReservaDAO().criar(new Reserva(0,cassio,"01/10/2023"));
