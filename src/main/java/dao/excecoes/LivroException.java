@@ -9,7 +9,7 @@ public class LivroException extends Exception{
     public static final String EXCLUIR = "Operação de EXCLUSÃO não realizada.";
     public static final String ATUALIZAR = "Operação de ATUALIZAÇÃO não realizada.";
     public static final String INDISPONIBILIDADE = "Livro INDISPONÍVEL";
-    public static final String DISPONIBILIDADE = "Livro INDISPONÍVEL para emprestimos";
+    public static final String DISPONIBILIDADE = "Livro DISPONÍVEL para emprestimos";
 
 
     public LivroException(String texto, Livro livro){
