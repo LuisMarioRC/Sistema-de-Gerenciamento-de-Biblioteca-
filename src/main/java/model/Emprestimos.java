@@ -57,21 +57,19 @@ public class Emprestimos {
 
 
 
-    private void multas (Livro livro, Usuario usuario) throws EmprestimosException, UsuarioException {
-        LocalDate datahoje = LocalDate.now();
+    private void multas (Livro livro, Usuario usuario, LocalDate dataQueDevolveu) throws EmprestimosException, UsuarioException {
         Emprestimos emprestimo = DAO.getEmprestimosDAO().encontraPorIdDoLivro(livro.getId());
-        if (emprestimo != null) {
-            if (datahoje.isAfter(emprestimo.getDataDevolucao())) {
-                long diferencaEntreDias = ChronoUnit.DAYS.between(datahoje, emprestimo.getDataDevolucao());
-                int diasDeMulta = Math.toIntExact(diferencaEntreDias * 2);
-                usuario.setFimDaMulta(emprestimo.getDataDevolucao().plusDays(diasDeMulta));
-                DAO.getUsuarioDAO().atualizar(usuario);
-            }
+        if (dataQueDevolveu.isAfter(emprestimo.getDataDevolucao())) {
+            long diferencaEntreDias = ChronoUnit.DAYS.between(emprestimo.getDataDevolucao(),dataQueDevolveu);
+            int diasDeMulta = Math.toIntExact(diferencaEntreDias * 2);
+            usuario.setFimDaMulta(dataQueDevolveu.plusDays(diasDeMulta));
+            DAO.getUsuarioDAO().atualizar(usuario);
         }
+
     }
 
-    public void registraDevolucao(Livro livro, Usuario usuario) throws EmprestimosException, LivroException, UsuarioException {
-        this.multas(livro,usuario);
+    public void registraDevolucao(Livro livro, Usuario usuario, LocalDate dataQueDevolveu) throws EmprestimosException, LivroException, UsuarioException {
+        this.multas(livro,usuario,dataQueDevolveu);
         Emprestimos emprestimoDoLivro = DAO.getEmprestimosDAO().encontraPorIdDoLivro(livro.getId());
         emprestimoDoLivro.setAndamento(false);
         DAO.getEmprestimosDAO().atualizar(emprestimoDoLivro);
@@ -79,7 +77,7 @@ public class Emprestimos {
         DAO.getLivroDAO().atualizar(livro);
     }
 
-    public void renovar(Livro livro, Usuario usuario, String dataHoje) throws EmprestimosException, UsuarioException, ReservaException {
+    public Boolean renovar(Livro livro, Usuario usuario, String dataHoje) throws EmprestimosException, UsuarioException, ReservaException {
         Emprestimos emprestimo = DAO.getEmprestimosDAO().encontraPorIdDoLivro(livro.getId());
         DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate newDate = LocalDate.parse(dataHoje, dataFormatada);
@@ -95,13 +93,17 @@ public class Emprestimos {
         if (!usuario.getStatus()){
             throw new UsuarioException(UsuarioException.BLOQUEIO);
         }
-        if (ChronoUnit.DAYS.between(emprestimo.getDataEmprestimos(),newDate) >=14 ){
+        if (ChronoUnit.DAYS.between(emprestimo.getDataEmprestimos(),emprestimo.getDataDevolucao()) >=14 ){
             throw new EmprestimosException(EmprestimosException.RENOVAR);
         }
+
         LocalDate dataDeDevolucao = emprestimo.getDataDevolucao();
         emprestimo.setDataDevolucao(dataDeDevolucao.plusDays(7));
         DAO.getEmprestimosDAO().atualizar(emprestimo);
+        return true;
+
     }
+
 
 
     public Livro getLivro() {
