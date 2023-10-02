@@ -44,6 +44,8 @@ public class ReservaTest {
     @AfterEach
     void tearDown(){
         DAO.getReservaDAO().excluirTodos();
+        DAO.getUsuarioDAO().excluirTodos();
+        DAO.getLivroDAO().excluirTodos();
     }
 
     @Test
