@@ -14,6 +14,6 @@ public interface ReservaDAOInterface extends CRUD<Reserva, Exception> {
     public ArrayList<Reserva> getReservasParaLivro(Integer idLivro);
     public Integer numLivrosReservados();
 
-
+    public ArrayList<Reserva> reservasDeUsuario(Usuario usuario);
     public Map<Integer, ArrayList<Reserva>> getReservas();
 }
