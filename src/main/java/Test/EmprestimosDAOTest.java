@@ -146,5 +146,30 @@ public class EmprestimosDAOTest {
         assertEquals(econtrado,emprestimo2);
     }
 
+    @Test
+    void econtraPorUsuario() throws LivroException, UsuarioException, ReservaException, EmprestimosException {
+        DAO.getEmprestimosDAO().criar(new Emprestimos(livro1,cassio,"02/10/2023"));
+        ArrayList<Emprestimos> emprestimoDoUsuario= DAO.getEmprestimosDAO().econtraPorUsuario(rogerio);
+        assertEquals(emprestimoDoUsuario.size(),2);
+        assertEquals(emprestimoDoUsuario.get(0).getUsuario(),rogerio);
+        emprestimo2.setAndamento(false);
+        DAO.getEmprestimosDAO().atualizar(emprestimo2);
+        ArrayList<Emprestimos> emprestimoDoUsuario2= DAO.getEmprestimosDAO().econtraPorUsuario(rogerio);
+        assertEquals(emprestimoDoUsuario2.size(),1);
+    }
 
+    @Test
+    void failEncontraPorIdDoLivro(){
+        try{
+            DAO.getEmprestimosDAO().encontraPorIdDoLivro(100);
+            fail("Uma exceção deveria ser lançada");
+        } catch (EmprestimosException e) {
+            assertEquals(EmprestimosException.BUSCAR,e.getMessage());
+        }
+    }
+    @Test
+    void econtraPorIdDoLivro() throws EmprestimosException {
+        Emprestimos emprestimo = DAO.getEmprestimosDAO().encontraPorIdDoLivro(2);
+        assertEquals(emprestimo.getLivro(),livro3);
+    }
 }
