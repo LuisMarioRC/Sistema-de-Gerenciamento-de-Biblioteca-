@@ -28,7 +28,7 @@ public class ReservaDAOTest {
 
 
     @BeforeEach
-    void setUp() throws LivroException, UsuarioException {
+    void setUp() throws LivroException, UsuarioException ,ReservaException{
         usuario1 =DAO.getUsuarioDAO().criar(new Usuario("usuario 1","Rua A","11 1111"));
         usuario2 =DAO.getUsuarioDAO().criar(new Usuario("usuario 2","Rua B","22 2222"));
         livro1 = DAO.getLivroDAO().criar(new Livro("pequeno","Luis Mario","Brasileira",2577,1989,"Romance"));
@@ -48,7 +48,7 @@ public class ReservaDAOTest {
 
 
     @Test
-    void criar() throws LivroException, UsuarioException {
+    void criar() throws LivroException, UsuarioException,ReservaException {
         Reserva criado = DAO.getReservaDAO().criar(new Reserva(0,usuario2,"01/10/2023"));
         ArrayList<Reserva> listaEsperada = DAO.getReservaDAO().getReservasParaLivro(0);
         assertEquals(listaEsperada.size(),2);
@@ -58,7 +58,7 @@ public class ReservaDAOTest {
     }
 
     @Test
-    void getReservasParaLivro() throws LivroException, UsuarioException {
+    void getReservasParaLivro() throws LivroException, UsuarioException,ReservaException {
         // se a chave não existir o metodo retorna uma lista vazia
         ArrayList<Reserva> listaSemReserva= DAO.getReservaDAO().getReservasParaLivro(100);
         assertEquals(listaSemReserva.size(),0);
@@ -146,5 +146,13 @@ public class ReservaDAOTest {
     void encontraPorId() throws Exception {
         Reserva econtrada = DAO.getReservaDAO().encontrarPorID(0);
         assertEquals(econtrada,reserva1);
-}
+    }
+
+    @Test
+    void reservasDeUsuario() throws LivroException, UsuarioException, ReservaException {
+        livro2.setDisponibilidade(false);
+        DAO.getLivroDAO().atualizar(livro2);
+        DAO.getReservaDAO().criar(new Reserva(1,usuario1,"02/10/2023"));
+        assertEquals(DAO.getReservaDAO().reservasDeUsuario(usuario1).size(),2);
+    }
 }

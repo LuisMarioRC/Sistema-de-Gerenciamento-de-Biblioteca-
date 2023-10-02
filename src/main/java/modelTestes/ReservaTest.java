@@ -30,7 +30,7 @@ public class ReservaTest {
 
 
     @BeforeEach
-    void setUp() throws LivroException, UsuarioException {
+    void setUp() throws LivroException, UsuarioException, ReservaException {
         usuario1 = DAO.getUsuarioDAO().criar(new Usuario("usuario 1","Rua A","11 1111"));
         usuario2 =DAO.getUsuarioDAO().criar(new Usuario("usuario 2","Rua B","22 2222"));
         livro1 = DAO.getLivroDAO().criar(new Livro("pequeno","Luis Mario","Brasileira",2577,1989,"Romance"));
@@ -46,10 +46,11 @@ public class ReservaTest {
         DAO.getReservaDAO().excluirTodos();
         DAO.getUsuarioDAO().excluirTodos();
         DAO.getLivroDAO().excluirTodos();
+        DAO.getEmprestimosDAO().excluirTodos();
     }
 
     @Test
-    void failreservaConstrutorStatusBloqueado() throws UsuarioException,LivroException {
+    void failreservaConstrutorStatusBloqueado() throws UsuarioException,LivroException,ReservaException {
         usuario1.setStatus(false);
         DAO.getUsuarioDAO().atualizar(usuario1);
         try{
@@ -60,7 +61,7 @@ public class ReservaTest {
         }
     }
     @Test
-    void failreservaConstrutorUsuarioMulta() throws UsuarioException,LivroException {
+    void failreservaConstrutorUsuarioMulta() throws UsuarioException,LivroException,ReservaException {
         usuario1.setFimDaMulta(LocalDate.of(2023,10,2));
         DAO.getUsuarioDAO().atualizar(usuario1);
         try{
@@ -83,7 +84,7 @@ public class ReservaTest {
         }
     }
     @Test
-    void failreservaConstrutorLivroDisponivel() throws UsuarioException, LivroException {
+    void failreservaConstrutorLivroDisponivel() throws UsuarioException, LivroException,ReservaException {
         livro2.setDisponibilidade(true);
         DAO.getLivroDAO().atualizar(livro2);
         try{
@@ -91,6 +92,21 @@ public class ReservaTest {
             fail("Uma exeção deveria ser lançada");
         } catch (LivroException e) {
             assertEquals(LivroException.DISPONIBILIDADE,e.getMessage());
+        }
+    }
+    @Test
+    void failreservaConstrutorLimiteDeReservas() throws LivroException, UsuarioException, ReservaException {
+        livro2.setDisponibilidade(false);
+        DAO.getLivroDAO().atualizar(livro2);
+        DAO.getReservaDAO().criar(new Reserva(1,usuario1,"02/10/2023"));
+        Livro livro3= DAO.getLivroDAO().criar(new Livro("pequeno","Luis Mario","Brasileira",2577,1989,"Romance"));
+        livro3.setDisponibilidade(false);
+        DAO.getLivroDAO().atualizar(livro3);
+        try{
+            DAO.getReservaDAO().criar(new Reserva(livro3.getId(),usuario1,"02/10/2023"));
+            fail("Uma exceção deveria ser lançada");
+        }catch (ReservaException e){
+            assertEquals(ReservaException.LIMITE,e.getMessage());
         }
     }
 
