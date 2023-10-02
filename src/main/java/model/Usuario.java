@@ -31,6 +31,12 @@ public class Usuario {
         return usuario;
     }
 
+    public Usuario desbloqueiaConta(Usuario usuario) throws UsuarioException{
+        usuario.setStatus(true);// Muda o status da conta que desbloquear para true;
+        DAO.getUsuarioDAO().atualizar(usuario);
+        return usuario;
+    }
+
     public String getEndereco() {
         return endereco;
     }
