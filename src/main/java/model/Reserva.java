@@ -2,13 +2,14 @@ package model;
 
 import dao.DAO;
 import dao.excecoes.LivroException;
+import dao.excecoes.ReservaException;
 import dao.excecoes.UsuarioException;
 
 public class Reserva {
     private Integer idLivro;
     private Usuario usuario;
 
-    public Reserva(Integer idLivro,Usuario usuario, String dataHoje) throws UsuarioException, LivroException {
+    public Reserva(Integer idLivro,Usuario usuario, String dataHoje) throws UsuarioException, LivroException, ReservaException {
         if (!usuario.getStatus() ){
             throw new UsuarioException(UsuarioException.BLOQUEIO);
         }
@@ -20,6 +21,9 @@ public class Reserva {
         }
         if (DAO.getLivroDAO().encontrarPorID(idLivro).getDisponibilidade()){
             throw new LivroException(LivroException.DISPONIBILIDADE);
+        }
+        if (DAO.getReservaDAO().reservasDeUsuario(usuario).size() >=2 ){
+            throw new ReservaException(ReservaException.LIMITE);
         }
         this.idLivro = idLivro;
         this.usuario=usuario;
