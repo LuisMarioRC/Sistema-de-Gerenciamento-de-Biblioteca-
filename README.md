@@ -24,18 +24,18 @@ Fase 3 - Implementação da interface gráfica (frontend)<br>
 
 # Título Descrição
 1 Registro de Livros <br>
-&emsp;&emsp;O sistema deve permitir o registro de novos livros no
+&emsp;&emsp;● O sistema deve permitir o registro de novos livros no
 &emsp;&emsp;sistema, incluindo informações como título, autor,
 &emsp;&emsp;editora, ISBN, ano de publicação e categoria.<br>
 
 2 Pesquisa de Livros <br>
-&emsp;&emsp;Os usuários devem ser capazes de pesquisar livros
+&emsp;&emsp;● Os usuários devem ser capazes de pesquisar livros
 &emsp;&emsp;por título, autor, ISBN ou categoria, a fim de
 &emsp;&emsp;encontrar informações sobre disponibilidade,
 &emsp;&emsp;localização e outras informações relevantes.<br>
 
 3 Empréstimo e Devolução<br>
-&emsp;&emsp;O sistema deve permitir o registro de empréstimos
+&emsp;&emsp;● O sistema deve permitir o registro de empréstimos
 &emsp;&emsp;de livros para os usuários da biblioteca. Isso inclui a
 &emsp;&emsp;possibilidade de registrar a data de empréstimo, a
 &emsp;&emsp;data de devolução esperada e a identificação do
@@ -44,45 +44,44 @@ Fase 3 - Implementação da interface gráfica (frontend)<br>
 &emsp;&emsp;livros e a atualização da disponibilidade do livro.<br>
 
 4 Reserva de Livros <br>
-&emsp;&emsp;Os usuários devem ter a opção de reservar livros
+&emsp;&emsp;● Os usuários devem ter a opção de reservar livros
 &emsp;&emsp;que estejam emprestados por outros usuários. O
 &emsp;&emsp;sistema deve registrar a reserva por ordem de
 &emsp;&emsp;solicitação.<br>
 
 5 Renovação de Empréstimos<br> 
-&emsp;&emsp;O sistema deve permitir a renovação dos
+&emsp;&emsp;● O sistema deve permitir a renovação dos
 &emsp;&emsp;empréstimos de livros, desde que não haja outras
 &emsp;&emsp;reservas para o mesmo livro e o limite de
 &emsp;&emsp;renovações não tenha sido atingido.<br>
 
 6 Controle de Usuários<br>
-&emsp;&emsp;O sistema deve permitir o cadastro de novos
+&emsp;&emsp;● O sistema deve permitir o cadastro de novos
 &emsp;&emsp;usuários, com informações como nome, endereço,
 &emsp;&emsp;telefone e número de identificação. Além disso, deve
 &emsp;&emsp;ser possível bloquear uma conta, não permitindo que
 &emsp;&emsp;o usuário faça empréstimos e renovação.<br>
 
 7 Relatórios e Estatísticas<br>
-&emsp;&emsp;O sistema deve ser capaz de gerar relatórios e
+&emsp;&emsp;● O sistema deve ser capaz de gerar relatórios e
 &emsp;&emsp;estatísticas, como número de livros emprestados,
 &emsp;&emsp;atrasados e reservados; histórico de empréstimos de
 &emsp;&emsp;um usuário específico; e livros mais populares.<br>
 
 8 Gerenciamento de Multas<br> 
-&emsp;&emsp;O sistema deve ser capaz de calcular e registrar
+&emsp;&emsp;● O sistema deve ser capaz de calcular e registrar
 &emsp;&emsp;multas por atraso na devolução de livros. O usuário
 &emsp;&emsp;deverá ser multado com o dobro de dias em atraso.<br>
 
 9 Gerenciamento de Acervo<br> 
-&emsp;&emsp;O sistema deve permitir o gerenciamento do acervo
+&emsp;&emsp;● O sistema deve permitir o gerenciamento do acervo
 &emsp;&emsp;da biblioteca, incluindo adição, remoção e
 &emsp;&emsp;atualização de informações sobre os livros, além do
 &emsp;&emsp;controle de estoque.<br>
 
 10 Controle de operadores do
 sistema<br>
-
-&emsp;&emsp;O sistema deve permitir o cadastro de novos
+&emsp;&emsp;● O sistema deve permitir o cadastro de novos
 &emsp;&emsp;operadores, com informações como nome, número
 &emsp;&emsp;de identificação, cargo e senha de acesso. Os
 &emsp;&emsp;cargos podem ser do tipo Administrador ou
