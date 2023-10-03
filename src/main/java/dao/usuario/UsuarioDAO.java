@@ -1,12 +1,20 @@
 package dao.usuario;
 
-import dao.DAO;;
+
 import dao.excecoes.UsuarioException;
 import model.Usuario;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Classe que é responsável por fazer o acesso dos dados da classe Empréstimos
+ * @author Luis Mario
+ * @author Gabril Henry
+ * @see dao.excecoes.UsuarioException
+ * @see model.Usuario
+ * @see java.util.ArrayList
+ * @see java.util.Objects
+ */
 public class UsuarioDAO implements UsuarioDAOInterface{
 
     private ArrayList<Usuario> listDeUsuario;

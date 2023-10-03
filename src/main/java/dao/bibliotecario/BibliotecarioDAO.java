@@ -2,10 +2,18 @@ package dao.bibliotecario;
 
 import dao.excecoes.BibliotecarioException;
 import model.Bibliotecario;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Classe que é responsável por fazer o acesso dos dados da classe Empréstimos
+ * @author Luis Mario
+ * @author Gabril Henry
+ * @see dao.excecoes.BibliotecarioException
+ * @see model.Bibliotecario
+ * @see java.util.ArrayList
+ * @see java.util.Objects
+ */
 public class BibliotecarioDAO implements BibliotecarioDAOInterface {
 
 

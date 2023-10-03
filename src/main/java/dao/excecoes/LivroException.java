@@ -2,6 +2,12 @@ package dao.excecoes;
 
 import model.Livro;
 
+/**
+ * Classe responsável por criar mensagens estáticas de Exceções
+ * @author Luis Mario
+ * @author Gabril Henry
+ * @see model.Livro
+ */
 public class LivroException extends Exception{
 
     private Livro livro;

@@ -7,6 +7,17 @@ import dao.livro.LivroDAO;
 import dao.reserva.ReservaDAO;
 import dao.usuario.UsuarioDAO;
 
+/**
+ * Classe responável por fornecer instâncias de todas as classes DAO's
+ * @author Luis Mario
+ * @author Gabriel Henry
+ * @see dao.administrador.AdministradorDAO
+ * @see dao.bibliotecario.BibliotecarioDAO
+ * @see dao.emprestimos.EmprestimosDAO
+ * @see dao.livro.LivroDAO
+ * @see dao.reserva.ReservaDAO
+ * @see dao.usuario.UsuarioDAO
+ */
 public class DAO {
 
     private static LivroDAO livroDao;

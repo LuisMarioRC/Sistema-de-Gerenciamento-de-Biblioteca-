@@ -7,6 +7,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Classe que é responsável por fazer o acesso dos dados da classe Empréstimos
+ * @author Luis Mario
+ * @author Gabril Henry
+ * @see dao.excecoes.ReservaException
+ * @see model.Reserva
+ * @see model.Usuario
+ * @see java.util.ArrayList
+ * @see java.util.HashMap
+ * @see java.util.Map
+ */
 public class ReservaDAO implements ReservaDAOInterface {
 
     private Map<Integer, ArrayList<Reserva>> reservas = new HashMap<>();
@@ -21,12 +32,23 @@ public class ReservaDAO implements ReservaDAOInterface {
         return this.reservas.size();
     }
 
+    /**
+     * Método para obter a lista de reservas para um livro específico
+     * @param idLivro que deseja ver as reservas
+     * @return um ArrayList contendo as reservas
+     */
     @Override
-    // Método para obter a lista de reservas para um livro específico
     public ArrayList<Reserva> getReservasParaLivro(Integer idLivro) {
         return reservas.getOrDefault(idLivro, new ArrayList<>());
     }
 
+    /**
+     * Método que verifica na lista se o usuário que está sendo passado como parâmetro é o primeiro da lista
+     * da lista de reserva
+     * @param idLivro que foi reservado
+     * @param usuario que está sendo verificado na lista de reserva
+     * @return false se não for, e true se for o primeiro da lista de reserva para esse livro
+     */
     @Override
     public boolean primeiroUsuarioNaLista(Integer idLivro, Usuario usuario) {
         ArrayList<Reserva> listaDeReserva = getReservasParaLivro(idLivro);
@@ -37,12 +59,20 @@ public class ReservaDAO implements ReservaDAOInterface {
     }
 
 
-    //retorna toda o map;
+    /**
+     * Metodo que retorna todas as reservas já feitas em forma de hashMap
+     * @return hashMap contendo todas as reservas
+     */
     @Override
     public Map<Integer, ArrayList<Reserva>> getReservas() {
         return this.reservas;
     }
 
+    /**
+     * Método que verifica se existe alguma reserva para determinado livro
+     * @param idLivro que deseja verificar se tem reservas
+     * @return true que significa que tem reservas e false que não tem reservas
+     */
     @Override
     public boolean verificaReserva(Integer idLivro) {
         if (reservas.containsKey(idLivro)) {
@@ -54,6 +84,10 @@ public class ReservaDAO implements ReservaDAOInterface {
         }
     }
 
+    /**
+     * Método que realiza a remoção do primeiro usuário da lista de reserva de determinado livro
+     * @param idLivro que deseja remover o primero que esta na lista de reservas
+     */
     @Override
     public void retiraUsuarioDaLista(Integer idLivro) {
         ArrayList<Reserva> reservasDoLivro = this.getReservasParaLivro(idLivro);
@@ -116,6 +150,11 @@ public class ReservaDAO implements ReservaDAOInterface {
         throw new ReservaException(ReservaException.BUSCAR);
     }
 
+    /**
+     * Método que econtra todas as reserva que um usuario específico tem
+     * @param usuario que deseja filtrar as reservas
+     * @return uma lista de reservas desse usuario
+     */
     @Override
     public ArrayList<Reserva> reservasDeUsuario(Usuario usuario){
         ArrayList<Reserva> reservasDeUsuario = new ArrayList<>();

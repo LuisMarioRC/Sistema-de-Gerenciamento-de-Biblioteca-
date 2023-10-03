@@ -9,6 +9,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Classe responsável por realizar o teste dos métodos da classe Usuario model
+ * @author Gabriel Henry
+ * @author Luis Mario
+ * @see dao.DAO;
+ * @see dao.excecoes.UsuarioException;
+ * @see model.Usuario;
+ * @see org.junit.jupiter.api.AfterEach;
+ * @see org.junit.jupiter.api.BeforeEach;
+ * @see org.junit.jupiter.api.Test;
+ */
+
 public class UsuarioTest {
 
     Usuario um;
@@ -22,11 +34,18 @@ public class UsuarioTest {
     void tearDow(){
         DAO.getUsuarioDAO().excluirTodos();
     }
+
+    /**
+     * Teste que certifica se o usuário está sendo bloqueado
+     */
     @Test
      void bloquearConta() throws UsuarioException {
         um.bloquearConta(um);
         assertFalse(um.getStatus());
     }
+    /**
+     * Teste que certifica se o usuário está sendo desbloqueado
+     */
     @Test
     void desbloquearConta() throws UsuarioException {
         um.desbloqueiaConta(um);

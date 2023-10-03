@@ -2,6 +2,12 @@ package dao.excecoes;
 
 import model.Emprestimos;
 
+/**
+ * Classe responsável por criar mensagens estáticas de Exceções
+ * @author Luis Mario
+ * @author Gabril Henry
+ * @see model.Emprestimos
+ */
 public class EmprestimosException extends Exception{
 
     private Emprestimos emprestimos;

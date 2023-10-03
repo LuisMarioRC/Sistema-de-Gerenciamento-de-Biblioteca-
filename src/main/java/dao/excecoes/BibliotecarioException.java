@@ -2,6 +2,12 @@ package dao.excecoes;
 
 import model.Bibliotecario;
 
+/**
+ * Classe responsável por criar mensagens estáticas de Exceções
+ * @author Luis Mario
+ * @author Gabril Henry
+ * @see model.Bibliotecario
+ */
 public class BibliotecarioException extends Exception {
 
     private Bibliotecario bibliotecario;
@@ -10,10 +16,6 @@ public class BibliotecarioException extends Exception {
     public static final String EXCLUIR = "Operação de EXCLUSÃO não realizada.";
     public static final String ATUALIZAR = "Operação de ATUALIZAÇÃO não realizada.";
 
-    public BibliotecarioException(String texto, Bibliotecario bibliotecario){
-        super(texto);
-        this.bibliotecario = bibliotecario;
-    }
 
     public BibliotecarioException(String texto){
         super(texto);

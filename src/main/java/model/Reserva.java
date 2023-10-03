@@ -5,10 +5,27 @@ import dao.excecoes.LivroException;
 import dao.excecoes.ReservaException;
 import dao.excecoes.UsuarioException;
 
+/**
+ * Classe que representa a Reserva no sistema da biblioteca
+ * @author Luis Mario
+ * @author Gabril Henry
+ * @see dao.DAO
+ * @see dao.excecoes.LivroException
+ * @see dao.excecoes.ReservaException
+ * @see dao.excecoes.UsuarioException
+ */
 public class Reserva {
     private Integer idLivro;
     private Usuario usuario;
 
+    /**
+     * Construtor da classe reserva
+     * @param idLivro que deseja ser reservado
+     * @param usuario que deseja reserva
+     * @param dataHoje que está sendo rservado
+     * Possui verificações que lançam exceções caso alguns dos dados nao for condizente
+     * Verificações de status, multa, livro sem devolver após o prazo, disponibilidade do livro e limite de reservas
+     */
     public Reserva(Integer idLivro,Usuario usuario, String dataHoje) throws UsuarioException, LivroException, ReservaException {
         if (!usuario.getStatus() ){
             throw new UsuarioException(UsuarioException.BLOQUEIO);

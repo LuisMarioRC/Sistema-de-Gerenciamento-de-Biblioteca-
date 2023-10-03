@@ -2,6 +2,12 @@ package dao.excecoes;
 
 import model.Reserva;
 
+/**
+ * Classe responsável por criar mensagens estáticas de Exceções
+ * @author Luis Mario
+ * @author Gabril Henry
+ * @see model.Reserva
+ */
 public class ReservaException extends Exception{
     private Reserva reserva;
 
@@ -11,10 +17,6 @@ public class ReservaException extends Exception{
     public static final String RESERVADO = "Livro RESERVADO por outro usuário";
     public static final String LIMITE = "Limite de RESERVAS atingido";
 
-    public ReservaException(String texto, Reserva reserva){
-        super(texto);
-        this.reserva = reserva;
-    }
 
     public ReservaException(String texto){
         super(texto);

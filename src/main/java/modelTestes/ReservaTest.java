@@ -18,6 +18,25 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.fail;
+
+/**
+ * Classe responsável por realizar o teste dos métodos da classe reserva model
+ * @author Gabriel Henry
+ * @author Luis Mario
+ * @see dao.DAO;
+ * @see dao.excecoes.EmprestimosException
+ * @see dao.excecoes.LivroException
+ * @see dao.excecoes.ReservaException
+ * @see dao.excecoes.UsuarioException
+ * @see model.Emprestimos
+ * @see model.Livro
+ * @see model.Reserva
+ * @see model.Usuario
+ * @see org.junit.jupiter.api.AfterEach
+ * @see org.junit.jupiter.api.BeforeEach
+ * @see org.junit.jupiter.api.Test
+ * @see java.time.LocalDate
+ */
 public class ReservaTest {
 
     Usuario usuario1;
@@ -49,6 +68,9 @@ public class ReservaTest {
         DAO.getEmprestimosDAO().excluirTodos();
     }
 
+    /**
+     * Teste que confere que o não usuário consegue realizar uma reserva estando bloqueado
+     */
     @Test
     void failreservaConstrutorStatusBloqueado() throws UsuarioException,LivroException,ReservaException {
         usuario1.setStatus(false);
@@ -60,6 +82,10 @@ public class ReservaTest {
             assertEquals(UsuarioException.BLOQUEIO,e.getMessage());
         }
     }
+
+    /**
+     * Teste que certifica que o usuário não consegue realizar uma renovação estando multado
+     */
     @Test
     void failreservaConstrutorUsuarioMulta() throws UsuarioException,LivroException,ReservaException {
         usuario1.setFimDaMulta(LocalDate.of(2023,10,2));
@@ -71,6 +97,10 @@ public class ReservaTest {
             assertEquals(UsuarioException.MULTADO,e.getMessage());
         }
     }
+
+    /**
+     * Teste que certifica que o usuário não consegue fazer uma reserva estando atrasado
+     */
     @Test
     void failreservaConstrutorUsuarioAtrasado() throws UsuarioException, LivroException, ReservaException, EmprestimosException {
         Emprestimos atrasado =DAO.getEmprestimosDAO().criar(new Emprestimos(livro2,usuario1,"01/09/2023"));
@@ -83,6 +113,10 @@ public class ReservaTest {
             assertEquals(UsuarioException.ATRASO,e.getMessage());
         }
     }
+
+    /**
+     * Teste que certifica que o usuário não consegue reservar um livro que está disponível
+     */
     @Test
     void failreservaConstrutorLivroDisponivel() throws UsuarioException, LivroException,ReservaException {
         livro2.setDisponibilidade(true);
@@ -94,6 +128,10 @@ public class ReservaTest {
             assertEquals(LivroException.DISPONIBILIDADE,e.getMessage());
         }
     }
+
+    /**
+     * Teste que certifica que o usuário não consegue realizar mais de duas reservas
+     */
     @Test
     void failreservaConstrutorLimiteDeReservas() throws LivroException, UsuarioException, ReservaException {
         livro2.setDisponibilidade(false);

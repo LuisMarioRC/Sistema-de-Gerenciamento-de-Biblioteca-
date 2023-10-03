@@ -1,6 +1,12 @@
 package dao.excecoes;
 
 import model.Usuario;
+/**
+ * Classe responsável por criar mensagens estáticas de Exceções
+ * @author Luis Mario
+ * @author Gabril Henry
+ * @see model.Usuario
+ */
 
 public class UsuarioException extends Exception{
     private Usuario usuario;

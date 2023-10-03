@@ -3,6 +3,12 @@ package model;
 
 import java.util.Objects;
 
+/**
+ * CLasse que representa o livro no sistema da biblioteca
+ * @author Luis Mario
+ * @author Gabriel Henry
+ * @see java.util.Objects
+ */
 public class Livro {
     private String titulo;
     private String autor;
@@ -13,8 +19,16 @@ public class Livro {
     private Boolean disponibilidade;
     private int id;
 
-
-
+    /**
+     * Construtor da classe livro que seta alguns atributos como entrada
+     * O atributo disponibilidade é atribuído com o valor true automaticamente, que está disponivel;
+     * @param titulo :String
+     * @param autor : String
+     * @param editora : String
+     * @param isbn : Integer
+     * @param anoDePublicacao : Integer
+     * @param categoria : String
+     */
     public Livro(String titulo, String autor,String editora,Integer isbn,Integer anoDePublicacao,String categoria) {
         this.titulo=titulo;
         this.autor=autor;

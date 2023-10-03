@@ -4,25 +4,53 @@ package dao;
 
 import java.util.ArrayList;
 
-
+/**
+ * Interface responsável por implementar os metodos CRUD que serão subescrevidos no DAO
+ * @author Luis Mario
+ * @author Gabriel Henry
+ * @param <T> Objeto
+ * @param <E> Exceção
+ * @see java.util.ArrayList
+ */
 public interface CRUD <T, E extends Exception> {
 
-    // Cria um novo objeto
+    /**
+     * Cria novo objeto T
+     *
+     * @param obj
+     * @return
+     */
     public T criar(T obj);
 
-    // Excluir um objeto
+    /**
+     * remove objeto T
+     * @param obj
+     */
+
     public void excluir(T obj) throws E;
 
-    // Excluir todos os objetos
+    /**
+     * remove todos os objetos
+     */
     public void excluirTodos();
 
-    // Atualizar um objeto
+    /**
+     * atualiza objeto T na sua coleção
+     * @param obj
+     * @return
+     */
     public T atualizar(T obj) throws E;
 
-    // Econtrar todos os objetos
+    /**
+     * consulta coleção de objetos T
+     * @return
+     */
     public ArrayList<T> encontrarTodos();
 
-
-    // Econtrar o objeto por id
+    /**
+     * consulta objeto T na coleção pelo ID
+     * @param  id
+     * @return
+     */
     public T encontrarPorID(int id) throws E;
 }

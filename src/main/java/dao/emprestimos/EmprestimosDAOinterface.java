@@ -8,6 +8,17 @@ import model.Usuario;
 
 import java.util.ArrayList;
 
+/**
+ * Interface responsável por implementar os metodos que serão subescrevidos no DAO
+ * @author Luis Mario
+ * @author Gabriel Henry
+ * @see dao.CRUD
+ * @see dao.excecoes.EmprestimosException
+ * @see model.Emprestimos
+ * @see model.Livro
+ * @see model.Usuario
+ * @see java.util.ArrayList
+ */
 public interface EmprestimosDAOinterface extends CRUD<Emprestimos, Exception> {
     public Integer numLivrosEmprestados();
     public Integer numLivroAtrasado();

@@ -2,22 +2,42 @@ package model;
 
 import java.util.Objects;
 
+/**
+ * Classe que representa o Bibliotecario no sistema da Biblioteca
+ * @author Gabriel Henry
+ * @author Luis Mario
+ * @see java.util.Objects
+ */
 public class Bibliotecario  {
     private String nome;
     private Integer senha;
     private String cargo;
     private Integer numeroDeIdentificacao;
 
+    /**
+     * Construtor da classe Biliotecario
+     * O atributo de cargo é automaticamente setado como "Bibliotecário
+     * @param nome : String
+     * @param senha : Integer
+     */
     public Bibliotecario(String nome,Integer senha){
         this.nome=nome;
         this.senha=senha;
-        this.cargo="Biliotecario";
+        this.cargo="Biliotecário";
+        this.numeroDeIdentificacao=-1;
     }
 
+    /**
+     * Construtor da classe Bibliotecario que está sendo usado pelo Administrador
+     * @param nome : String
+     * @param senha : Integer
+     * @param cargo : String
+     */
     public Bibliotecario(String nome,Integer senha,String cargo){
         this.nome=nome;
         this.senha=senha;
         this.cargo=cargo;
+        this.numeroDeIdentificacao=-1;
     }
 
     public String getNome() {

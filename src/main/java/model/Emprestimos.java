@@ -11,6 +11,21 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
+/**
+ * Classe que representa o emprétimo do livro no sistema da biblioteca
+ * @author Gabriel Henry
+ * @author Luis Mario
+ * @see dao.DAO
+ * @see dao.excecoes.EmprestimosException
+ * @see dao.excecoes.LivroException
+ * @see dao.excecoes.ReservaException
+ * @see dao.excecoes.UsuarioException
+ * @see java.time.LocalDate
+ * @see java.time.Period
+ * @see java.time.format.DateTimeFormatter
+ * @see java.time.temporal.ChronoUnit
+ * @see java.util.Objects
+ */
 public class Emprestimos {
     private Livro livro;
     private Usuario usuario;
@@ -19,7 +34,16 @@ public class Emprestimos {
     private int id;
     private Boolean andamento; //true = o emprestimo esta ativo, false = o emprestimo foi delvolvido
 
-
+    /**
+     * Construtor da classe emprestimos
+     * @param livro que deseja fazer o empréstimo
+     * @param usuario que está realizando o empréstimos
+     * @param dataHoje que o empréstimo esta sendo realizado
+     * Possui verificações que lançam exceções caso alguns dos dados nao for condizente
+     * Verificações de livro sem devolver, disponibilidade do livro, usuário com estatus bloqueado, multa,
+     *                 limite de empréstimos, se tem reserva para esse livro e se o usuario que esta em primeiro
+     *                 na lista de reserva é quem esta tentando pegar o livro.
+     */
     public Emprestimos(Livro livro, Usuario usuario,String dataHoje) throws LivroException, ReservaException, UsuarioException {
         if (DAO.getEmprestimosDAO().verificaAtrasoDeUsuario(usuario)) {
             throw new UsuarioException(UsuarioException.ATRASO);
@@ -56,7 +80,12 @@ public class Emprestimos {
     }
 
 
-
+    /**
+     * Método que calcula o período de multa aplicado ao Usuário, sendo o dobro dos dias de atraso.
+     * @param livro que foi emprestado
+     * @param usuario que realizou o emprestimo
+     * @param dataQueDevolveu data que o usuario devolveu o livro para a biblioteca
+     */
     private void multas (Livro livro, Usuario usuario, LocalDate dataQueDevolveu) throws EmprestimosException, UsuarioException {
         Emprestimos emprestimo = DAO.getEmprestimosDAO().encontraPorIdDoLivro(livro.getId());
         if (dataQueDevolveu.isAfter(emprestimo.getDataDevolucao())) {
@@ -68,6 +97,13 @@ public class Emprestimos {
 
     }
 
+    /**
+     * Método que registra a devolução do livro, alterando seu status de andamento do emprestimo para falso,
+     * reativando sua disponibilidade e o atualizando.
+     * @param livro que foi emprestado
+     * @param usuario que realizou o emprestimo
+     * @param dataQueDevolveu data que o usuario devolveu o livro
+     */
     public void registraDevolucao(Livro livro, Usuario usuario, LocalDate dataQueDevolveu) throws EmprestimosException, LivroException, UsuarioException {
         this.multas(livro,usuario,dataQueDevolveu);
         Emprestimos emprestimoDoLivro = DAO.getEmprestimosDAO().encontraPorIdDoLivro(livro.getId());
@@ -77,6 +113,17 @@ public class Emprestimos {
         DAO.getLivroDAO().atualizar(livro);
     }
 
+    /**
+     * Construtor de renovaçõo da classe empréstimo
+     *
+     * @param livro que será renovado
+     * @param usuario que deseja renovar o livro
+     * @param dataHoje data que está sendo realizada a renovação
+     * Possui verificações que lançam exceções caso alguns dos dados nao for condizente
+     * Verificações de para saber se o usuario está com algum livro atrasado, se o realmente já está reservado
+     *                para que possa ser realizada a renovação, se o usuario está multado ou bloqueado e se
+     *                o mesmo já atingiu seu limite de renovações.
+     */
     public Boolean renovar(Livro livro, Usuario usuario, String dataHoje) throws EmprestimosException, UsuarioException, ReservaException {
         Emprestimos emprestimo = DAO.getEmprestimosDAO().encontraPorIdDoLivro(livro.getId());
         DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");

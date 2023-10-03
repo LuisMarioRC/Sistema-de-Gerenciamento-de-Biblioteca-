@@ -6,6 +6,15 @@ import dao.excecoes.UsuarioException;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Classe que representa o usuario no sistema da Biblioteca, possuindo métodos que alteram seu status no sistema
+ * @author Gabriel Henry
+ * @author Luis Mario
+ * @see dao.DAO
+ * @see dao.excecoes.UsuarioException
+ * @see java.time.LocalDate
+ * @see java.util.Objects
+ */
 public class Usuario {
 
     private String endereco;
@@ -17,20 +26,41 @@ public class Usuario {
 
 
 
+    /**
+     * Construtor da classe Usuario.
+     * O parametro fimDaMulta inicia com o valor null, que representa que não está com multa prevista.
+     * O parámetro status inicia com o booleano true, que significa que o usuario não está bloqueado.
+     * @param nome : String.
+     * @param endereco : String
+     * @param telefone : String
+     */
     public Usuario(String nome,String endereco,String telefone){
         this.nome=nome;
         this.endereco=endereco;
         this.telefone=telefone;
         this.fimDaMulta = null;
         this.status=true;
+        this.numeroDeIdentificacao=-1;
     }
 
+    /**
+     * Método que bloqueia conta, onde muda o status do usuario para false
+     * @param usuario para bloquear
+     * @return usuario bloqueado
+     * @throws UsuarioException de erro de atualização
+     */
     public Usuario bloquearConta(Usuario usuario) throws UsuarioException{
         usuario.setStatus(false);// Muda o status da conta que deseja bloquear para false;
         DAO.getUsuarioDAO().atualizar(usuario);
         return usuario;
     }
 
+    /**
+     * Método que desbloqueia conta, onde muda o status do usuario para true
+     * @param usuario para desbloquear
+     * @return usuario desbloqueado
+     * @throws UsuarioException de erro de atualização
+     */
     public Usuario desbloqueiaConta(Usuario usuario) throws UsuarioException{
         usuario.setStatus(true);// Muda o status da conta que desbloquear para true;
         DAO.getUsuarioDAO().atualizar(usuario);

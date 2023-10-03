@@ -20,6 +20,26 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Classe responsável por realizar o teste dos métodos da classe Empréstimos model
+ * @author Gabriel Henry
+ * @author Luis Mario
+ * @see dao.DAO;
+ * @see dao.excecoes.EmprestimosException
+ * @see dao.excecoes.LivroException
+ * @see dao.excecoes.ReservaException
+ * @see dao.excecoes.UsuarioException
+ * @see model.Emprestimos;
+ * @see model.Livro
+ * @see model.Reserva
+ * @see model.Usuario
+ * @see org.junit.jupiter.api.AfterEach
+ * @see org.junit.jupiter.api.BeforeEach
+ * @see org.junit.jupiter.api.Test
+ * @see java.time.LocalDate
+ * @see static org.junit.jupiter.api.Assertions.*
+ */
+
 public class EmprestimosTest {
     Usuario cassio;
     Usuario rogerio;
@@ -49,6 +69,9 @@ public class EmprestimosTest {
         DAO.getEmprestimosDAO().excluirTodos();
     }
 
+    /**
+     *Teste que confere se o usuario consegue realizar um empréstimo estando atrasado
+     */
     @Test
     void failEmprestimoConstrutorUsuarioAtrasado() throws UsuarioException, LivroException, ReservaException, EmprestimosException {
         Emprestimos atrasado = DAO.getEmprestimosDAO().criar(new Emprestimos(livro2,cassio,"01/09/2023"));
@@ -62,6 +85,9 @@ public class EmprestimosTest {
         }
     }
 
+    /**
+     *Teste que confere se é possível realizar empréstimo com um livro que não está disponível
+     */
     @Test
     void failEmprestimoConstrutorLivroIndisponivel() throws UsuarioException, LivroException, ReservaException {
         livro2.setDisponibilidade(false);
@@ -74,6 +100,9 @@ public class EmprestimosTest {
         }
     }
 
+    /**
+     * Teste que confere se o usuário consegue realizar um empréstimo mesmo estando bloqueado
+     */
     @Test
     void failEmprestimoConstrutorStatusBloqueado() throws UsuarioException,LivroException, ReservaException {
         cassio.setStatus(false);
@@ -86,6 +115,10 @@ public class EmprestimosTest {
         }
     }
 
+    /**
+     * Teste que confere se o usuário consegue realizar um empréstimo mesmo estando multado
+     * @throws UsuarioException
+     */
     @Test
     void failEmprestimoConstrutorUsuarioMulta() throws UsuarioException,LivroException, ReservaException {
         cassio.setFimDaMulta(LocalDate.of(2023,10,2));
@@ -98,6 +131,9 @@ public class EmprestimosTest {
         }
     }
 
+    /**
+     * Teste que confere se o usuário consegue realizar um empréstimo mesmo atingindo o limite de empréstimos
+     */
     @Test
     void failEmprestimoConstrutorLimiteDeLivros() throws LivroException, UsuarioException, ReservaException {
         DAO.getEmprestimosDAO().criar(new Emprestimos(livro1,cassio,"01/10/2023"));
@@ -111,6 +147,10 @@ public class EmprestimosTest {
         }
     }
 
+    /**
+     * Teste que confere se a reserva realmente está sendo efetivada pelo primeiro usuário da lista de reserva
+
+     */
     @Test
     void failEmprestimoConstrutorVerificaReserva() throws LivroException, UsuarioException ,ReservaException{
         livro1.setDisponibilidade(false);
@@ -127,6 +167,14 @@ public class EmprestimosTest {
         }
     }
 
+    /**
+     * Teste que confere se os usuários estão sendo multados corretamente  ou não
+     * de acordo com a data da devolução dos seus livros
+     * @throws LivroException
+     * @throws UsuarioException
+     * @throws ReservaException
+     * @throws EmprestimosException
+     */
     @Test
     void multa() throws LivroException, UsuarioException, ReservaException, EmprestimosException {
         Emprestimos emprestimo2 = DAO.getEmprestimosDAO().criar(new Emprestimos(livro2,rogerio,"03/10/2023"));
@@ -139,6 +187,14 @@ public class EmprestimosTest {
 
     }
 
+    /**
+     * Teste que certifica se o livro realmente foi devolvido através da análise do seu atributo
+     * de andamento do empréstimo
+     * @throws LivroException
+     * @throws UsuarioException
+     * @throws ReservaException
+     * @throws EmprestimosException
+     */
     @Test
     void registraDevolucao() throws LivroException, UsuarioException, ReservaException, EmprestimosException {
         Emprestimos emprestimos1 = DAO.getEmprestimosDAO().criar(new Emprestimos(livro1,cassio,"03/10/2023"));
@@ -147,6 +203,14 @@ public class EmprestimosTest {
         assertFalse(emprestimos1.getAndamento());
     }
 
+    /**
+     * Teste que confere que o usuário não consegue renovar o empréstimo de um livro,
+     * pois o mesmo ja atingiu o limite de renovações
+     * @throws LivroException
+     * @throws UsuarioException
+     * @throws ReservaException
+     * @throws EmprestimosException
+     */
     @Test
     void failLimiteDeRenovacao() throws LivroException, UsuarioException, ReservaException, EmprestimosException {
         Emprestimos emprestimos1 = DAO.getEmprestimosDAO().criar(new Emprestimos(livro1,cassio,"01/10/2023"));
@@ -158,6 +222,15 @@ public class EmprestimosTest {
             assertEquals(EmprestimosException.RENOVAR, e.getMessage());
         }
     }
+
+    /**
+     * Teste que confere se o usuário consegue realizar a renovação dentro do período
+     * de andamento do livro que está sendo emprestado
+     * @throws EmprestimosException
+     * @throws UsuarioException
+     * @throws ReservaException
+     * @throws LivroException
+     */
     @Test
     void renovar() throws EmprestimosException, UsuarioException, ReservaException, LivroException {
         Emprestimos emprestimos1 = DAO.getEmprestimosDAO().criar(new Emprestimos(livro1,cassio,"01/10/2023"));
