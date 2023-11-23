@@ -142,11 +142,12 @@ public class EmprestimosDAO implements EmprestimosDAOinterface {
      * @return true que equivale que tem devolução atrasada e false se nao estiver atraso
      */
     @Override
-    public Boolean verificaAtrasoDeUsuario(Usuario usuario){
-        LocalDate dataHoje= LocalDate.now();
+    public Boolean verificaAtrasoDeUsuario(Usuario usuario,String dataHoje){
+        DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate newDate = LocalDate.parse(dataHoje, dataFormatada);
         for (Emprestimos emprestimo: listDeEmprestimos){
             if (emprestimo.getUsuario() == usuario
-                    && dataHoje.isAfter(emprestimo.getDataDevolucao())
+                    && newDate.isAfter(emprestimo.getDataDevolucao())
                     && emprestimo.getAndamento()){
                 return true;
             }

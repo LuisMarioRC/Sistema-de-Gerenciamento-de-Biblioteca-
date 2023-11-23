@@ -6,6 +6,7 @@ import model.Emprestimos;
 import model.Livro;
 import model.Usuario;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -24,7 +25,7 @@ public interface EmprestimosDAOinterface extends CRUD<Emprestimos, Exception> {
     public Integer numLivroAtrasado();
     public ArrayList<Emprestimos> historicoEmprestimosUsuario(Usuario usuario);
     public ArrayList<Livro> livroMaisPolular();
-    public Boolean verificaAtrasoDeUsuario(Usuario usuario);
+    public Boolean verificaAtrasoDeUsuario(Usuario usuario, String data);
     public boolean validaMulta(Usuario usuario,String dataHoje);
     public ArrayList<Emprestimos> econtraPorUsuario(Usuario usuario);
     public Emprestimos encontraPorIdDoLivro(int id) throws EmprestimosException;

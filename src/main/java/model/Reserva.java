@@ -33,7 +33,7 @@ public class Reserva {
         if (!DAO.getEmprestimosDAO().validaMulta(usuario,dataHoje)){
             throw new UsuarioException(UsuarioException.MULTADO);
         }
-        if (DAO.getEmprestimosDAO().verificaAtrasoDeUsuario(usuario)){
+        if (DAO.getEmprestimosDAO().verificaAtrasoDeUsuario(usuario, dataHoje)){
             throw new UsuarioException(UsuarioException.ATRASO);
         }
         if (DAO.getLivroDAO().encontrarPorID(idLivro).getDisponibilidade()){

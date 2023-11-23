@@ -45,7 +45,7 @@ public class Emprestimos {
      *                 na lista de reserva é quem esta tentando pegar o livro.
      */
     public Emprestimos(Livro livro, Usuario usuario,String dataHoje) throws LivroException, ReservaException, UsuarioException {
-        if (DAO.getEmprestimosDAO().verificaAtrasoDeUsuario(usuario)) {
+        if (DAO.getEmprestimosDAO().verificaAtrasoDeUsuario(usuario,dataHoje)) {
             throw new UsuarioException(UsuarioException.ATRASO);
         }
         if (!livro.getDisponibilidade()){
@@ -128,7 +128,7 @@ public class Emprestimos {
         Emprestimos emprestimo = DAO.getEmprestimosDAO().encontraPorIdDoLivro(livro.getId());
         DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate newDate = LocalDate.parse(dataHoje, dataFormatada);
-        if (DAO.getEmprestimosDAO().verificaAtrasoDeUsuario(usuario)) {
+        if (DAO.getEmprestimosDAO().verificaAtrasoDeUsuario(usuario,dataHoje)) {
             throw new UsuarioException(UsuarioException.ATRASO);
         }
         if (DAO.getReservaDAO().verificaReserva(livro.getId())){
