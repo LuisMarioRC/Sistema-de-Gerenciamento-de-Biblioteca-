@@ -4,6 +4,8 @@ import excecoes.EmprestimosException;
 import model.Emprestimos;
 import model.Livro;
 import model.Usuario;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;

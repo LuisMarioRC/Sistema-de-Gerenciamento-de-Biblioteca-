@@ -1,4 +1,4 @@
-package test;
+package daoTestes;
 
 import dao.DAO;
 import excecoes.LivroException;
