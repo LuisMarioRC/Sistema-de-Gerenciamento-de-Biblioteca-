@@ -1,7 +1,7 @@
 package dao.livro;
 
 import dao.CRUD;
-import dao.excecoes.LivroException;
+import excecoes.LivroException;
 import model.Livro;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author Luis Mario
  * @author Gabriel Henry
  * @see dao.CRUD
- * @see dao.excecoes.LivroException
+ * @see excecoes.LivroException
  * @see model.Livro
  * @see java.util.ArrayList
  */

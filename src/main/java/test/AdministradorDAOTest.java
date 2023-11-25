@@ -3,7 +3,7 @@ package test;
 
 
 import dao.DAO;
-import dao.excecoes.AdministradorException;
+import excecoes.AdministradorException;
 import model.Administrador;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  * @author Luis Mario
  * @author Gabriel Henry
  * @see dao.DAO;
- * @see dao.excecoes.AdministradorException;
+ * @see excecoes.AdministradorException;
  * @see model.Administrador;
  * @see org.junit.jupiter.api.AfterEach;
  * @see org.junit.jupiter.api.BeforeEach;

@@ -1,9 +1,9 @@
 package test;
 
 import dao.DAO;
-import dao.excecoes.LivroException;
-import dao.excecoes.ReservaException;
-import dao.excecoes.UsuarioException;
+import excecoes.LivroException;
+import excecoes.ReservaException;
+import excecoes.UsuarioException;
 import model.Livro;
 import model.Reserva;
 import model.Usuario;
@@ -21,9 +21,9 @@ import static org.junit.jupiter.api.Assertions.fail;
  * @author Luis Mario
  * @author Gabriel Henry
  * @see dao.DAO
- * @see dao.excecoes.LivroException
- * @see dao.excecoes.ReservaException
- * @see dao.excecoes.UsuarioException
+ * @see excecoes.LivroException
+ * @see excecoes.ReservaException
+ * @see excecoes.UsuarioException
  * @see model.Livro
  * @see model.Reserva
  * @see model.Usuario

@@ -1,4 +1,4 @@
-package dao.excecoes;
+package excecoes;
 
 import model.Usuario;
 /**

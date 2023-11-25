@@ -1,12 +1,11 @@
 package dao.emprestimos;
 
 import dao.CRUD;
-import dao.excecoes.EmprestimosException;
+import excecoes.EmprestimosException;
 import model.Emprestimos;
 import model.Livro;
 import model.Usuario;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -14,7 +13,7 @@ import java.util.ArrayList;
  * @author Luis Mario
  * @author Gabriel Henry
  * @see dao.CRUD
- * @see dao.excecoes.EmprestimosException
+ * @see excecoes.EmprestimosException
  * @see model.Emprestimos
  * @see model.Livro
  * @see model.Usuario

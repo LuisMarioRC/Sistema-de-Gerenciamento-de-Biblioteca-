@@ -1,7 +1,7 @@
 package modelTestes;
 
 import dao.DAO;
-import dao.excecoes.UsuarioException;
+import excecoes.UsuarioException;
 import model.Usuario;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Gabriel Henry
  * @author Luis Mario
  * @see dao.DAO;
- * @see dao.excecoes.UsuarioException;
+ * @see excecoes.UsuarioException;
  * @see model.Usuario;
  * @see org.junit.jupiter.api.AfterEach;
  * @see org.junit.jupiter.api.BeforeEach;

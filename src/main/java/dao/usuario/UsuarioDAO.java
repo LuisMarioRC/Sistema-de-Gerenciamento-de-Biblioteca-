@@ -1,7 +1,7 @@
 package dao.usuario;
 
 
-import dao.excecoes.UsuarioException;
+import excecoes.UsuarioException;
 import model.Usuario;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -10,7 +10,7 @@ import java.util.Objects;
  * Classe que é responsável por fazer o acesso dos dados da classe Empréstimos
  * @author Luis Mario
  * @author Gabril Henry
- * @see dao.excecoes.UsuarioException
+ * @see excecoes.UsuarioException
  * @see model.Usuario
  * @see java.util.ArrayList
  * @see java.util.Objects

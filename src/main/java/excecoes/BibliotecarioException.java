@@ -1,24 +1,24 @@
-package dao.excecoes;
+package excecoes;
 
-import model.Reserva;
+import model.Bibliotecario;
 
 /**
  * Classe responsável por criar mensagens estáticas de Exceções
  * @author Luis Mario
  * @author Gabril Henry
- * @see model.Reserva
+ * @see model.Bibliotecario
  */
-public class ReservaException extends Exception{
-    private Reserva reserva;
+public class BibliotecarioException extends Exception {
+
+    private Bibliotecario bibliotecario;
 
     public static final String BUSCAR = "Operação de BUSCAR não encontrada";
     public static final String EXCLUIR = "Operação de EXCLUSÃO não realizada.";
     public static final String ATUALIZAR = "Operação de ATUALIZAÇÃO não realizada.";
-    public static final String RESERVADO = "Livro RESERVADO por outro usuário";
-    public static final String LIMITE = "Limite de RESERVAS atingido";
 
 
-    public ReservaException(String texto){
+    public BibliotecarioException(String texto){
         super(texto);
     }
+
 }

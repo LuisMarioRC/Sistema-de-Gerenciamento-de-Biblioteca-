@@ -1,7 +1,7 @@
 package test;
 
 import dao.DAO;
-import dao.excecoes.LivroException;
+import excecoes.LivroException;
 import model.Livro;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  * @author Luis Mario
  * @author Gabriel Henry
  *  @see dao.DAO
- *  @see dao.excecoes.LivroException
+ *  @see excecoes.LivroException
  *  @see model.Livro
  *  @see org.junit.jupiter.api.AfterEach
  *  @see org.junit.jupiter.api.BeforeEach

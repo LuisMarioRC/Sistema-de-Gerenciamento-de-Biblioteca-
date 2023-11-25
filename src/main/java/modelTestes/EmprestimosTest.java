@@ -3,10 +3,10 @@ package modelTestes;
 
 
 import dao.DAO;
-import dao.excecoes.EmprestimosException;
-import dao.excecoes.LivroException;
-import dao.excecoes.ReservaException;
-import dao.excecoes.UsuarioException;
+import excecoes.EmprestimosException;
+import excecoes.LivroException;
+import excecoes.ReservaException;
+import excecoes.UsuarioException;
 import model.Emprestimos;
 import model.Livro;
 import model.Reserva;
@@ -25,10 +25,10 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Gabriel Henry
  * @author Luis Mario
  * @see dao.DAO;
- * @see dao.excecoes.EmprestimosException
- * @see dao.excecoes.LivroException
- * @see dao.excecoes.ReservaException
- * @see dao.excecoes.UsuarioException
+ * @see excecoes.EmprestimosException
+ * @see excecoes.LivroException
+ * @see excecoes.ReservaException
+ * @see excecoes.UsuarioException
  * @see model.Emprestimos;
  * @see model.Livro
  * @see model.Reserva

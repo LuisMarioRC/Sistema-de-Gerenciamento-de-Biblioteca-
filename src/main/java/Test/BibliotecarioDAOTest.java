@@ -1,7 +1,7 @@
 package test;
 
 import dao.DAO;
-import dao.excecoes.BibliotecarioException;
+import excecoes.BibliotecarioException;
 import model.Bibliotecario;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  * @author Luis Mario
  * @author Gabriel Henry
  * @see dao.DAO
- * @see dao.excecoes.BibliotecarioException
+ * @see excecoes.BibliotecarioException
  * @see model.Bibliotecario
  * @see org.junit.jupiter.api.AfterEach
  * @see org.junit.jupiter.api.BeforeEach

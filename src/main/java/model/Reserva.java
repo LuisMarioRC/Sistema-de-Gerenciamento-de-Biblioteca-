@@ -1,18 +1,18 @@
 package model;
 
 import dao.DAO;
-import dao.excecoes.LivroException;
-import dao.excecoes.ReservaException;
-import dao.excecoes.UsuarioException;
+import excecoes.LivroException;
+import excecoes.ReservaException;
+import excecoes.UsuarioException;
 
 /**
  * Classe que representa a Reserva no sistema da biblioteca
  * @author Luis Mario
  * @author Gabril Henry
  * @see dao.DAO
- * @see dao.excecoes.LivroException
- * @see dao.excecoes.ReservaException
- * @see dao.excecoes.UsuarioException
+ * @see excecoes.LivroException
+ * @see excecoes.ReservaException
+ * @see excecoes.UsuarioException
  */
 public class Reserva {
     private Integer idLivro;

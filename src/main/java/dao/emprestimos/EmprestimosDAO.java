@@ -1,6 +1,6 @@
 package dao.emprestimos;
 
-import dao.excecoes.EmprestimosException;
+import excecoes.EmprestimosException;
 import model.Emprestimos;
 import model.Livro;
 import model.Usuario;
@@ -12,7 +12,7 @@ import java.util.*;
  * Classe que é responsável por fazer o acesso dos dados da classe Empréstimos
  * @author Luis Mario
  * @author Gabril Henry
- * @see dao.excecoes.EmprestimosException
+ * @see excecoes.EmprestimosException
  * @see model.Emprestimos
  * @see model.Livro
  * @see model.Usuario

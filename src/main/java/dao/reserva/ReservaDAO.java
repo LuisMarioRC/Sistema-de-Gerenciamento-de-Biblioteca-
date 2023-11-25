@@ -1,6 +1,6 @@
 package dao.reserva;
 
-import dao.excecoes.ReservaException;
+import excecoes.ReservaException;
 import model.Reserva;
 import model.Usuario;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.Map;
  * Classe que é responsável por fazer o acesso dos dados da classe Empréstimos
  * @author Luis Mario
  * @author Gabril Henry
- * @see dao.excecoes.ReservaException
+ * @see excecoes.ReservaException
  * @see model.Reserva
  * @see model.Usuario
  * @see java.util.ArrayList

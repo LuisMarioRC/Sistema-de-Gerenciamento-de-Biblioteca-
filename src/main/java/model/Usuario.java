@@ -1,7 +1,7 @@
 package model;
 
 import dao.DAO;
-import dao.excecoes.UsuarioException;
+import excecoes.UsuarioException;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -11,7 +11,7 @@ import java.util.Objects;
  * @author Gabriel Henry
  * @author Luis Mario
  * @see dao.DAO
- * @see dao.excecoes.UsuarioException
+ * @see excecoes.UsuarioException
  * @see java.time.LocalDate
  * @see java.util.Objects
  */

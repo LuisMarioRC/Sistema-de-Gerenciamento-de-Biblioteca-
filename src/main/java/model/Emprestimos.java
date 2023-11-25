@@ -1,10 +1,10 @@
 package model;
 
 import dao.DAO;
-import dao.excecoes.EmprestimosException;
-import dao.excecoes.LivroException;
-import dao.excecoes.ReservaException;
-import dao.excecoes.UsuarioException;
+import excecoes.EmprestimosException;
+import excecoes.LivroException;
+import excecoes.ReservaException;
+import excecoes.UsuarioException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -16,10 +16,10 @@ import java.util.Objects;
  * @author Gabriel Henry
  * @author Luis Mario
  * @see dao.DAO
- * @see dao.excecoes.EmprestimosException
- * @see dao.excecoes.LivroException
- * @see dao.excecoes.ReservaException
- * @see dao.excecoes.UsuarioException
+ * @see excecoes.EmprestimosException
+ * @see excecoes.LivroException
+ * @see excecoes.ReservaException
+ * @see excecoes.UsuarioException
  * @see java.time.LocalDate
  * @see java.time.Period
  * @see java.time.format.DateTimeFormatter

@@ -1,24 +1,22 @@
-package dao.excecoes;
+package excecoes;
 
-import model.Bibliotecario;
+import model.Administrador;
 
 /**
  * Classe responsável por criar mensagens estáticas de Exceções
  * @author Luis Mario
  * @author Gabril Henry
- * @see model.Bibliotecario
+ * @see model.Administrador
  */
-public class BibliotecarioException extends Exception {
-
-    private Bibliotecario bibliotecario;
+public class AdministradorException extends Exception{
+    private Administrador administrador;
 
     public static final String BUSCAR = "Operação de BUSCAR não encontrada";
     public static final String EXCLUIR = "Operação de EXCLUSÃO não realizada.";
     public static final String ATUALIZAR = "Operação de ATUALIZAÇÃO não realizada.";
 
 
-    public BibliotecarioException(String texto){
+    public AdministradorException(String texto){
         super(texto);
     }
-
 }
