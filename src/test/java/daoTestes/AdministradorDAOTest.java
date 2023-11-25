@@ -2,9 +2,9 @@ package daoTestes;
 
 
 
-import dao.DAO;
-import excecoes.AdministradorException;
-import model.Administrador;
+import org.example.dao.DAO;
+import org.example.excecoes.AdministradorException;
+import org.example.model.Administrador;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,9 +18,9 @@ import static org.junit.jupiter.api.Assertions.fail;
  * Classe de teste responsável para realizar testes referente aos métodos do AdministradorDAO
  * @author Luis Mario
  * @author Gabriel Henry
- * @see dao.DAO;
- * @see excecoes.AdministradorException;
- * @see model.Administrador;
+ * @see DAO ;
+ * @see AdministradorException ;
+ * @see Administrador ;
  * @see org.junit.jupiter.api.AfterEach;
  * @see org.junit.jupiter.api.BeforeEach;
  * @see org.junit.jupiter.api.Test;

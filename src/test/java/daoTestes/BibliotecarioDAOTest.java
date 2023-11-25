@@ -1,8 +1,8 @@
 package daoTestes;
 
-import dao.DAO;
-import excecoes.BibliotecarioException;
-import model.Bibliotecario;
+import org.example.dao.DAO;
+import org.example.excecoes.BibliotecarioException;
+import org.example.model.Bibliotecario;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.fail;
  * Classe de teste responsável para realizar testes referente aos métodos do BibliotecarioDAO
  * @author Luis Mario
  * @author Gabriel Henry
- * @see dao.DAO
- * @see excecoes.BibliotecarioException
- * @see model.Bibliotecario
+ * @see DAO
+ * @see BibliotecarioException
+ * @see Bibliotecario
  * @see org.junit.jupiter.api.AfterEach
  * @see org.junit.jupiter.api.BeforeEach
  * @see org.junit.jupiter.api.Test

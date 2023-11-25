@@ -1,8 +1,8 @@
 package daoTestes;
 
-import dao.DAO;
-import excecoes.UsuarioException;
-import model.Usuario;
+import org.example.dao.DAO;
+import org.example.excecoes.UsuarioException;
+import org.example.model.Usuario;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.fail;
  * Classe de teste reponsável por gerar teste para o UsuarioDAO
  * @author Luis Mario
  * @author Gabriel Henry
- * @see dao.DAO
- * @see excecoes.UsuarioException
- * @see model.Usuario
+ * @see DAO
+ * @see UsuarioException
+ * @see Usuario
  * @see org.junit.jupiter.api.AfterEach
  * @see org.junit.jupiter.api.BeforeEach
  * @see org.junit.jupiter.api.Test

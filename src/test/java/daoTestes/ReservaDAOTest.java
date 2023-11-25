@@ -1,12 +1,12 @@
 package daoTestes;
 
-import dao.DAO;
-import excecoes.LivroException;
-import excecoes.ReservaException;
-import excecoes.UsuarioException;
-import model.Livro;
-import model.Reserva;
-import model.Usuario;
+import org.example.dao.DAO;
+import org.example.excecoes.LivroException;
+import org.example.excecoes.ReservaException;
+import org.example.excecoes.UsuarioException;
+import org.example.model.Livro;
+import org.example.model.Reserva;
+import org.example.model.Usuario;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,13 +20,13 @@ import static org.junit.jupiter.api.Assertions.fail;
  * Classe de teste reponsável por gerar teste para o ReservaDAO
  * @author Luis Mario
  * @author Gabriel Henry
- * @see dao.DAO
- * @see excecoes.LivroException
- * @see excecoes.ReservaException
- * @see excecoes.UsuarioException
- * @see model.Livro
- * @see model.Reserva
- * @see model.Usuario
+ * @see DAO
+ * @see LivroException
+ * @see ReservaException
+ * @see UsuarioException
+ * @see Livro
+ * @see Reserva
+ * @see Usuario
  * @see org.junit.jupiter.api.AfterEach
  * @see org.junit.jupiter.api.BeforeEach
  * @see org.junit.jupiter.api.Test

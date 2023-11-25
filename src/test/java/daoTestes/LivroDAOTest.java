@@ -1,8 +1,8 @@
 package daoTestes;
 
-import dao.DAO;
-import excecoes.LivroException;
-import model.Livro;
+import org.example.dao.DAO;
+import org.example.excecoes.LivroException;
+import org.example.model.Livro;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.fail;
  * Classe de teste reponsável por gerar teste para o LivroDAO
  * @author Luis Mario
  * @author Gabriel Henry
- *  @see dao.DAO
- *  @see excecoes.LivroException
- *  @see model.Livro
+ *  @see DAO
+ *  @see LivroException
+ *  @see Livro
  *  @see org.junit.jupiter.api.AfterEach
  *  @see org.junit.jupiter.api.BeforeEach
  *  @see org.junit.jupiter.api.Test
