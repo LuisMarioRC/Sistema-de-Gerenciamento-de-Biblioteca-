@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 
-public class FileMethods {
+public abstract class FileMethods {
     public static final File DIRECTORY = new File("cache");
     public static final String EXTENSAO = ".mh";
 
