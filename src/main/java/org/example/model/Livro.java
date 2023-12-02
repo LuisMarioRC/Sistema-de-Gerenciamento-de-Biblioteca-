@@ -1,6 +1,7 @@
 package org.example.model;
 
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Objects;
  * @author Gabriel Henry
  * @see java.util.Objects
  */
-public class Livro {
+public class Livro implements Serializable{
     private String titulo;
     private String autor;
     private String editora;
