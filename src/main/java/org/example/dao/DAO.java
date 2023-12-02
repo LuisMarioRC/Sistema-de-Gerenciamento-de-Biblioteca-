@@ -4,6 +4,7 @@ import org.example.dao.administrador.AdministradorDAO;
 import org.example.dao.bibliotecario.BibliotecarioDAO;
 import org.example.dao.emprestimos.EmprestimosDAO;
 import org.example.dao.livro.LivroDAO;
+import org.example.dao.livro.LivroDAOFile;
 import org.example.dao.reserva.ReservaDAO;
 import org.example.dao.usuario.UsuarioDAO;
 
@@ -20,7 +21,7 @@ import org.example.dao.usuario.UsuarioDAO;
  * @see UsuarioDAO
  */
 public class DAO {
-    private static LivroDAO livroDao;
+    private static LivroDAOFile livroDao;
     private static EmprestimosDAO emprestimosDao;
     private static UsuarioDAO usuarioDao;
     private static AdministradorDAO administradorDao;
@@ -40,9 +41,9 @@ public class DAO {
     /**
      * @return A instância de code LivroDAO.
      */
-    public static LivroDAO getLivroDAO() {
+    public static LivroDAOFile getLivroDAO() {
         if (livroDao == null) {
-            livroDao = new LivroDAO();
+            livroDao = new LivroDAOFile();
         }
         return livroDao;
     }
