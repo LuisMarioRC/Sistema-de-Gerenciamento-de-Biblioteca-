@@ -60,10 +60,10 @@ public abstract class AdministradorDAOFile implements AdministradorDAOInterface 
 
     @Override
     public Administrador encontrarPorID(int id) throws AdministradorException {
-        ArrayList<Administrador> administrador = encontrarTodos() ;
-        for (Administrador listaDeAdministrador: administrador){
+        ArrayList<Administrador> listaDeAdministrador = encontrarTodos() ;
+        for (Administrador administrador: listaDeAdministrador){
             if (Objects.equals(administrador.getNumeroDeIdentificacao(), id)){
-                return listaDeAdministrador;
+                return administrador;
             }
         }
         throw new AdministradorException(AdministradorException.BUSCAR);
