@@ -1,5 +1,6 @@
 package org.example.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Objects;
  * @author Luis Mario
  * @see java.util.Objects
  */
-public class Bibliotecario  {
+public class Bibliotecario implements Serializable {
     private String nome;
     private Integer senha;
     private String cargo;

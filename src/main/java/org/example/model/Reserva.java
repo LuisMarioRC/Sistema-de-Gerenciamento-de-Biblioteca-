@@ -5,6 +5,8 @@ import org.example.excecoes.LivroException;
 import org.example.excecoes.ReservaException;
 import org.example.excecoes.UsuarioException;
 
+import java.io.Serializable;
+
 /**
  * Classe que representa a Reserva no sistema da biblioteca
  * @author Luis Mario
@@ -14,7 +16,7 @@ import org.example.excecoes.UsuarioException;
  * @see ReservaException
  * @see UsuarioException
  */
-public class Reserva {
+public class Reserva implements Serializable {
     private Integer idLivro;
     private Usuario usuario;
 

@@ -5,6 +5,8 @@ import org.example.excecoes.EmprestimosException;
 import org.example.excecoes.LivroException;
 import org.example.excecoes.ReservaException;
 import org.example.excecoes.UsuarioException;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +28,7 @@ import java.util.Objects;
  * @see java.time.temporal.ChronoUnit
  * @see java.util.Objects
  */
-public class Emprestimos {
+public class Emprestimos implements Serializable {
     private Livro livro;
     private Usuario usuario;
     private LocalDate dataEmprestimos;
