@@ -75,6 +75,7 @@ public class Emprestimos implements Serializable {
         usuario.setFimDaMulta(null);
         DAO.getUsuarioDAO().atualizar(usuario);
         this.livro = livro;
+        this.id=-1;
         this.usuario = usuario;
         this.dataEmprestimos = LocalDate.parse(dataHoje, dataFormatada);
         this.dataDevolucao = dataEmprestimos.plus(Period.ofDays(7));
@@ -108,9 +109,8 @@ public class Emprestimos implements Serializable {
      */
     public void registraDevolucao(Livro livro, Usuario usuario, LocalDate dataQueDevolveu) throws EmprestimosException, LivroException, UsuarioException {
         this.multas(livro,usuario,dataQueDevolveu);
-        Emprestimos emprestimoDoLivro = DAO.getEmprestimosDAO().encontraPorIdDoLivro(livro.getId());
-        emprestimoDoLivro.setAndamento(false);
-        DAO.getEmprestimosDAO().atualizar(emprestimoDoLivro);
+        this.setAndamento(false);
+        DAO.getEmprestimosDAO().atualizar(this);
         livro.setDisponibilidade(true);
         DAO.getLivroDAO().atualizar(livro);
     }
