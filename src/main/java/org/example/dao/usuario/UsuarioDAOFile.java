@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public abstract class UsuarioDAOFile implements UsuarioDAOInterface {
+public class UsuarioDAOFile implements UsuarioDAOInterface {
     File arquivo;
     private static final String NAMEFILE= "usuario";
 
@@ -68,11 +68,7 @@ public abstract class UsuarioDAOFile implements UsuarioDAOInterface {
     }
 
     private int getProximoID(ArrayList<Usuario> usuario){
-        int cont =-1;
-        for (Usuario u : usuario){
-            cont++;
-        }
-        return (cont+1);
+        return (usuario.size());
     }
 
 }

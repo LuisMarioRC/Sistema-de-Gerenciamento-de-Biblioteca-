@@ -70,10 +70,6 @@ public class BibliotecarioDAOFile implements BibliotecarioDAOInterface {
     }
 
     private int getProximoID(ArrayList<Bibliotecario> bibliotecario){
-        int cont =-1;
-        for (Bibliotecario b : bibliotecario){
-            cont++;
-        }
-        return (cont+1);
+        return(bibliotecario.size());
     }
 }

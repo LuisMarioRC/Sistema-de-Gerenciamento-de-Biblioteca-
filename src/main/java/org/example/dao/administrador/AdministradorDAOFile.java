@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public abstract class AdministradorDAOFile implements AdministradorDAOInterface {
+public class AdministradorDAOFile implements AdministradorDAOInterface {
     File arquivo;
     private static final String NAMEFILE= "administrador";
 
@@ -70,10 +70,6 @@ public abstract class AdministradorDAOFile implements AdministradorDAOInterface 
     }
 
     private int getProximoID(ArrayList<Administrador> administrador){
-        int cont =-1;
-        for (Administrador a : administrador){
-            cont++;
-        }
-        return (cont+1);
+        return(administrador.size());
     }
 }

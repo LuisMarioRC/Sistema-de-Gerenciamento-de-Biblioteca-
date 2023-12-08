@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public abstract class EmprestimosDAOFile implements EmprestimosDAOinterface {
+public class EmprestimosDAOFile implements EmprestimosDAOinterface {
     File arquivo;
     private static final String NAMEFILE = "emprestimos";
 
@@ -100,15 +100,14 @@ public abstract class EmprestimosDAOFile implements EmprestimosDAOinterface {
         throw new EmprestimosException(EmprestimosException.BUSCAR);
     }
 
-    /*@Override
+    @Override
     public boolean validaMulta(Usuario usuario,String dataHoje){
-        ArrayList<Emprestimos> listDeEmprestimos = encontrarTodos();
         DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate newDate = LocalDate.parse(dataHoje, dataFormatada);
         if (usuario.getFimDaMulta() == null){
             return true;
         } else return newDate.isAfter(usuario.getFimDaMulta());
-    }*/
+    }
 
     @Override
     public Integer numLivrosEmprestados(){
@@ -191,11 +190,7 @@ public abstract class EmprestimosDAOFile implements EmprestimosDAOinterface {
     }
 
     private int getProximoID(ArrayList<Emprestimos> emprestimos){
-        int cont =-1;
-        for (Emprestimos e : emprestimos){
-            cont++;
-        }
-        return (cont+1);
+        return(emprestimos.size());
     }
 
 }
