@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 
-public abstract class FileMethods {
+public abstract class FileMethods{
     public static final File DIRECTORY = new File("cache");
     public static final String EXTENSAO = ".mh";
 
@@ -22,16 +22,6 @@ public abstract class FileMethods {
         return arquivo;
     }
 
-    /*public static <V> ArrayList<V> consultarArquivoList(File file){
-        ArrayList<V> list;
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
-            list = (ArrayList<V>) in.readObject();
-
-        } catch (IOException | ClassNotFoundException e) {
-            list = new ArrayList<>();
-        }
-        return list;
-    }*/
 
     public static <T extends Serializable> ArrayList<T> consultarArquivoList(File file) {
         ArrayList<T> list;

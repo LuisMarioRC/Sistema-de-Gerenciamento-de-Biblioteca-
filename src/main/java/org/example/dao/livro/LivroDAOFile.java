@@ -129,10 +129,6 @@ public class LivroDAOFile implements LivroDAOinterface{
 
 
     private int getProximoID(ArrayList<Livro> livros){
-        int cont =-1;
-        for (Livro l : livros){
-            cont++;
-        }
-        return (cont+1);
+        return (livros.size());
     }
 }

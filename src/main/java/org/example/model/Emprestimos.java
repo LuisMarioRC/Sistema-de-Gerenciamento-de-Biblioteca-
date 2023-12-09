@@ -5,6 +5,8 @@ import org.example.excecoes.EmprestimosException;
 import org.example.excecoes.LivroException;
 import org.example.excecoes.ReservaException;
 import org.example.excecoes.UsuarioException;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +28,7 @@ import java.util.Objects;
  * @see java.time.temporal.ChronoUnit
  * @see java.util.Objects
  */
-public class Emprestimos {
+public class Emprestimos implements Serializable {
     private Livro livro;
     private Usuario usuario;
     private LocalDate dataEmprestimos;
@@ -73,6 +75,7 @@ public class Emprestimos {
         usuario.setFimDaMulta(null);
         DAO.getUsuarioDAO().atualizar(usuario);
         this.livro = livro;
+        this.id=-1;
         this.usuario = usuario;
         this.dataEmprestimos = LocalDate.parse(dataHoje, dataFormatada);
         this.dataDevolucao = dataEmprestimos.plus(Period.ofDays(7));
@@ -106,9 +109,8 @@ public class Emprestimos {
      */
     public void registraDevolucao(Livro livro, Usuario usuario, LocalDate dataQueDevolveu) throws EmprestimosException, LivroException, UsuarioException {
         this.multas(livro,usuario,dataQueDevolveu);
-        Emprestimos emprestimoDoLivro = DAO.getEmprestimosDAO().encontraPorIdDoLivro(livro.getId());
-        emprestimoDoLivro.setAndamento(false);
-        DAO.getEmprestimosDAO().atualizar(emprestimoDoLivro);
+        this.setAndamento(false);
+        DAO.getEmprestimosDAO().atualizar(this);
         livro.setDisponibilidade(true);
         DAO.getLivroDAO().atualizar(livro);
     }

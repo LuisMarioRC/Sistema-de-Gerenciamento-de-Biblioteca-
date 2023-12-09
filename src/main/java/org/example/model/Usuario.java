@@ -3,6 +3,7 @@ package org.example.model;
 import org.example.dao.DAO;
 import org.example.excecoes.UsuarioException;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ import java.util.Objects;
  * @see java.time.LocalDate
  * @see java.util.Objects
  */
-public class Usuario {
+public class Usuario implements Serializable {
 
     private String endereco;
     private String telefone;
