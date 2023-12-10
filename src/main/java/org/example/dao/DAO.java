@@ -9,6 +9,7 @@ import org.example.dao.emprestimos.EmprestimosDAOFile;
 import org.example.dao.livro.LivroDAO;
 import org.example.dao.livro.LivroDAOFile;
 import org.example.dao.reserva.ReservaDAO;
+import org.example.dao.reserva.ReservaDAOFile;
 import org.example.dao.usuario.UsuarioDAO;
 import org.example.dao.usuario.UsuarioDAOFile;
 
@@ -30,15 +31,15 @@ public class DAO {
     private static UsuarioDAOFile usuarioDao;
     private static AdministradorDAOFile administradorDao;
     private static BibliotecarioDAOFile bibliotecarioDao;
-    private static ReservaDAO reservaDao;
+    private static ReservaDAOFile reservaDao;
 
 
     /**
      * @return A instância de code ReservaDAO.
      */
-    public static ReservaDAO getReservaDAO(){
+    public static ReservaDAOFile getReservaDAO(){
         if (reservaDao == null) {
-            reservaDao = new ReservaDAO();
+            reservaDao = new ReservaDAOFile();
         }
         return reservaDao;
     }
