@@ -6,6 +6,7 @@ import org.example.excecoes.ReservaException;
 import org.example.excecoes.UsuarioException;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Classe que representa a Reserva no sistema da biblioteca
@@ -62,6 +63,14 @@ public class Reserva implements Serializable {
 
     public void setIdLivro(Integer idLivro) {
         this.idLivro = idLivro;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reserva reserva = (Reserva) o;
+        return Objects.equals(idLivro, reserva.idLivro);
     }
 
 
