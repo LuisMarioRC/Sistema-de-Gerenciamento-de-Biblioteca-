@@ -4,11 +4,23 @@ import org.example.excecoes.ReservaException;
 import org.example.model.Reserva;
 import org.example.model.Usuario;
 import org.example.utils.FileMethods;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * Classe que é responsável por fazer o acesso dos dados da classe Empréstimos
+ * @author Luis Mario
+ * @author Gabril Henry
+ * @see ReservaException
+ * @see Reserva
+ * @see FileMethods
+ * @see Usuario
+ * @see java.util.ArrayList
+ * @see java.util.HashMap
+ * @see java.util.Map
+ * @see java.io.File
+ */
 public class ReservaDAOFile implements ReservaDAOInterface {
     File arquivo;
     private static final String NAMEFILE= "reservas";
@@ -41,7 +53,7 @@ public class ReservaDAOFile implements ReservaDAOInterface {
             reservas.put(obj.getIdLivro(), new ArrayList<>());
         }
         reservas.get(obj.getIdLivro()).add(obj);
-        FileMethods.sobreescreverArquivoMap(arquivo, reservas);
+        FileMethods.sobreescreverArquivo(arquivo, reservas);
         return obj;
     }
 
@@ -54,7 +66,7 @@ public class ReservaDAOFile implements ReservaDAOInterface {
             throw new ReservaException(ReservaException.EXCLUIR);
         }
         reservas.put(obj.getIdLivro(), listDeReservas);
-        FileMethods.sobreescreverArquivoMap(arquivo, reservas);
+        FileMethods.sobreescreverArquivo(arquivo, reservas);
     }
 
 
@@ -69,7 +81,7 @@ public class ReservaDAOFile implements ReservaDAOInterface {
         listDeReservas.remove(obj);
         listDeReservas.add(index, obj);
         reservas.put(obj.getIdLivro(), listDeReservas);
-        FileMethods.sobreescreverArquivoMap(arquivo, reservas);
+        FileMethods.sobreescreverArquivo(arquivo, reservas);
         return obj;
     }
 
@@ -112,7 +124,7 @@ public class ReservaDAOFile implements ReservaDAOInterface {
         if (!reservasDoLivro.isEmpty()) {
             reservasDoLivro.remove(0);
             reservas.put(idLivro, reservasDoLivro);
-            FileMethods.sobreescreverArquivoMap(arquivo,reservas);
+            FileMethods.sobreescreverArquivo(arquivo,reservas);
         }
 
     }

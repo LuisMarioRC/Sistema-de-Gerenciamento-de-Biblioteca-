@@ -3,11 +3,21 @@ package org.example.dao.administrador;
 import org.example.excecoes.AdministradorException;
 import org.example.model.Administrador;
 import org.example.utils.FileMethods;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Classe que é responsável por fazer o acesso dos dados da classe Empréstimos
+ * @author Luis Mario
+ * @author Gabril Henry
+ * @see AdministradorException
+ * @see Administrador
+ * @see java.util.ArrayList
+ * @see java.util.Objects
+ * @see FileMethods
+ * @see java.io.File
+ */
 public class AdministradorDAOFile implements AdministradorDAOInterface {
     File arquivo;
     private static final String NAMEFILE= "administrador";

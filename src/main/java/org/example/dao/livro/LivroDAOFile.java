@@ -7,6 +7,17 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Classe que é responsável por fazer o acesso dos dados da classe Empréstimos
+ * @author Luis Mario
+ * @author Gabril Henry
+ * @see LivroException
+ * @see Livro
+ * @see FileMethods
+ * @see java.util.ArrayList
+ * @see java.util.Objects
+ * @see java.io.File
+ */
 public class LivroDAOFile implements LivroDAOinterface{
     File arquivo;
     private static final String NAMEFILE= "livros";

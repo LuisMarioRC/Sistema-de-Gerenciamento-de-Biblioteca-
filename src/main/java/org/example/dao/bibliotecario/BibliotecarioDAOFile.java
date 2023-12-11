@@ -3,11 +3,21 @@ package org.example.dao.bibliotecario;
 import org.example.model.Bibliotecario;
 import org.example.utils.FileMethods;
 import org.example.excecoes.BibliotecarioException;
-import org.example.model.Bibliotecario;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Classe que é responsável por fazer o acesso dos dados da classe Empréstimos
+ * @author Luis Mario
+ * @author Gabril Henry
+ * @see FileMethods
+ * @see BibliotecarioException
+ * @see Bibliotecario
+ * @see java.util.ArrayList
+ * @see java.util.Objects
+ * @see java.io.File
+ */
 public class BibliotecarioDAOFile implements BibliotecarioDAOInterface {
     File arquivo;
     private static final String NAMEFILE= "bibliotecario";
