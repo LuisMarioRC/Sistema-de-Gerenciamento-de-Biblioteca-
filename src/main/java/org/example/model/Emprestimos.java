@@ -128,8 +128,6 @@ public class Emprestimos implements Serializable {
      */
     public Boolean renovar(Livro livro, Usuario usuario, String dataHoje) throws EmprestimosException, UsuarioException, ReservaException {
         Emprestimos emprestimo = DAO.getEmprestimosDAO().encontraPorIdDoLivro(livro.getId());
-        DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate newDate = LocalDate.parse(dataHoje, dataFormatada);
         if (DAO.getEmprestimosDAO().verificaAtrasoDeUsuario(usuario,dataHoje)) {
             throw new UsuarioException(UsuarioException.ATRASO);
         }

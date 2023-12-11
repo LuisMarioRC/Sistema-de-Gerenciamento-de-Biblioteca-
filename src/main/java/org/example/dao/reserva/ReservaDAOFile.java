@@ -46,20 +46,26 @@ public class ReservaDAOFile implements ReservaDAOInterface {
     }
 
     @Override
-    public void excluir(Reserva obj) throws Exception {
+    public void excluir(Reserva obj) throws ReservaException {
         Map<Integer, ArrayList<Reserva>> reservas = this.getReservas();
         ArrayList<Reserva> listDeReservas = reservas.get(obj.getIdLivro());
-        listDeReservas.remove(obj);
+        boolean remocao = listDeReservas.remove(obj);
+        if (!remocao){
+            throw new ReservaException(ReservaException.EXCLUIR);
+        }
         reservas.put(obj.getIdLivro(), listDeReservas);
         FileMethods.sobreescreverArquivoMap(arquivo, reservas);
     }
 
 
     @Override
-    public Reserva atualizar(Reserva obj) throws Exception {
+    public Reserva atualizar(Reserva obj) throws ReservaException {
         Map<Integer, ArrayList<Reserva>> reservas = getReservas();
         ArrayList<Reserva> listDeReservas = reservas.get(obj.getIdLivro());
         int index = listDeReservas.indexOf(obj);
+        if (index ==-1){
+            throw new ReservaException(ReservaException.ATUALIZAR);
+        }
         listDeReservas.remove(obj);
         listDeReservas.add(index, obj);
         reservas.put(obj.getIdLivro(), listDeReservas);

@@ -180,7 +180,7 @@ public class EmprestimosDAOFile implements EmprestimosDAOinterface {
         DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate newDate = LocalDate.parse(dataHoje, dataFormatada);
         for (Emprestimos emprestimo: listDeEmprestimos){
-            if (emprestimo.getUsuario() == usuario
+            if (Objects.equals(emprestimo.getUsuario().getNumeroDeIdentificacao(), usuario.getNumeroDeIdentificacao())
                     && newDate.isAfter(emprestimo.getDataDevolucao())
                     && emprestimo.getAndamento()){
                 return true;
