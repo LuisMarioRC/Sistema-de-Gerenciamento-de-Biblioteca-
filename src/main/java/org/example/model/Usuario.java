@@ -31,9 +31,9 @@ public class Usuario implements Serializable {
      * Construtor da classe Usuario.
      * O parametro fimDaMulta inicia com o valor null, que representa que não está com multa prevista.
      * O parámetro status inicia com o booleano true, que significa que o usuario não está bloqueado.
-     * @param nome : String.
-     * @param endereco : String
-     * @param telefone : String
+     * @param nome o nome do usuário
+     * @param endereco o endereço do usuário
+     * @param telefone o telefone do usuário
      */
     public Usuario(String nome,String endereco,String telefone){
         this.nome=nome;

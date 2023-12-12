@@ -16,6 +16,7 @@ import java.util.Objects;
  * @see LivroException
  * @see ReservaException
  * @see UsuarioException
+ * @see java.io.Serializable
  */
 public class Reserva implements Serializable {
     private Integer idLivro;

@@ -8,6 +8,7 @@ import java.util.Objects;
  * @author Gabriel Henry
  * @author Luis Mario
  * @see java.util.Objects
+ * @see java.io.Serializable
  */
 public class Bibliotecario implements Serializable {
     private String nome;
@@ -18,8 +19,9 @@ public class Bibliotecario implements Serializable {
     /**
      * Construtor da classe Biliotecario
      * O atributo de cargo é automaticamente setado como "Bibliotecário
-     * @param nome : String
-     * @param senha : Integer
+     * Numero de identificação iniciado com o valor padrão
+     * @param nome o nome do bibliotecario
+     * @param senha a senha de acesso do bibliotecario
      */
     public Bibliotecario(String nome,Integer senha){
         this.nome=nome;
@@ -30,9 +32,10 @@ public class Bibliotecario implements Serializable {
 
     /**
      * Construtor da classe Bibliotecario que está sendo usado pelo Administrador
-     * @param nome : String
-     * @param senha : Integer
-     * @param cargo : String
+     * Numero de identificação iniciado com o valor padrão
+     * @param nome o administrador
+     * @param senha a senha do administrador
+     * @param cargo o cargo do administrador
      */
     public Bibliotecario(String nome,Integer senha,String cargo){
         this.nome=nome;

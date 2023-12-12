@@ -27,6 +27,7 @@ import java.util.Objects;
  * @see java.time.format.DateTimeFormatter
  * @see java.time.temporal.ChronoUnit
  * @see java.util.Objects
+ * @see java.io.Serializable
  */
 public class Emprestimos implements Serializable {
     private Livro livro;

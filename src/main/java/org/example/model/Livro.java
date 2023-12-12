@@ -9,6 +9,7 @@ import java.util.Objects;
  * @author Luis Mario
  * @author Gabriel Henry
  * @see java.util.Objects
+ * @see java.io.Serializable
  */
 public class Livro implements Serializable{
     private String titulo;
@@ -23,12 +24,12 @@ public class Livro implements Serializable{
     /**
      * Construtor da classe livro que seta alguns atributos como entrada
      * O atributo disponibilidade é atribuído com o valor true automaticamente, que está disponivel;
-     * @param titulo :String
-     * @param autor : String
-     * @param editora : String
-     * @param isbn : Integer
-     * @param anoDePublicacao : Integer
-     * @param categoria : String
+     * @param titulo o titulo do livro
+     * @param autor o autor do livro
+     * @param editora a editora do livro
+     * @param isbn o isbn do livro
+     * @param anoDePublicacao o ano de publicação do livro
+     * @param categoria do livro
      */
     public Livro(String titulo, String autor,String editora,Integer isbn,Integer anoDePublicacao,String categoria) {
         this.titulo=titulo;
@@ -37,6 +38,7 @@ public class Livro implements Serializable{
         this.isbn=isbn;
         this.anoDePublicacao=anoDePublicacao;
         this.categoria=categoria;
+        this.id=-1;
         this.disponibilidade=true; //Se tiver disponivel a disponibilidade é true
     }
 
