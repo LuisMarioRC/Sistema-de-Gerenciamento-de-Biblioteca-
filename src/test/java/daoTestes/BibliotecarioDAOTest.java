@@ -1,8 +1,8 @@
 package daoTestes;
 
-import org.example.dao.DAO;
-import org.example.excecoes.BibliotecarioException;
-import org.example.model.Bibliotecario;
+import com.example.dao.DAO;
+import com.example.excecoes.BibliotecarioException;
+import com.example.model.Bibliotecario;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -2,9 +2,9 @@ package daoTestes;
 
 
 
-import org.example.dao.DAO;
-import org.example.excecoes.AdministradorException;
-import org.example.model.Administrador;
+import com.example.dao.DAO;
+import com.example.excecoes.AdministradorException;
+import com.example.model.Administrador;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

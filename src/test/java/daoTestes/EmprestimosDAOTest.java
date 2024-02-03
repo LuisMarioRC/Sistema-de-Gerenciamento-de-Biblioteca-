@@ -1,13 +1,13 @@
 package daoTestes;
 
-import org.example.dao.DAO;
-import org.example.excecoes.EmprestimosException;
-import org.example.excecoes.LivroException;
-import org.example.excecoes.ReservaException;
-import org.example.excecoes.UsuarioException;
-import org.example.model.Emprestimos;
-import org.example.model.Livro;
-import org.example.model.Usuario;
+import com.example.dao.DAO;
+import com.example.excecoes.EmprestimosException;
+import com.example.excecoes.LivroException;
+import com.example.excecoes.ReservaException;
+import com.example.excecoes.UsuarioException;
+import com.example.model.Emprestimos;
+import com.example.model.Livro;
+import com.example.model.Usuario;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
