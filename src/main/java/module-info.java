@@ -1,14 +1,15 @@
-module Sistema.de.Gerenciamento.de.Biblioteca {
-
+module com.example.sistemadegenrenciamentodebiblioteca {
+    requires javafx.graphics;
+    requires javafx.fxml;
+    requires javafx.controls;
     /**
-     * Permite o acesso aos pacotes para os testes de unidade pelo TestSuite
+     * Permite o acesso aos pacotes
      */
-    opens org.example.dao.administrador;
-    opens org.example.dao.bibliotecario;
-    opens org.example.dao.emprestimos;
-    opens org.example.dao.livro;
-    opens org.example.dao.reserva;
-    opens org.example.dao.usuario;
-    opens org.example.model;
+
+    opens com.example to javafx.fxml, javafx.graphics, javafx.controls;
+    opens com.example.app to javafx.fxml, javafx.graphics, javafx.controls;
+
+    exports com.example.app;
+    exports com.example;
 
 }
