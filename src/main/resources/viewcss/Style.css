@@ -1,0 +1,18 @@
+.tela-total{
+    -fx-background-image : url('file:///C:/Users/luism/OneDrive/Imagens/projetoLib/a-F-jpg.jpg');
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+.text-field-error {
+    -fx-background-color: #FFCCCC; /* Cor de fundo vermelha */
+    -fx-border-color: #FF0000; /* Cor da borda vermelha */
+}
+
+
+.tela-livros{
+    -fx-background-image : url('file:///C:/Users/luism/OneDrive/Imagens/projetoLib/livrosBiblioteca.jpg');
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
