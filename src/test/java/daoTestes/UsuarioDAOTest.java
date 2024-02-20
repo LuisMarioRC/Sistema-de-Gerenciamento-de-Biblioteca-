@@ -32,10 +32,10 @@ public class UsuarioDAOTest {
 
     @BeforeEach
     void setUp(){
-        cassio = DAO.getUsuarioDAO().criar(new Usuario("cassio","rua A","11 22222"));
-        fagner = DAO.getUsuarioDAO().criar(new Usuario("fagner","rua B","22 22222"));
-        romero = DAO.getUsuarioDAO().criar(new Usuario("romero","rua C","33 33333"));
-        notExisted = new Usuario("notExisted","notEndereço","notTel");
+        cassio = DAO.getUsuarioDAO().criar(new Usuario("cassio","rua A","11 22222",1234));
+        fagner = DAO.getUsuarioDAO().criar(new Usuario("fagner","rua B","22 22222",1234));
+        romero = DAO.getUsuarioDAO().criar(new Usuario("romero","rua C","33 33333",1234));
+        notExisted = new Usuario("notExisted","notEndereço","notTel",1234);
     }
 
     @AfterEach
@@ -49,7 +49,7 @@ public class UsuarioDAOTest {
      */
     @Test
     void criar() throws UsuarioException {
-        Usuario criado = DAO.getUsuarioDAO().criar(new Usuario("esperado", "rua D", "44 44444"));
+        Usuario criado = DAO.getUsuarioDAO().criar(new Usuario("esperado", "rua D", "44 44444",1234));
         Usuario esperado = DAO.getUsuarioDAO().encontrarPorID(3);
         assertEquals(criado, esperado);
     }

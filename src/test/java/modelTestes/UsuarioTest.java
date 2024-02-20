@@ -27,7 +27,7 @@ public class UsuarioTest {
 
     @BeforeEach
     void setUp(){
-        um =DAO.getUsuarioDAO().criar(new Usuario("Um","Rua J","11 111"));
+        um =DAO.getUsuarioDAO().criar(new Usuario("Um","Rua J","11 111",1234));
     }
 
     @AfterEach

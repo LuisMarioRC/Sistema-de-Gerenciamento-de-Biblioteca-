@@ -52,9 +52,9 @@ public class EmprestimosTest {
 
     @BeforeEach
     void setup(){
-        cassio = DAO.getUsuarioDAO().criar(new Usuario("cassio", "rua b", "22 555555"));
-        rogerio = DAO.getUsuarioDAO().criar(new Usuario("rogerio", "rua b", "22 777777"));
-        notExisted = new Usuario("notExisted", "----", "-----");
+        cassio = DAO.getUsuarioDAO().criar(new Usuario("cassio", "rua b", "22 555555",1234));
+        rogerio = DAO.getUsuarioDAO().criar(new Usuario("rogerio", "rua b", "22 777777",1234));
+        notExisted = new Usuario("notExisted", "----", "-----",1234);
         livro1 = DAO.getLivroDAO().criar(new Livro("pequeno","Luis Mario","Brasileira",2577,1989,"Romance"));
         livro2 = DAO.getLivroDAO().criar(new Livro("pequeno","Luis Mario","Brasileira",2577,1989,"Romance"));
         livro3 = DAO.getLivroDAO().criar(new Livro("pequeno","Luis Mario","Brasileira",2577,1989,"Romance"));
