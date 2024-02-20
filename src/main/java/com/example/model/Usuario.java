@@ -24,6 +24,7 @@ public class Usuario implements Serializable {
     private String nome;
     private Boolean status; //true = ativo, false= bloqueado
     private Integer numeroDeIdentificacao;
+    private Integer senha;
 
 
 
@@ -35,13 +36,14 @@ public class Usuario implements Serializable {
      * @param endereco o endereço do usuário
      * @param telefone o telefone do usuário
      */
-    public Usuario(String nome,String endereco,String telefone){
+    public Usuario(String nome,String endereco,String telefone,Integer senha){
         this.nome=nome;
         this.endereco=endereco;
         this.telefone=telefone;
         this.fimDaMulta = null;
         this.status=true;
         this.numeroDeIdentificacao=-1;
+        this.senha=senha;
     }
 
     /**
@@ -84,7 +86,6 @@ public class Usuario implements Serializable {
         this.telefone = telefone;
     }
 
-
     public LocalDate getFimDaMulta() {
         return fimDaMulta;
     }
@@ -115,6 +116,14 @@ public class Usuario implements Serializable {
 
     public void setNumeroDeIdentificacao(Integer numeroDeIdentificacao) {
         this.numeroDeIdentificacao = numeroDeIdentificacao;
+    }
+
+    public Integer getSenha() {
+        return senha;
+    }
+
+    public void setSenha(Integer senha) {
+        this.senha = senha;
     }
 
     @Override
