@@ -50,8 +50,8 @@ public class ReservaTest {
 
     @BeforeEach
     void setUp() throws LivroException, UsuarioException, ReservaException {
-        usuario1 = DAO.getUsuarioDAO().criar(new Usuario("usuario 1","Rua A","11 1111"));
-        usuario2 =DAO.getUsuarioDAO().criar(new Usuario("usuario 2","Rua B","22 2222"));
+        usuario1 = DAO.getUsuarioDAO().criar(new Usuario("usuario 1","Rua A","11 1111",1234));
+        usuario2 =DAO.getUsuarioDAO().criar(new Usuario("usuario 2","Rua B","22 2222",1234));
         livro1 = DAO.getLivroDAO().criar(new Livro("pequeno","Luis Mario","Brasileira",2577,1989,"Romance"));
         livro1.setDisponibilidade(false);
         DAO.getLivroDAO().atualizar(livro1);
