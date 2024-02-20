@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../viewcss/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.app.controller.TelaUsuario">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.20001220703125" minWidth="10.0" prefWidth="247.1999969482422" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="352.8000030517578" minWidth="10.0" prefWidth="352.8000030517578" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Label alignment="CENTER" layoutX="-3.0" prefHeight="37.0" prefWidth="306.0" text="Bem Vindo a Biblioteca">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <VBox fx:id="vbox" layoutY="36.0" prefHeight="140.0" prefWidth="300.0" spacing="7.0">
+               <children>
+                  <Separator prefWidth="200.0" />
+                  <Button fx:id="btnPesquisarLivro" maxWidth="150.0" mnemonicParsing="false" onAction="#btnPesquisarLivroAction" prefHeight="26.0" prefWidth="126.0" text="Pesquisar Livros">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="btnReservarLivro" maxWidth="150.0" mnemonicParsing="false" onAction="#btnReservarLivroAction" prefHeight="26.0" prefWidth="125.0" text="Reservar Livros">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="btnRenovarEmprestimo" maxWidth="150.0" mnemonicParsing="false" onAction="#btnRenovarEmprestimoAction" text="Renovar Empréstimo">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </VBox>
+            <Button fx:id="btnSair" layoutX="7.0" layoutY="373.0" mnemonicParsing="false" onAction="#btnSairAction" text="Sair">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+      <Pane prefHeight="400.0" prefWidth="350.0" styleClass="tela-livros" stylesheets="@../../viewcss/Style.css" GridPane.columnIndex="1">
+         <children>
+            <Separator layoutX="-4.0" layoutY="-10.0" orientation="VERTICAL" prefHeight="410.0" prefWidth="5.0" />
+         </children>
+      </Pane>
+   </children>
+</GridPane>

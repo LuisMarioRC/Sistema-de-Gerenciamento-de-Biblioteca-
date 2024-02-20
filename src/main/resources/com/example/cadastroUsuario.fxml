@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.app.controller.CadastroUsuario">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Label alignment="CENTER" layoutX="-1.0" layoutY="6.0" prefHeight="27.0" prefWidth="300.0" text="Cadastro de Usuário">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <VBox layoutY="38.0" prefHeight="364.0" prefWidth="300.0" spacing="7.0">
+               <children>
+                  <Separator prefWidth="200.0" />
+                  <Label prefHeight="18.0" prefWidth="54.0" text="Nome">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="textNome" onAction="#textNomeAction" promptText="Informe o nome do usuário" />
+                  <Label prefHeight="20.0" prefWidth="65.0" text="Endereço">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="textEndereco" onAction="#textEnderecoAction" promptText="Informe o endereço do usuário" />
+                  <Label prefHeight="20.0" prefWidth="66.0" text="Telefone">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="textTelefone" onAction="#textTelefoneAction" promptText="Informe o telefone do usuário" />
+                  <Label prefHeight="18.0" prefWidth="54.0" text="Senha">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="textSenha" onAction="#textSenhaAction" promptText="Digita uma senha para o usuário" />
+                  <Label prefHeight="20.0" prefWidth="102.0" text="Repetir a senha">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="textRepetirSenha" onAction="#textRepetirSenhaAction" promptText="Repita a senha do usuário" />
+                  <Button fx:id="btnCadastrar" alignment="CENTER" mnemonicParsing="false" onAction="#btnCadastrarAction" text="Cadastrar" />
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+         <children>
+            <Button fx:id="btnVoltar" layoutX="252.0" layoutY="2.0" mnemonicParsing="false" onAction="#btnVoltarAction" text="Back">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</GridPane>
