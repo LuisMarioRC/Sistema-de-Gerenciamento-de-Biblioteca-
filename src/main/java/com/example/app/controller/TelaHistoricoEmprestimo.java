@@ -1,3 +1,6 @@
+/**
+ * Controller responsável pela exibição do histórico de empréstimos de um usuário.
+ */
 package com.example.app.controller;
 
 import java.net.URL;
@@ -37,6 +40,12 @@ public class TelaHistoricoEmprestimo {
     @FXML
     private TextField textIdUsuario;
 
+    /**
+     * Ação acionada quando o botão 'Enter' é clicado.
+     * Exibe o histórico de empréstimos do usuário com o ID especificado.
+     * @param event Evento de clique no botão 'Enter'.
+     * @throws UsuarioException Se ocorrer um erro relacionado ao usuário.
+     */
     @FXML
     void btnEnterAction(ActionEvent event) throws UsuarioException {
         try {
@@ -45,97 +54,128 @@ public class TelaHistoricoEmprestimo {
             verificaInt(idUsuario);
             Usuario usuario = buscaUsuario(Integer.parseInt(idUsuario));
             mostraView(usuario);
-        }catch (Exception e){
+        } catch (Exception e) {
             listViewHistorico.getItems().clear();
             listViewHistorico.requestLayout();
         }
     }
 
-    private void verificaCampos(String idUsuario){
-        if (idUsuario.isEmpty()){
-            informationAlert("ATENÇÂO", "Por favor, preencha todos os campos");
+    /**
+     * Verifica se o campo de texto contém um valor válido.
+     * @param idUsuario Texto a ser verificado.
+     */
+    private void verificaCampos(String idUsuario) {
+        if (idUsuario.isEmpty()) {
+            informationAlert("ATENÇÃO", "Por favor, preencha todos os campos");
             throw new IllegalArgumentException("Por favor, preencha todos os campos");
         }
-
     }
 
-
-    private void verificaInt(String idUsuario){
+    /**
+     * Verifica se o texto contém um valor numérico.
+     * @param idUsuario Texto a ser verificado.
+     */
+    private void verificaInt(String idUsuario) {
         int idUsuarioInt;
-        try{
+        try {
             idUsuarioInt = Integer.parseInt(idUsuario);
-        }catch (NumberFormatException e ){
-            informationAlert("ERROR", "Atenção, são aceita apenas IDs numéricos");
+        } catch (NumberFormatException e) {
+            informationAlert("ERROR", "Atenção, são aceitos apenas IDs numéricos");
             throw e;
         }
-
     }
 
-    private void mostraView( Usuario usuario){
+    /**
+     * Exibe o histórico de empréstimos do usuário na interface gráfica.
+     * @param usuario Usuário para o qual o histórico de empréstimos será exibido.
+     */
+    private void mostraView(Usuario usuario) {
         try {
             ArrayList<Emprestimos> listEmprestio = DAO.getEmprestimosDAO().historicoEmprestimosUsuario(usuario);
             if (listEmprestio != null) {
-                // Verifique se a lista de resultados não está vazia
+                // Verifica se a lista de resultados não está vazia
                 if (!listEmprestio.isEmpty()) {
                     // Importe a classe javafx.collections.FXCollections para usar o método observableArrayList
                     for (Emprestimos emprestimos : listEmprestio) {
                         listViewHistorico.setItems(FXCollections.observableArrayList(listEmprestio).sorted());
                     }
                 } else {
-                    // Se não houver resultados, limpe a lista
+                    // Se não houver resultados, limpa a lista
                     listViewHistorico.getItems().clear();
                     informationAlert("ERROR", "Nenhum resultado encontrado.");
                     throw new IllegalArgumentException();
                 }
             } else {
-                // Se a lista de resultados for nula, limpe a lista
+                // Se a lista de resultados for nula, limpa a lista
                 listViewHistorico.getItems().clear();
                 informationAlert("ERROR", "Nenhum resultado encontrado.");
                 throw new IllegalArgumentException();
             }
         } catch (Exception e) {
-            // Trate adequadamente as exceções, se necessário
-            e.printStackTrace(); // Ou qualquer tratamento específico de erro
+            // Trata adequadamente as exceções, se necessário
+            e.printStackTrace();
         }
-
     }
+
+    /**
+     * Busca um usuário pelo ID.
+     * @param idUsuario ID do usuário a ser buscado.
+     * @return O usuário correspondente ao ID.
+     * @throws UsuarioException Se ocorrer um erro ao buscar o usuário.
+     */
     private Usuario buscaUsuario(Integer idUsuario) throws UsuarioException {
         Usuario usuario;
-        try{
+        try {
             usuario = DAO.getUsuarioDAO().encontrarPorID(idUsuario);
-        }catch (UsuarioException e){
+        } catch (UsuarioException e) {
             informationAlert("ERROR", "Usuário não encontrado");
             throw e;
         }
         return usuario;
     }
 
+    /**
+     * Ação acionada quando o botão 'Voltar' é clicado.
+     * Retorna à tela de relatórios.
+     * @param event Evento de clique no botão 'Voltar'.
+     */
     @FXML
     void btnVoltarAction(ActionEvent event) {
         AbrirProximaTela.proximaTela(event, "telaDeRelatorio.fxml");
-
     }
 
+    /**
+     * Ação acionada quando o texto do campo de ID do usuário é inserido.
+     * Não possui funcionalidade neste momento.
+     * @param event Evento de inserção de texto no campo de ID do usuário.
+     */
     @FXML
     void textIdUsuarioAction(ActionEvent event) {
-
+        // Não possui funcionalidade neste momento
     }
 
+    /**
+     * Método executado ao inicializar a tela.
+     * Verifica se os elementos do FXML foram injetados corretamente.
+     */
     @FXML
     void initialize() {
         assert btnEnter != null : "fx:id=\"btnEnter\" was not injected: check your FXML file 'telaHistoricoEmprestimo.fxml'.";
         assert btnVoltar != null : "fx:id=\"btnVoltar\" was not injected: check your FXML file 'telaHistoricoEmprestimo.fxml'.";
         assert listViewHistorico != null : "fx:id=\"listViewHistorico\" was not injected: check your FXML file 'telaHistoricoEmprestimo.fxml'.";
         assert textIdUsuario != null : "fx:id=\"textIdUsuario\" was not injected: check your FXML file 'telaHistoricoEmprestimo.fxml'.";
-
     }
-    private void informationAlert(String title,String texto){
+
+    /**
+     * Exibe um alerta de informação com o título e texto especificados.
+     * @param title Título do alerta.
+     * @param texto Texto do alerta.
+     */
+    private void informationAlert(String title, String texto) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(texto);
         alert.showAndWait();
     }
-
-
 }

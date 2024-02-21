@@ -1,3 +1,6 @@
+/**
+ * Controller responsável pela exibição dos livros mais populares.
+ */
 package com.example.app.controller;
 
 import java.net.URL;
@@ -28,56 +31,68 @@ public class TelaLivroPopular {
     @FXML
     private ListView<Livro> listViewLivroPupular;
 
+    /**
+     * Ação acionada quando o botão 'Voltar' é clicado.
+     * Retorna à tela de relatórios.
+     * @param event Evento de clique no botão 'Voltar'.
+     */
     @FXML
     void btnVoltarAction(ActionEvent event) {
         AbrirProximaTela.proximaTela(event, "telaDeRelatorio.fxml");
     }
 
+    /**
+     * Método executado ao inicializar a tela.
+     * Verifica se os elementos do FXML foram injetados corretamente e exibe os livros mais populares.
+     */
     @FXML
     void initialize() {
         assert btnVoltar != null : "fx:id=\"btnVoltar\" was not injected: check your FXML file 'telaLivroPopular.fxml'.";
         assert listViewLivroPupular != null : "fx:id=\"listViewLivroPupular\" was not injected: check your FXML file 'telaLivroPopular.fxml'.";
         mostraView();
-
     }
 
+    /**
+     * Exibe os livros mais populares na interface gráfica.
+     */
     private void mostraView() {
         try {
             ArrayList<Livro> listPopular = DAO.getEmprestimosDAO().livroMaisPolular();
             if (listPopular != null) {
-                // Verifique se a lista de resultados não está vazia
+                // Verifica se a lista de resultados não está vazia
                 if (!listPopular.isEmpty()) {
-                    // Importe a classe javafx.collections.FXCollections para usar o método observableArrayList
+                    // Importa a classe javafx.collections.FXCollections para usar o método observableArrayList
                     for (Livro livro : listPopular) {
                         listViewLivroPupular.setItems(FXCollections.observableArrayList(listPopular).sorted());
                     }
                 } else {
-                    // Se não houver resultados, limpe a lista
+                    // Se não houver resultados, limpa a lista
                     listViewLivroPupular.getItems().clear();
                     informationAlert("ERROR", "Nenhum resultado encontrado.");
                     throw new IllegalArgumentException();
                 }
             } else {
-                // Se a lista de resultados for nula, limpe a lista
+                // Se a lista de resultados for nula, limpa a lista
                 listViewLivroPupular.getItems().clear();
                 informationAlert("ERROR", "Nenhum resultado encontrado.");
                 throw new IllegalArgumentException();
             }
         } catch (Exception e) {
-            // Trate adequadamente as exceções, se necessário
-            e.printStackTrace(); // Ou qualquer tratamento específico de erro
+            // Trata adequadamente as exceções, se necessário
+            e.printStackTrace();
         }
     }
 
-
-        private void informationAlert (String title, String texto){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle(title);
-            alert.setHeaderText(null);
-            alert.setContentText(texto);
-            alert.showAndWait();
-        }
-
-
-
+    /**
+     * Exibe um alerta de informação com o título e texto especificados.
+     * @param title Título do alerta.
+     * @param texto Texto do alerta.
+     */
+    private void informationAlert(String title, String texto) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(texto);
+        alert.showAndWait();
+    }
 }

@@ -1,12 +1,17 @@
+/**
+ * Controller responsável pelo cadastro de operadores (Administrador ou Bibliotecário).
+ */
 package com.example.app.controller;
 
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
+
 import com.example.dao.DAO;
 import com.example.model.Administrador;
 import com.example.model.Bibliotecario;
 import com.example.utils.AbrirProximaTela;
+
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,77 +58,117 @@ public class CadastrarOperador {
     @FXML
     private TextField textSenhaRepetida;
 
+    /**
+     * Método acionado ao clicar no botão 'Cadastrar'.
+     * Realiza o cadastro do operador.
+     * @param event Evento de clique no botão 'Cadastrar'.
+     */
     @FXML
     void btnCadastrarAction(ActionEvent event) {
+        // Obtenção dos dados dos campos
         String nome = textNome.getText();
-        String senha= textSenha.getText();
+        String senha = textSenha.getText();
         String senhaRepetida = textSenhaRepetida.getText();
 
+        // Determinação do cargo selecionado
         String cargo = cargoSelecionado();
-        verificarCampos(nome,senha,senhaRepetida,cargo);
-        verificaSenha(senha,senhaRepetida);
 
-        cadastro(nome,senha,cargo);
+        // Verificação dos campos
+        verificarCampos(nome, senha, senhaRepetida, cargo);
 
+        // Verificação das senhas
+        verificaSenha(senha, senhaRepetida);
+
+        // Cadastro do operador
+        cadastro(nome, senha, cargo);
+
+        // Limpeza dos campos
         limparCampos();
     }
+
+    /**
+     * Método para limpar os campos após o cadastro.
+     */
     private void limparCampos() {
         PauseTransition delay = new PauseTransition(Duration.seconds(1)); // Ajuste a duração conforme necessário
         delay.setOnFinished(event -> {
-            textNome.clear(); textSenha.clear(); textSenhaRepetida.clear();
-            radioButtonBibliotecario.setSelected(false); radioButtonAdministrador.setSelected(false);
+            textNome.clear();
+            textSenha.clear();
+            textSenhaRepetida.clear();
+            radioButtonBibliotecario.setSelected(false);
+            radioButtonAdministrador.setSelected(false);
         });
         delay.play();
     }
 
-    private void cadastro(String nome, String senha, String cargo){
-        if (Objects.equals(cargo, "Bibliotecario")){
-            Bibliotecario bibliotecarioCadastrado = DAO.getBibliotecarioDAO().criar(
-                    new Bibliotecario(nome,Integer.parseInt(senha)));
+    /**
+     * Realiza o cadastro do operador com base no cargo especificado.
+     * @param nome Nome do operador.
+     * @param senha Senha do operador.
+     * @param cargo Cargo do operador.
+     */
+    private void cadastro(String nome, String senha, String cargo) {
+        if (Objects.equals(cargo, "Bibliotecario")) {
+            Bibliotecario bibliotecarioCadastrado = DAO.getBibliotecarioDAO().criar(new Bibliotecario(nome, Integer.parseInt(senha)));
             verificaCadastrado(bibliotecarioCadastrado);
-        }else {
-            Administrador administradorCadastrado = DAO.getAdministradorDAO().criar(
-                    new Administrador(nome,Integer.parseInt(senha)));
+        } else {
+            Administrador administradorCadastrado = DAO.getAdministradorDAO().criar(new Administrador(nome, Integer.parseInt(senha)));
             verificaCadastrado(administradorCadastrado);
         }
-
     }
 
-    private void verificaCadastrado(Object cadastrado){
-        if (cadastrado != null){
-            informationAlert("Cadastro Completo","O operador foi cadastrado com sucesso");
-
-        }else{
-            informationAlert("ERROR","Ocorreu um erro ao cadastrar o operador.\n Por favor, tente novamente");
+    /**
+     * Verifica se o operador foi cadastrado com sucesso.
+     * @param cadastrado Objeto do operador cadastrado.
+     */
+    private void verificaCadastrado(Object cadastrado) {
+        if (cadastrado != null) {
+            informationAlert("Cadastro Completo", "O operador foi cadastrado com sucesso");
+        } else {
+            informationAlert("ERROR", "Ocorreu um erro ao cadastrar o operador.\n Por favor, tente novamente");
         }
     }
 
-
-
-    private void verificaSenha(String senha, String senhaRepetida){
+    /**
+     * Verifica se as senhas informadas são iguais.
+     * @param senha Senha informada.
+     * @param senhaRepetida Senha repetida.
+     */
+    private void verificaSenha(String senha, String senhaRepetida) {
         int senhaInt;
         int senhaRepetidaInt;
-        try{
-            senhaInt= Integer.parseInt(senha);
+        try {
+            senhaInt = Integer.parseInt(senha);
             senhaRepetidaInt = Integer.parseInt(senhaRepetida);
-        }catch (NumberFormatException e ){
+        } catch (NumberFormatException e) {
             informationAlert("ERROR", "Atenção, são aceita apenas senhas numéricas");
             throw e;
         }
-        if (senhaInt != senhaRepetidaInt){
+        if (senhaInt != senhaRepetidaInt) {
             informationAlert("ERROR", "As senhas devem ser iguais");
             throw new IllegalArgumentException("As senhas devem ser iguais");
         }
     }
 
-    private void verificarCampos(String nome, String senha,
-                                 String senhaRepetida, String cargo){
-        if (nome.isEmpty() || senha.isEmpty() || senhaRepetida.isEmpty() || cargo == null){
-            informationAlert("ERROR","Porfavor, preencha todos os campos!");
+    /**
+     * Verifica se todos os campos foram preenchidos.
+     * @param nome Nome do operador.
+     * @param senha Senha do operador.
+     * @param senhaRepetida Senha repetida do operador.
+     * @param cargo Cargo do operador.
+     */
+    private void verificarCampos(String nome, String senha, String senhaRepetida, String cargo) {
+        if (nome.isEmpty() || senha.isEmpty() || senhaRepetida.isEmpty() || cargo == null) {
+            informationAlert("ERROR", "Por favor, preencha todos os campos!");
             throw new IllegalArgumentException();
         }
     }
 
+    /**
+     * Exibe um Alerta de informação.
+     * @param title Título do Alerta.
+     * @param texto Texto do Alerta.
+     */
     private void informationAlert(String title, String texto) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -134,33 +179,35 @@ public class CadastrarOperador {
 
     @FXML
     void btnVoltarAction(ActionEvent event) {
-        AbrirProximaTela.proximaTela(event,"telaAdministrador.fxml");
-
+        AbrirProximaTela.proximaTela(event, "telaAdministrador.fxml");
     }
-    @FXML
-    void textNomeAction (ActionEvent event){
 
+    @FXML
+    void textNomeAction(ActionEvent event) {
     }
-    @FXML
-    void textSenhaAction (ActionEvent event){
 
+    @FXML
+    void textSenhaAction(ActionEvent event) {
     }
-    @FXML
-    void textSenhaRepetidaAction (ActionEvent event){
 
+    @FXML
+    void textSenhaRepetidaAction(ActionEvent event) {
     }
 
     @FXML
     void radioButtonAdministradorAction(ActionEvent event) {
         deselecionarOutrosRadios(radioButtonAdministrador);
-
     }
 
     @FXML
     void radioButtonBibliotecarioAction(ActionEvent event) {
         deselecionarOutrosRadios(radioButtonBibliotecario);
-
     }
+
+    /**
+     * Desmarca os outros RadioButtones quando um é selecionado.
+     * @param selecionado RadioButton selecionado.
+     */
     private void deselecionarOutrosRadios(RadioButton selecionado) {
         for (javafx.scene.Node node : hboxOperador.getChildren()) {
             if (node instanceof RadioButton && node != selecionado) {
@@ -169,6 +216,10 @@ public class CadastrarOperador {
         }
     }
 
+    /**
+     * Retorna o cargo selecionado.
+     * @return Cargo selecionado.
+     */
     private String cargoSelecionado() {
         for (javafx.scene.Node node : hboxOperador.getChildren()) {
             if (node instanceof RadioButton radioButton) {

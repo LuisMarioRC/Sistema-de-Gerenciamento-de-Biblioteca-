@@ -1,3 +1,6 @@
+/**
+ * Controller responsável pela tela de pesquisa de livros.
+ */
 package com.example.app.controller;
 
 import java.net.URL;
@@ -55,20 +58,27 @@ public class TelaDePesquisa {
     @FXML
     private ListView<Livro> livroListView;
 
-
+    /**
+     * Ação acionada quando o botão 'Voltar' é clicado.
+     * Retorna à tela do usuário ou do bibliotecário, dependendo do tipo de usuário.
+     * @param event Evento de clique no botão 'Voltar'.
+     */
     @FXML
     void bntVoltarAction(ActionEvent event) {
-
         Object login = SessionLogin.getUserInSession();
-        if (login instanceof Usuario){
+        if (login instanceof Usuario) {
             AbrirProximaTela.proximaTela(event, "telaUsuario.fxml");
-        }
-        else if (login instanceof Bibliotecario){
+        } else if (login instanceof Bibliotecario) {
             AbrirProximaTela.proximaTela(event, "telaBibliotecario.fxml");
         }
     }
 
-
+    /**
+     * Ação acionada quando o botão 'Enter' é clicado.
+     * Realiza a pesquisa de livros com base no tipo de pesquisa selecionado.
+     * @param event Evento de clique no botão 'Enter'.
+     * @throws LivroException Exceção lançada se ocorrer um erro relacionado aos livros.
+     */
     @FXML
     void btnEnterAction(ActionEvent event) throws LivroException {
         String tipoDePesquisa = pesquisaSelecionada();
@@ -76,81 +86,111 @@ public class TelaDePesquisa {
             informationAlert("ERROR", "Selecione o tipo da pesquisa");
             throw new IllegalArgumentException();
         }
-        mostraView(tipoDePesquisa,textPesquisarLivro.getText());
+        mostraView(tipoDePesquisa, textPesquisarLivro.getText());
     }
 
-    private void mostraView(String tipoDePesquisa, String termoDePesquisa){
+    /**
+     * Exibe a lista de livros correspondente à pesquisa realizada.
+     * @param tipoDePesquisa Tipo de pesquisa selecionada.
+     * @param termoDePesquisa Termo de pesquisa inserido pelo usuário.
+     */
+    private void mostraView(String tipoDePesquisa, String termoDePesquisa) {
         try {
             ArrayList<Livro> resultados = returnDaPesquisa(tipoDePesquisa, termoDePesquisa);
             if (resultados != null) {
-                // Verifique se a lista de resultados não está vazia
                 if (!resultados.isEmpty()) {
-                    // Importe a classe javafx.collections.FXCollections para usar o método observableArrayList
-                    for (Livro livro: resultados) {
-                        livroListView.setItems(FXCollections.observableArrayList(resultados).sorted());
-                    }
+                    livroListView.setItems(FXCollections.observableArrayList(resultados).sorted());
                 } else {
-                    // Se não houver resultados, limpe a lista
                     livroListView.getItems().clear();
                     informationAlert("ERROR", "Nenhum resultado encontrado.");
                 }
             } else {
-                // Se a lista de resultados for nula, limpe a lista
                 livroListView.getItems().clear();
                 informationAlert("ERROR", "Nenhum resultado encontrado.");
             }
         } catch (LivroException e) {
-            // Trate adequadamente as exceções, se necessário
-            e.printStackTrace(); // Ou qualquer tratamento específico de erro
+            e.printStackTrace();
         }
-
     }
 
-
+    /**
+     * Ação acionada quando um tipo de pesquisa é selecionado no MenuButton.
+     * Desmarca os outros RadioMenuItems.
+     * @param event Evento de seleção de um tipo de pesquisa.
+     */
     @FXML
     void btnMenuPesquisaAction(ActionEvent event) {
-
+        // Método vazio, a lógica está na marcação dos RadioMenuItems
     }
 
+    /**
+     * Ação acionada quando o RadioMenuItem 'Pesquisa por Autor' é selecionado.
+     * Desmarca os outros RadioMenuItems.
+     * @param event Evento de seleção do RadioMenuItem 'Pesquisa por Autor'.
+     */
     @FXML
     void btnPequisaAutorAction(ActionEvent event) {
         descelecionarOutrosRadios(btnPequisaAutor);
     }
 
+    /**
+     * Ação acionada quando o RadioMenuItem 'Pesquisa por Categoria' é selecionado.
+     * Desmarca os outros RadioMenuItems.
+     * @param event Evento de seleção do RadioMenuItem 'Pesquisa por Categoria'.
+     */
     @FXML
     void btnPesquisaCategoriaAction(ActionEvent event) {
         descelecionarOutrosRadios(btnPesquisaCategoria);
     }
 
+    /**
+     * Ação acionada quando o RadioMenuItem 'Pesquisa por ISBN' é selecionado.
+     * Desmarca os outros RadioMenuItems.
+     * @param event Evento de seleção do RadioMenuItem 'Pesquisa por ISBN'.
+     */
     @FXML
     void btnPesquisaISBNAction(ActionEvent event) {
         descelecionarOutrosRadios(btnPesquisaISBN);
     }
 
+    /**
+     * Ação acionada quando o RadioMenuItem 'Pesquisa por Título' é selecionado.
+     * Desmarca os outros RadioMenuItems.
+     * @param event Evento de seleção do RadioMenuItem 'Pesquisa por Título'.
+     */
     @FXML
     void btnPesquisaTituloAction(ActionEvent event) {
         descelecionarOutrosRadios(btnPesquisaTitulo);
     }
 
+    /**
+     * Ação acionada quando o campo de pesquisa de livros é modificado.
+     * @param event Evento de modificação do campo de pesquisa de livros.
+     */
     @FXML
     void textPesquisarLivroAction(ActionEvent event) {
-
-
+        // Método vazio, a lógica de pesquisa é acionada pelo botão 'Enter'
     }
 
-    private void informationAlert(String title,String texto){
+    /**
+     * Exibe um alerta de informação.
+     * @param title Título do alerta.
+     * @param texto Texto do alerta.
+     */
+    private void informationAlert(String title, String texto) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(texto);
         alert.showAndWait();
     }
+
     /**
-     * Método responsável para que apenas um radioMenuItem seja selecionado
-     * @param selecionado
+     * Desmarca todos os outros RadioMenuItems, exceto o selecionado.
+     * @param selecionado RadioMenuItem selecionado.
      */
     private void descelecionarOutrosRadios(RadioMenuItem selecionado) {
-        for (javafx.scene.control.MenuItem item : btnMenuPesquisa.getItems()) {
+        for (MenuItem item : btnMenuPesquisa.getItems()) {
             if (item instanceof RadioMenuItem && item != selecionado) {
                 ((RadioMenuItem) item).setSelected(false);
             }
@@ -158,15 +198,15 @@ public class TelaDePesquisa {
     }
 
     /**
-     * Método que retorna o resultado da pesquisa por livros.
-     * @param selecaoDapesquisa
-     * @param pesquisa
-     * @return
-     * @throws LivroException
+     * Retorna os resultados da pesquisa com base no tipo de pesquisa e no termo inserido.
+     * @param selecaoDaPesquisa Tipo de pesquisa selecionada.
+     * @param pesquisa Termo de pesquisa inserido pelo usuário.
+     * @return Lista de livros correspondente à pesquisa.
+     * @throws LivroException Exceção lançada se ocorrer um erro relacionado aos livros.
      */
-    private ArrayList<Livro> returnDaPesquisa(String selecaoDapesquisa, String pesquisa) throws LivroException {
+    private ArrayList<Livro> returnDaPesquisa(String selecaoDaPesquisa, String pesquisa) throws LivroException {
         try {
-            switch (selecaoDapesquisa) {
+            switch (selecaoDaPesquisa) {
                 case "Título" -> {
                     return DAO.getLivroDAO().pesquisaPorTitulo(pesquisa);
                 }
@@ -183,30 +223,32 @@ public class TelaDePesquisa {
                     return null;
                 }
             }
-        }catch (Exception e){
-            informationAlert("ERROR", "Busca não econtrada!");
+        } catch (Exception e) {
+            informationAlert("ERROR", "Busca não encontrada!");
             throw e;
         }
     }
 
     /**
-     * Retorna o menuItem seleciona para pesquisa
-     * @return
+     * Retorna o texto do RadioMenuItem selecionado.
+     * @return Texto do RadioMenuItem selecionado.
      */
     private String pesquisaSelecionada() {
-        for (javafx.scene.control.MenuItem item : btnMenuPesquisa.getItems()) {
+        for (MenuItem item : btnMenuPesquisa.getItems()) {
             if (item instanceof RadioMenuItem radioMenuItem) {
                 if (radioMenuItem.isSelected()) {
-                    return radioMenuItem.getText(); // Retorna o texto do RadioMenuItem selecionado
+                    return radioMenuItem.getText();
                 }
             }
         }
-        return null; // Retorna null se nenhum RadioMenuItem estiver selecionado
+        return null;
     }
 
+    /**
+     * Método executado ao inicializar a tela.
+     */
     @FXML
     void initialize() {
-
         // Cria um novo ToggleGroup
         ToggleGroup toggleGroup = new ToggleGroup();
 
@@ -220,10 +262,8 @@ public class TelaDePesquisa {
         toggleGroup.selectedToggleProperty().addListener((observable, oldToggle, newToggle) -> {
             if (newToggle != null) {
                 RadioMenuItem selectedRadioMenuItem = (RadioMenuItem) newToggle;
-                btnMenuPesquisa.setText(selectedRadioMenuItem.getText()); // Define o texto do MenuButton
+                btnMenuPesquisa.setText(selectedRadioMenuItem.getText());
             }
         });
-
     }
-
 }

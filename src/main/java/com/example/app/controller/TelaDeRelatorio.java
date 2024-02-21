@@ -1,3 +1,6 @@
+/**
+ * Controller responsável pela tela de relatórios.
+ */
 package com.example.app.controller;
 
 import java.net.URL;
@@ -30,48 +33,69 @@ public class TelaDeRelatorio {
     private Button tbnLivroPopular;
 
     @FXML
-    private ListView<?> viewNumLivrosAtrasados;
+    private ListView<Integer> viewNumLivrosAtrasados;
 
     @FXML
-    private ListView<?> viewNumLivrosEmp;
+    private ListView<Integer> viewNumLivrosEmp;
 
     @FXML
-    private ListView<?> viewNumLivrosReservados;
+    private ListView<Integer> viewNumLivrosReservados;
 
+    /**
+     * Ação acionada quando o botão 'Histórico de Empréstimos' é clicado.
+     * Abre a tela de histórico de empréstimos.
+     * @param event Evento de clique no botão 'Histórico de Empréstimos'.
+     */
     @FXML
     void btnHistoricoEmpAction(ActionEvent event) {
         AbrirProximaTela.proximaTela(event, "telaHistoricoEmprestimo.fxml");
-
     }
 
+    /**
+     * Ação acionada quando o botão 'Voltar' é clicado.
+     * Retorna à tela do administrador.
+     * @param event Evento de clique no botão 'Voltar'.
+     */
     @FXML
     void btnVoltarAction(ActionEvent event) {
         AbrirProximaTela.proximaTela(event, "telaAdministrador.fxml");
-
     }
 
+    /**
+     * Ação acionada quando o botão 'Livro Popular' é clicado.
+     * Abre a tela de livro popular.
+     * @param event Evento de clique no botão 'Livro Popular'.
+     */
     @FXML
     void tbnLivroPopularAction(ActionEvent event) {
         AbrirProximaTela.proximaTela(event, "telaLivroPopular.fxml");
-
     }
 
+    /**
+     * Método executado ao inicializar a tela.
+     */
     @FXML
     void initialize() {
+        // Verifica se os elementos do FXML foram injetados corretamente
         assert btnHistoricoEmp != null : "fx:id=\"btnHistoricoEmp\" was not injected: check your FXML file 'telaDeRelatorio.fxml'.";
         assert btnVoltar != null : "fx:id=\"btnVoltar\" was not injected: check your FXML file 'telaDeRelatorio.fxml'.";
         assert tbnLivroPopular != null : "fx:id=\"tbnLivroPopular\" was not injected: check your FXML file 'telaDeRelatorio.fxml'.";
         assert viewNumLivrosAtrasados != null : "fx:id=\"viewNumLivrosAtrasados\" was not injected: check your FXML file 'telaDeRelatorio.fxml'.";
         assert viewNumLivrosEmp != null : "fx:id=\"viewNumLivrosEmp\" was not injected: check your FXML file 'telaDeRelatorio.fxml'.";
         assert viewNumLivrosReservados != null : "fx:id=\"viewNumLivrosReservados\" was not injected: check your FXML file 'telaDeRelatorio.fxml'.";
-        mostraView((ListView<Integer>) viewNumLivrosAtrasados,DAO.getEmprestimosDAO().numLivroAtrasado());
-        mostraView((ListView<Integer>) viewNumLivrosEmp, DAO.getEmprestimosDAO().numLivrosEmprestados());
-        mostraView((ListView<Integer>) viewNumLivrosReservados, DAO.getReservaDAO().numLivrosReservados());
+
+        // Exibe o número de livros atrasados, emprestados e reservados nas respectivas ListViews
+        mostraView(viewNumLivrosAtrasados, DAO.getEmprestimosDAO().numLivroAtrasado());
+        mostraView(viewNumLivrosEmp, DAO.getEmprestimosDAO().numLivrosEmprestados());
+        mostraView(viewNumLivrosReservados, DAO.getReservaDAO().numLivrosReservados());
     }
 
-    private void mostraView(ListView<Integer> localDeExibir, Integer exibicao){
+    /**
+     * Exibe os dados na ListView especificada.
+     * @param localDeExibir ListView onde os dados serão exibidos.
+     * @param exibicao Dados a serem exibidos.
+     */
+    private void mostraView(ListView<Integer> localDeExibir, Integer exibicao) {
         localDeExibir.setItems(FXCollections.observableArrayList(exibicao).sorted());
     }
-
-
 }

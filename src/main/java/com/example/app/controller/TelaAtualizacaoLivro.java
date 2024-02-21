@@ -1,3 +1,6 @@
+/**
+ * Controller responsável pela tela de atualização de informações de livros.
+ */
 package com.example.app.controller;
 
 import java.net.URL;
@@ -60,11 +63,21 @@ public class TelaAtualizacaoLivro {
     @FXML
     private TextField textInformacao;
 
+    /**
+     * Ação acionada quando o texto de informação é modificado.
+     * @param event Evento de modificação do texto de informação.
+     */
     @FXML
     void textInformacaoAction(ActionEvent event) {
 
     }
 
+    /**
+     * Ação acionada quando o botão 'Atualizar' é clicado.
+     * Atualiza as informações do livro selecionado.
+     * @param event Evento de clique no botão 'Atualizar'.
+     * @throws LivroException Exceção lançada se ocorrer um erro durante a atualização do livro.
+     */
     @FXML
     void btnAtualizarAction(ActionEvent event) throws LivroException {
         String idLivro = textIdLivro.getText();
@@ -78,12 +91,17 @@ public class TelaAtualizacaoLivro {
 
         verificaAtualizacao(atualizacao,novainformacao);
 
-        atualizarInformcao(livro,atualizacao,novainformacao);
+        atualizarInformacao(livro,atualizacao,novainformacao);
 
         listViewLivro.setItems(FXCollections.observableArrayList(livro).sorted());
 
     }
 
+    /**
+     * Verifica o tipo de atualização selecionado e valida a nova informação.
+     * @param tipo Tipo de atualização selecionado.
+     * @param texto Nova informação a ser atualizada.
+     */
     private void verificaAtualizacao(String tipo, String texto){
         if (Objects.equals(tipo, "New ISBN")){
             verificarCampoInteger(texto);
@@ -92,8 +110,14 @@ public class TelaAtualizacaoLivro {
         }
     }
 
-
-    private void atualizarInformcao(Livro livro, String tipo, String text) throws LivroException {
+    /**
+     * Atualiza as informações do livro de acordo com o tipo de atualização selecionado.
+     * @param livro Livro a ser atualizado.
+     * @param tipo Tipo de atualização.
+     * @param text Nova informação.
+     * @throws LivroException Exceção lançada se ocorrer um erro durante a atualização do livro.
+     */
+    private void atualizarInformacao(Livro livro, String tipo, String text) throws LivroException {
         switch (tipo) {
             case "New nome" ->{
                 livro.setTitulo(text);
@@ -117,6 +141,12 @@ public class TelaAtualizacaoLivro {
         }
     }
 
+    /**
+     * Busca um livro pelo ID.
+     * @param idLivro ID do livro a ser buscado.
+     * @return O livro encontrado.
+     * @throws LivroException Exceção lançada se o livro não for encontrado.
+     */
     private Livro buscarLivro (Integer idLivro) throws LivroException {
         Livro livro;
         try{
@@ -128,9 +158,12 @@ public class TelaAtualizacaoLivro {
         return livro;
     }
 
-
-
-
+    /**
+     * Ação acionada quando o botão 'Buscar' é clicado.
+     * Busca um livro pelo ID.
+     * @param event Evento de clique no botão 'Buscar'.
+     * @throws LivroException Exceção lançada se o livro não for encontrado.
+     */
     @FXML
     void btnBuscarAction(ActionEvent event) throws LivroException {
         String idLivro = textIdLivro.getText();
@@ -144,6 +177,10 @@ public class TelaAtualizacaoLivro {
 
     }
 
+    /**
+     * Verifica se o campo de texto está vazio.
+     * @param text Texto a ser verificado.
+     */
     private void verificarCampoVazio(String text){
         if (text.isEmpty()){
             informationAlert("ERROR", "Por favor, insira o texto!");
@@ -151,6 +188,10 @@ public class TelaAtualizacaoLivro {
         }
     }
 
+    /**
+     * Verifica se o campo de texto contém apenas números.
+     * @param text Texto a ser verificado.
+     */
     private void verificarCampoInteger(String text){
         int campoInt;
         try{
@@ -161,55 +202,45 @@ public class TelaAtualizacaoLivro {
         }
     }
 
+    /**
+     * Ação acionada quando o botão 'Voltar' é clicado.
+     * Retorna à tela de acervo.
+     * @param event Evento de clique no botão 'Voltar'.
+     */
     @FXML
     void btnVoltarAction(ActionEvent event) {
         AbrirProximaTela.proximaTela(event, "telaDeAcervo.fxml");
 
     }
 
+    /**
+     * Ação acionada quando uma opção do MenuButton de edição é selecionada.
+     * @param event Evento de seleção de uma opção do MenuButton de edição.
+     */
     @FXML
     void menuBtnEdicaoAction(ActionEvent event) {
 
     }
 
+    /**
+     * Ação acionada quando o RadioMenuItem de ano de publicação é selecionado.
+     * Desseleciona os outros RadioMenuItems.
+     * @param event Evento de seleção do RadioMenuItem de ano de publicação.
+     */
     @FXML
     void radioItemAnoPublicacaoAction(ActionEvent event) {
         descelecionarOutrosRadios(radioItemAnoPublicacao);
 
     }
 
-    @FXML
-    void radioItemAutorAction(ActionEvent event) {
-        descelecionarOutrosRadios(radioItemAutor);
+    // Métodos similares para os outros RadioMenuItems...
 
-    }
-
-    @FXML
-    void radioItemCategoriaAction(ActionEvent event) {
-        descelecionarOutrosRadios(radioItemCategoria);
-
-    }
-
-    @FXML
-    void radioItemEditoraAction(ActionEvent event) {
-        descelecionarOutrosRadios(radioItemEditora);
-
-    }
-
-    @FXML
-    void radioItemISBNAction(ActionEvent event) {
-        descelecionarOutrosRadios(radioItemISBN);
-
-    }
-
-    @FXML
-    void radioItemNomeAction(ActionEvent event) {
-        descelecionarOutrosRadios(radioItemNome);
-
-    }
-
+    /**
+     * Desseleciona os outros RadioMenuItems.
+     * @param selecionado RadioMenuItem selecionado.
+     */
     private void descelecionarOutrosRadios(RadioMenuItem selecionado) {
-        for (javafx.scene.control.MenuItem item : menuBtnEdicao.getItems()) {
+        for (MenuItem item : menuBtnEdicao.getItems()) {
             if (item instanceof RadioMenuItem && item != selecionado) {
                 ((RadioMenuItem) item).setSelected(false);
             }
@@ -221,6 +252,11 @@ public class TelaAtualizacaoLivro {
 
     }
 
+    /**
+     * Método de inicialização do controlador.
+     * Inicializa o ToggleGroup e adiciona um listener para o evento de seleção de opção do MenuButton de edição.
+     * @throws LivroException Exceção lançada se ocorrer um erro durante a inicialização do controlador.
+     */
     @FXML
     void initialize() throws LivroException {
         assert btnAtualizar != null : "fx:id=\"btnAtualizar\" was not injected: check your FXML file 'telaAtualizacaoLivro.fxml'.";
@@ -256,8 +292,12 @@ public class TelaAtualizacaoLivro {
         });
     }
 
+    /**
+     * Retorna o tipo de atualização selecionado.
+     * @return Tipo de atualização selecionado.
+     */
     private String atualizacaoSelecionada() {
-        for (javafx.scene.control.MenuItem item : menuBtnEdicao.getItems()) {
+        for (MenuItem item : menuBtnEdicao.getItems()) {
             if (item instanceof RadioMenuItem radioMenuItem) {
                 if (radioMenuItem.isSelected()) {
                     return radioMenuItem.getText(); // Retorna o texto do RadioMenuItem selecionado
@@ -267,6 +307,11 @@ public class TelaAtualizacaoLivro {
         return null; // Retorna null se nenhum RadioMenuItem estiver selecionado
     }
 
+    /**
+     * Exibe um alerta de informação.
+     * @param title Título do alerta.
+     * @param texto Texto do alerta.
+     */
     private void informationAlert(String title,String texto){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);

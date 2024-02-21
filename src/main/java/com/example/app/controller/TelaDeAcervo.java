@@ -1,3 +1,6 @@
+/**
+ * Controller responsável pela tela de acervo.
+ */
 package com.example.app.controller;
 
 import java.io.IOException;
@@ -48,34 +51,62 @@ public class TelaDeAcervo {
     @FXML
     private ListView<Livro> viewLivros;
 
+    /**
+     * Ação acionada quando o botão 'Voltar' é clicado.
+     * Retorna à tela de administrador.
+     * @param event Evento de clique no botão 'Voltar'.
+     */
     @FXML
     void btnVoltarAction(ActionEvent event) {
         AbrirProximaTela.proximaTela(event,"telaAdministrador.fxml" );
 
     }
 
+    /**
+     * Ação acionada quando o MenuButton é clicado.
+     * @param event Evento de clique no MenuButton.
+     */
     @FXML
     void menuButtonAction(ActionEvent event) {
 
     }
 
+    /**
+     * Ação acionada quando a opção 'Adicionar' do MenuButton é selecionada.
+     * Abre a tela de registro de livros.
+     * @param event Evento de seleção da opção 'Adicionar'.
+     */
     @FXML
     void menuItemAdcionarAction(ActionEvent event) {
         abrirProximaTelaPeloMenu("resgistroLivros.fxml");
 
     }
 
+    /**
+     * Ação acionada quando a opção 'Editar' do MenuButton é selecionada.
+     * Abre a tela de atualização de livro.
+     * @param event Evento de seleção da opção 'Editar'.
+     */
     @FXML
     void menuItemEditarAction(ActionEvent event) {
         abrirProximaTelaPeloMenu("telaAtualizacaoLivro.fxml");
 
     }
 
+    /**
+     * Ação acionada quando a opção 'Remover' do MenuButton é selecionada.
+     * Abre a tela de remoção de livro.
+     * @param event Evento de seleção da opção 'Remover'.
+     */
     @FXML
     void menuItemRemoverAction(ActionEvent event) {
         abrirProximaTelaPeloMenu("telaDeRemocao.fxml");
     }
 
+    /**
+     * Abre a próxima tela de acordo com o nome fornecido.
+     * @param nome Nome do arquivo FXML da próxima tela.
+     */
     @FXML
     private void abrirProximaTelaPeloMenu(String nome) {
         try {
@@ -97,6 +128,10 @@ public class TelaDeAcervo {
         }
     }
 
+    /**
+     * Método de inicialização do controlador.
+     * Mostra a lista de livros disponíveis.
+     */
     @FXML
     void initialize() {
         assert btnVoltar != null : "fx:id=\"btnVoltar\" was not injected: check your FXML file 'telaDeAcervo.fxml'.";
@@ -110,6 +145,11 @@ public class TelaDeAcervo {
         mostraView();
     }
 
+    /**
+     * Exibe um alerta de informação.
+     * @param title Título do alerta.
+     * @param texto Texto do alerta.
+     */
     private void informationAlert(String title,String texto){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -118,6 +158,9 @@ public class TelaDeAcervo {
         alert.showAndWait();
     }
 
+    /**
+     * Mostra a lista de livros disponíveis.
+     */
     private void mostraView() {
         ArrayList<Livro> resultados = DAO.getLivroDAO().encontrarTodos();
         if (resultados != null) {
