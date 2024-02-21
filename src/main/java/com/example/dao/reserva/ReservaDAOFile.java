@@ -137,7 +137,7 @@ public class ReservaDAOFile implements ReservaDAOInterface {
 
     @Override
     public Integer numLivrosReservados() {
-        return FileMethods.lerArquivoList(arquivo).size();
+        return FileMethods.lerArquivoMap(arquivo).size();
     }
 
     @Override
