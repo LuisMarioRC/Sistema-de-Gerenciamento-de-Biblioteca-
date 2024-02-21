@@ -19,6 +19,8 @@ public class UsuarioException extends Exception{
     public static final String MULTADO = "Usuário com MULTA pendente";
     public static final String BLOQUEIO = "Usuário BLOQUEADO";
     public static final String ATRASO = "Usuário com livro PENDENTE à devolução";
+    public static final String SENHA_INVALIDA = "A senha está INCORRETA!";
+
 
     public UsuarioException(String texto, Usuario usuario){
         super(texto);

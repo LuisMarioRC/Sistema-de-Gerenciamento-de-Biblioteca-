@@ -15,6 +15,7 @@ public class BibliotecarioException extends Exception {
     public static final String BUSCAR = "Operação de BUSCAR não encontrada";
     public static final String EXCLUIR = "Operação de EXCLUSÃO não realizada.";
     public static final String ATUALIZAR = "Operação de ATUALIZAÇÃO não realizada.";
+    public static final String SENHA_INVALIDA = "A senha está INCORRETA!";
 
 
     public BibliotecarioException(String texto){
