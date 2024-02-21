@@ -81,7 +81,7 @@ public class RegistroLivros {
         Livro livroRegistrado = DAO.getLivroDAO().criar(new Livro(titulo, autor, editora,
                 Integer.parseInt(isbnText), Integer.parseInt(anoPublicacaoText), categoria));
         if (livroRegistrado != null) {
-            informationAlert("Registro completo", "O livro foi registrado com sucesso!");
+            informationAlert("Registro completo", "O livro foi registrado com sucesso, com ID: " +livroRegistrado.getId());
         } else {
             informationAlert("ERROR", "Ocorreu um erro ao registrar o livro. Por favor, tente novamente.");
         }
