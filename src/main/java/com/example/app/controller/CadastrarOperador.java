@@ -91,10 +91,10 @@ public class CadastrarOperador {
 
     private void verificaCadastrado(Object cadastrado){
         if (cadastrado != null){
-            informationAlert("Cadastro Completo","O usuário foi cadastrado com sucesso");
+            informationAlert("Cadastro Completo","O operador foi cadastrado com sucesso");
 
         }else{
-            informationAlert("ERROR","Ocorreu um erro ao o usuário.\n Por favor, tente novamente");
+            informationAlert("ERROR","Ocorreu um erro ao cadastrar o operador.\n Por favor, tente novamente");
         }
     }
 

@@ -58,7 +58,8 @@ public class CadastroUsuario {
                 new Usuario(nome,endereco,telefone,Integer.parseInt(senha)));
 
         if (usuarioCadastrado != null){
-            informationAlert("Cadastro Completo","O usuário foi cadastrado com sucesso");
+            informationAlert("Cadastro Completo","O usuário foi " +
+                    " cadastrado com sucesso com o ID: "+usuarioCadastrado.getNumeroDeIdentificacao());
 
         }else{
             informationAlert("ERROR","Ocorreu um erro ao o usuário.\n Por favor, tente novamente");
