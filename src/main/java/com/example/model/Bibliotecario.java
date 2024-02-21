@@ -26,7 +26,7 @@ public class Bibliotecario implements Serializable {
     public Bibliotecario(String nome,Integer senha){
         this.nome=nome;
         this.senha=senha;
-        this.cargo="Biliotecário";
+        this.cargo="Bibliotecário";
         this.numeroDeIdentificacao=-1;
     }
 
