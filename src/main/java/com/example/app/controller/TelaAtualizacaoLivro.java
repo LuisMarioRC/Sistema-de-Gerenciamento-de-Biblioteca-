@@ -232,8 +232,32 @@ public class TelaAtualizacaoLivro {
         descelecionarOutrosRadios(radioItemAnoPublicacao);
 
     }
+    @FXML
+    void radioItemAutorAction(ActionEvent event) {
+        descelecionarOutrosRadios(radioItemAutor);
+    }
 
-    // Métodos similares para os outros RadioMenuItems...
+    @FXML
+    void radioItemCategoriaAction(ActionEvent event) {
+        descelecionarOutrosRadios(radioItemCategoria);
+    }
+
+    @FXML
+    void radioItemEditoraAction(ActionEvent event) {
+        descelecionarOutrosRadios(radioItemEditora);
+    }
+
+    @FXML
+    void radioItemISBNAction(ActionEvent event) {
+        descelecionarOutrosRadios(radioItemISBN);
+    }
+
+    @FXML
+    void radioItemNomeAction(ActionEvent event) {
+        descelecionarOutrosRadios(radioItemNome);
+    }
+
+
 
     /**
      * Desseleciona os outros RadioMenuItems.

@@ -173,12 +173,10 @@ public class TelaDeAcervo {
             } else {
                 // Se não houver resultados, limpe a lista
                 viewLivros.getItems().clear();
-                informationAlert("ERROR", "Nenhum resultado encontrado.");
             }
         } else {
             // Se a lista de resultados for nula, limpe a lista
             viewLivros.getItems().clear();
-            informationAlert("ERROR", "Nenhum resultado encontrado.");
         }
     }
 

@@ -57,6 +57,32 @@ public class RegistroLivros {
     @FXML
     private VBox vboxRegistro;
 
+
+    @FXML
+    void textAnoPublicacaoAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void textCategoriaAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void textEditoraAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void textISBNAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void textTituloAction(ActionEvent event) {
+
+    }
+
     /**
      * Método acionado ao clicar no botão 'Voltar'.
      * Retorna à tela anterior dependendo do tipo de usuário logado.

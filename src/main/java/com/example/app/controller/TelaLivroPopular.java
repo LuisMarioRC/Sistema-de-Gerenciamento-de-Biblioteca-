@@ -68,14 +68,10 @@ public class TelaLivroPopular {
                 } else {
                     // Se não houver resultados, limpa a lista
                     listViewLivroPupular.getItems().clear();
-                    informationAlert("ERROR", "Nenhum resultado encontrado.");
-                    throw new IllegalArgumentException();
                 }
             } else {
                 // Se a lista de resultados for nula, limpa a lista
                 listViewLivroPupular.getItems().clear();
-                informationAlert("ERROR", "Nenhum resultado encontrado.");
-                throw new IllegalArgumentException();
             }
         } catch (Exception e) {
             // Trata adequadamente as exceções, se necessário
